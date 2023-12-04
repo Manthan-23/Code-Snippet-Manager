@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    
+    <head xmlns::th="http://www.thymeleaf.org"
+          xmlns="http://www.w3.org/1999/xhtml">
+
+          <link rel="stylesheet" href="style.css">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
+         <link rel="stylesheet" href="style.css">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
+
+        <title>Snipp It</title>
+                      <link rel="icon" href="Snippets.png"/>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        
+        
+        <style media="screen">
+
+
+            
+            
+         *{
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins';
+}
+.body{
+    background-color:black;
+    color: #000;
+}
+
+.main{
+    width: 100%;
+    color: #000;
+    background-color:black;
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+}
+
+.navbar{
+    width: 1200px;
+    height: 75px;
+    margin: auto;
+}
+
+.icon{
+    width: 200px;
+    float: left;
+    height: 70px;
+}
+
+.logo{
+    color: #ff7200;
+    font-size: 35px;
+    font-family: Poppins;
+    padding-left: 20px;
+    float: left;
+    padding-top: 10px;
+    margin-top: 5px
+}
+
+.menu{
+    width: 400px;
+    float: left;
+    height: 70px;
+}
+
+ul{
+    float: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+ul li{
+    list-style: none;
+    margin-left: 62px;
+    margin-top: 27px;
+    font-size: 14px;
+}
+
+ul li a{
+    text-decoration: none;
+    color: #fff;
+    font-family: 'Poppins';
+    font-weight: bold;
+    transition: 0.4s ease-in-out;
+}
+
+ul li a:hover{
+    color: #ff7200;
+}
+
+.search{
+    width: 330px;
+    float: left;
+    margin-left: 270px;
+}
+
+.srch{
+    font-family: 'Poppins';
+    width: 200px;
+    height: 40px;
+    background: transparent;
+    border: 1px solid #ff7200;
+    margin-top: 13px;
+    color: #fff;
+    border-right: none;
+    font-size: 16px;
+    float: left;
+    padding: 10px;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+}
+
+.btn{
+    width: 100px;
+    height: 40px;
+    background: #ff7200;
+    border: 2px solid #ff7200;
+    margin-top: 13px;
+    color: #fff;
+    font-size: 15px;
+    border-bottom-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    transition: 0.2s ease;
+    cursor: pointer;
+}
+.btn:hover{
+    color: #000;
+}
+
+.btn:focus{
+    outline: none;
+}
+
+.srch:focus{
+    outline: none;
+}
+
+.content{
+    width: 1000px;
+    height: auto;
+    margin-left: 180px;
+    margin-top: 50px;
+    text-align: center;
+    color: #fff;
+    font-family: 'Poppins';
+    position: relative;
+}
+
+.content .par{
+    text-align: center;
+    padding-left: 20px;
+    padding-bottom: 25px;
+    font-family: Arial;
+    letter-spacing: 2px;
+    line-height: 30px;
+    font-family: 'Poppins';
+}
+
+.content h1{
+    font-family: 'Times New Roman';
+    font-size: 70px;
+    font-family: 'Poppins';
+    padding-left: 20px;
+    margin-top: 9%;
+    letter-spacing: 4px;
+}
+
+.content .cn{
+    width: 160px;
+    height: 40px;
+    background: #ff7200;
+    border: none;
+    
+    margin-bottom: 10px;
+    margin-left: 20px;
+    font-size: 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: .4s ease;
+    
+}
+
+.content .cn a{
+    text-decoration: none;
+    color: #000;
+    transition: .3s ease;
+}
+
+.cn:hover{
+    background-color: #ff7200;
+}
+
+.content span{
+    color: #ff7200;
+    font-size: 70px
+}
+
+.form{
+    width: 250px;
+    height: 380px;
+    background: linear-gradient(to top, rgba(0,0,0,0.8)50%,rgba(0,0,0,0.8)50%);
+    position: absolute;
+    top: -20px;
+    left: 870px;
+    transform: translate(0%,-5%);
+    border-radius: 10px;
+    padding: 25px;
+}
+
+.form h2{
+    width: 220px;
+    font-family: sans-serif;
+    text-align: center;
+    color: #ff7200;
+    font-size: 22px;
+    background-color: #fff;
+    border-radius: 10px;
+    margin: 2px;
+    padding: 8px;
+}
+
+.form input{
+    width: 240px;
+    height: 35px;
+    background: transparent;
+    border-bottom: 1px solid #ff7200;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    color: #fff;
+    font-size: 15px;
+    letter-spacing: 1px;
+    margin-top: 30px;
+    font-family: sans-serif;
+}
+
+.form input:focus{
+    outline: none;
+}
+
+::placeholder{
+    color: #fff;
+    font-family: Arial;
+}
+
+.btnn{
+    width: 240px;
+    height: 40px;
+    background: #ff7200;
+    border: none;
+    margin-top: 30px;
+    font-size: 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    color: #fff;
+    transition: 0.4s ease;
+}
+.btnn:hover{
+    background: #fff;
+    color: #ff7200;
+}
+.btnn a{
+    text-decoration: none;
+    color: #000;
+    font-weight: bold;
+}
+.form .link{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 17px;
+    padding-top: 20px;
+    text-align: center;
+}
+.form .link a{
+    text-decoration: none;
+    color: #ff7200;
+}
+.liw{
+    padding-top: 15px;
+    padding-bottom: 10px;
+    text-align: center;
+}
+.icons a{
+    text-decoration: none;
+    color: #fff;
+}
+.icons ion-icon{
+    color: #fff;
+    font-size: 30px;
+    padding-left: 14px;
+    padding-top: 5px;
+    transition: 0.3s ease;
+}
+.icons ion-icon:hover{
+    color: #ff7200;
+}
+
+.tab {
+  overflow:hidden;
+  width: 100%;
+  
+  background-color: black;
+  max-height: 200px;
+  position: relative;
+  border: 1px solid black;
+    
+}
+.tab button {
+  background-color: rgb(57, 30, 30);
+  float: left;
+  color: black;
+  outline:none;
+
+  border-radius: 6px;
+  font-weight:bolder;
+  margin-left: 190px;
+  cursor: pointer;
+  padding: 12px 14px;
+  transition: 0.3s;
+  font-size: 17px;
+  font-style: bold;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ff7200;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  width: 585px;
+  border-top: none;
+  margin-left:190px;
+  background-color:rgb(50, 50, 50);
+}
+
+/* Style the close button */
+.topright {
+  float: right;
+  cursor: pointer;
+  font-size: 28px;
+}
+
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,600,700&display=swap');
+
+*{
+	/* margin: 0;
+	padding: 0; */
+	list-style: none;
+	font-family: 'Poppins', sans-serif;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
+}
+
+
+
+body { 
+	height: 100%;
+	background-color: black; 
+	font-size: 16px; 
+	font-family: 'Poppins';
+} 
+
+
+.container { 
+	max-width: 960px; 
+	height: 100%;
+	margin: 0 auto; 
+	padding: 20px;
+}
+
+
+.tabs {
+	position: relative;
+	display: flex;
+    margin-top: 60px;
+	min-height: 550px;
+	border-radius: 8px 8px 0 0;
+	overflow: hidden;
+    color: #000;
+    background-color: #000;
+}
+
+.tabby-tab {
+    color: black;
+	flex: 1;
+    font-style: bolder;
+}
+
+.tabby-tab label {
+	display: block;
+	box-sizing: border-box;
+		height: 40px;
+	
+	padding: 10px;
+	text-align: center;
+	background: #efefef;
+	cursor: pointer;
+	transition: background 0.5s ease;
+	
+}
+
+.tabby-tab label:hover {
+	background: #ff7200;
+}
+
+.tabby-content {
+	position: absolute;
+	
+	left: 0; 
+    right: 0;
+    
+		top: 40px; 
+	
+	border-radius: 0 0 8px 8px;
+	background: #736F6F;
+    padding-bottom: 0px;
+	
+	transition: 
+		opacity 0.8s ease,
+		transform 0.8s ease;
+	
+		opacity: 0;
+		transform: scale(0.1);
+		transform-origin: top left;
+	
+}
+
+.tabby-content vi {
+	float: left;
+	margin-right: 20px;
+	border-radius: 8px;
+}
+
+
+
+.tabby-tab [type=radio] { display: none; }
+[type=radio]:checked ~ label {
+	background: #ff7200;
+	z-index: 2;
+}
+
+[type=radio]:checked ~ label ~ .tabby-content {
+	z-index: 1;
+	
+		opacity: 1;
+		transform: scale(1);
+}
+
+@media screen and (max-width: 767px) {
+	.tabs { min-height: 400px;}
+}
+
+@media screen and (max-width: 480px) {
+	.tabs { min-height: 580px; }
+	.tabby-tab label { 
+		height: 60px;
+	}
+	.tabby-content { top: 60px; }
+	.tabby-content img {
+		float: none;
+		margin-right: 0;
+		margin-bottom: 20px;
+	}
+}
+
+.button1{
+        position: absolute;
+        top: 370px;
+        left: 380px;
+        background-color: #ff7200;
+        color: black;
+        border: none;
+        border-radius: 10px;
+        padding: 13px;
+        min-height: 30px;
+        max-height: 120px;
+        font-family: 'Poppins';
+        font-weight: bold;
+        font-size: 19px;
+        white-space: nowrap;
+        
+    }
+
+    .button1:hover{
+        
+        background-color: white;
+        transition: 0.7s ease;
+        cursor: pointer;
+    }
+
+    .button1 a{
+        text-decoration: none;
+        color: black;
+    }
+
+
+    .button2{
+        position: absolute;
+        top: 370px;
+        left: 543px;
+        background-color: #ff7200;
+        color: black;
+        border: none;
+        width: 90px;
+        border-radius: 10px;
+        padding: 13px;
+        min-height: 30px;
+        max-height: 120px;
+        font-family: 'Poppins';
+        font-weight: bold;
+        font-size: 19px;
+        white-space: nowrap;
+    }
+
+    .button2:hover{
+        background-color: white;
+        transition: 0.7s ease;
+    }
+
+    .button2 a{
+        text-decoration: none;
+        color: black;
+    }
+
+    
+
+    .get-start{
+        position: relative;
+       margin-bottom: 42px;
+       margin-left: 15px;
+    }
+
+    .OR{
+        position: relative;
+        margin-top: 20px;
+        margin-left: 20px;
+    }
+
+    .tab-start{
+        background-color: #000;
+        margin-top: 180px;
+        margin-left: 305px;
+        font-weight: bold;
+        width: 400px;
+        height: 60px;
+        padding: 12px;
+        font-size: 25px;
+        color: black;
+        text-align: center;
+        background-color: #efefef;
+        border-radius: 100px;
+    }
+    
+    .video1.center{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        
+        
+    }
+
+
+
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+    *{
+  margin: 0;
+  padding: 0;
+  
+  font-family: 'Poppins',sans-serif;
+  text-decoration: none;
+}
+
+
+footer{
+
+background-color: #111;
+width: 100%;
+position: relative;
+margin-top: 1000px;
+bottom: 0;
+color: #736F6F;
+}
+footer .content{
+background-color: #111;
+margin-left: 70px;
+
+max-width: 1350px;
+padding: 30px;
+display: flex;
+flex-wrap: wrap;
+
+justify-content: space-between;
+}
+footer .content p,a{
+color: #fff;
+  
+}
+footer .content .box{
+  position: relative;
+width: 30%;
+right: 10px;
+transition: all 0.4s ease;
+
+}
+footer .content .topic{
+font-size: 22px;
+font-weight: 600;
+margin-right: 73px;
+color: #fff;
+margin-bottom: 10px;
+
+
+}
+footer .content p{
+text-align:justify;
+white-space: pre;
+}
+footer .content .lower .topic{
+margin: 24px 0 5px 0;
+}
+
+footer .lower .topic{
+  padding-right: 190px;
+  white-space: nowrap;
+}
+
+footer .email{
+  padding-right: 190px;
+  white-space: nowrap;
+}
+
+footer .content .lower i{
+padding-right: 16px;
+}
+footer .content .middle{
+padding-left: 180px;
+white-space: nowrap;
+}
+footer .content .middle a{
+line-height: 32px;
+}
+
+footer .right .topic{
+  padding-left: 240px;
+  white-space: nowrap;
+}
+
+footer .content .right input[type="text"]{
+height: 45px;
+width: 115%;
+
+margin-left: 240px;
+outline: none;
+color: #d9d9d9;
+background: #000;
+border-radius: 5px;
+padding-left: 10px;
+font-size: 17px;
+border: 2px solid #222222;
+}
+footer .content .right input[type="submit"]{
+height: 42px;
+width: 115%;
+margin-left: 240px;
+font-size: 18px;
+color: #d9d9d9;
+background: #ff7200;
+outline: none;
+border-radius: 5px;
+letter-spacing: 1px;
+cursor: pointer;
+margin-top: 12px;
+border: 2px solid #ff7200;
+transition: all 0.3s ease-in-out;
+}
+.content .right input[type="submit"]:hover{
+background: none;
+color:  #eb2f06;
+}
+
+footer .content .media-icons{
+  margin-left: 240px;
+  white-space: nowrap;
+}
+
+footer .content .media-icons a{
+font-size: 16px;
+height: 45px;
+width: 45px;
+
+left: 500px;
+display: inline-block;
+text-align: center;
+line-height: 43px;
+border-radius: 5px;
+border: 2px solid #222222;
+margin: 30px 5px 0 0;
+transition: all 0.3s ease;
+}
+.content .media-icons a:hover{
+border-color: #ff7200;
+}
+footer .bottom{
+  background-color: #111;
+width: 100%;
+text-align: right;
+color: #d9d9d9;
+padding: 0 0 5px 0;
+}
+footer .bottom a{
+color: #ff7200;
+}
+footer a{
+transition: all 0.3s ease;
+}
+
+footer .bottom p{
+margin-right: 60px;
+}
+
+footer a:hover{
+color: #ff7200;
+}
+@media (max-width:1100px) {
+footer .content .middle{
+  padding-left: 50px;
+}
+}
+@media (max-width:950px){
+footer .content .box{
+  width: 50%;
+}
+.content .right{
+  margin-top: 40px;
+}
+}
+@media (max-width:560px){
+footer{
+  position: relative;
+}
+footer .content .box{
+  width: 100%;
+  margin-top: 40px;
+  
+}
+footer .content .middle{
+  padding-left: 0;
+}
+}
+
+.footer-background{
+  background-color: #111;
+}
+
+
+
+
+
+.upper{
+margin-right: 110px;
+}
+
+
+    
+    
+    </style>
+    
+        
+        
+        <div class="main">
+        <div class="navbar">
+            <div class="icon">
+                <h2 class="logo">Snipp It</h2>
+            </div>
+
+            <div class="menu">
+                <ul>
+                    <li><a href="index">HOME</a></li>
+                    <li><a href="pub">SNIPPETS</a></li>
+                    <li><a href="service">SERVICE</a></li>
+                    <li><a href="aboutus">ABOUT</a></li>
+                    <li><a href="contactus">CONTACT</a></li>
+ 
+                </ul>
+            </div>
+
+            <div class="search">
+                <input class="srch" type="search" name="" placeholder="Type To text">
+                <a href="#"> <button class="btn">Search</button></a>
+            </div>
+
+        </div> 
+        <div class="content">
+            <h1>Smart <span>Code Snippet</span> <br>Manager</h1>
+            <p class="par">Your snippets, Manage share for free  
+                <br>with anyone anytime</p>
+                <br>
+                <div class="get-start">Get Started for free. Sign in with</div>
+
+                <button type="submit" class="button1"><a href="signup">Sign Up</a></button>
+                
+                <div class="OR">Or</div>
+
+                <button type="submit" class="button2"><a href="login">Login</a></button>
+
+
+
+                <div class="tab-start">
+                    Store snippets as you want
+                </div>
+
+
+
+                <div class="tabs">
+                    <div class="tabby-tab">
+                        <input type="radio" id="tab-1" name="tabby-tabs" checked>
+                        <label for="tab-1">Public Snippets</label>
+                        <div class="tabby-content">
+                            <div class="center"> 
+                                <iframe
+                                 width="998" height="485" 
+                                src=https://www.youtube.com/embed/CatcnegC9KA?autoplay=1
+                                frameborder="0" 
+                                allowfullscreen
+
+                               ></iframe>
+                             </div>
+                            <!--  Changed in above -->
+                        </div>
+                    </div>
+            
+                    <div class="tabby-tab">
+                        <input type="radio" id="tab-2" name="tabby-tabs">
+                        <label for="tab-2">Private Snippets</label>
+                        <div class="tabby-content">
+                            <iframe
+                                 width="996" height="485"  controls
+                                src=https://www.youtube.com/embed/rjlPMq5r5VA
+                                frameborder="0" 
+                                allowfullscreen
+                               ></iframe> 
+                               <!-- changed in above -->
+                        </div>
+                    </div>
+
+                    </div>
+                </div>
+
+                
+
+
+        </div>
+
+        <footer class="footer-background">
+          <div class="content">
+            <div class="left box">
+              <div class="upper">
+                <div class="topic">About us</div>
+                <p>Snipp It provides you to store, manage your<br>code snippets, Store snippets either publicly or <br>privately, Access your snippets everywhere<br>whenever you want.</p>
+              </div>
+              <div class="lower">
+                <div class="topic">Contact us</div>
+                
+                <div class="email">
+                  <a href="contactus"><i class="fas fa-envelope"></i>snippit@gmail.com</a>
+                </div>
+              </div>
+            </div>
+            <div class="middle box">
+              <div class="topic">Our Services</div>
+              <div><a href="service">Store Code Snippets</a></div>
+              <div><a href="service">Share your snippets publicly</a></div>
+              <div><a href="service">Store snippets for your privately</a></div>
+              <div><a href="service">Edit snippets</a></div>
+              
+            </div>
+            <div class="right box">
+              <div class="topic">Share your reviews</div>
+              <form action="https://formsubmit.co/mtech1655@gmail.com" method="POST">
+                <input type="text" name="text" placeholder="Enter your review">
+                <input type="submit" value="Send">
+                <div class="media-icons">
+                  <a href="#"><i class="fab fa-facebook-f"></i></a>
+                  <a href="#"><i class="fab fa-instagram"></i></a>
+                  <a href="#"><i class="fab fa-twitter"></i></a>
+                  <a href="#"><i class="fab fa-youtube"></i></a>
+                  <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="bottom">
+            <p>Copyright © 2020 <a href="index">SnippIt</a> All rights reserved</p>
+          </div>
+        </footer>
+
+
+     <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
+
+
+    </body>
+</html>

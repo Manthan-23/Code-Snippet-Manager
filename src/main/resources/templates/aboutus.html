@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+
+<!DOCTYPE html>
+<html>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
+    <head>
+        <title>About Us</title>
+        <link rel="icon" href="Snippets.png"/>
+        <style>
+@import url("https://fonts.googleapis.com/css?family=Cute+Font|Open+Sans&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: 'Poppins';
+}
+
+body {
+  background: linear-gradient(
+                to bottom,
+                #000 0%,
+                #000 39.5%,
+                #e4e4e4 39.5%,
+                #e4e4e4 100%
+            );
+}
+
+.wrapper {
+  margin-top: 10px;
+}
+
+.wrapper .title {
+  max-width: 500px;
+  width: 100%;
+  padding: 20px;
+  margin: 0 auto 30px;
+  position: relative;
+  justify-content: space-between;
+
+  text-align: center;
+  font-size: 45px;
+  margin-top: 150px;
+ font-family: 'Poppins';
+  color: #ff7200;
+}
+
+.wrapper .team {
+  width: auto;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  flex-wrap: wrap;
+}
+
+.wrapper .team .team_member {
+  width: 325px;
+  margin: 10px;
+  background: white;
+  border-radius: 6px;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.034),
+  0 6px 6px rgba(0, 0, 0, 0.048),
+  0 1px 12px rgba(0, 0, 0, 0.06),
+  0 2px 22px rgba(0, 0, 0, 0.072),
+  0 4px 41px rgba(0, 0, 0, 0.086),
+  0 1px 10px rgba(0, 0, 0, 0.12);
+  padding: 25px;
+}
+
+.wrapper .team .team_member img {
+  width: 80px;
+}
+
+.wrapper .team .team_member h3 {
+  color: #444;
+}
+
+.wrapper .team .team_member span {
+  font-size: 12px;
+  color: #999;
+}
+
+.wrapper .team .team_member p {
+  margin: 15px 0;
+}
+
+.wrapper .team .team_member .btn_grp {
+  display: flex;
+}
+
+.wrapper .team .team_member .btn_grp a {
+  background: #ddd;
+  display: block;
+  width: 125px;
+  margin: 0 10px;
+  padding: 10px;
+  border-radius: 6px;
+  color: #444;
+  text-transform: capitalize;
+  transition: all 0.3s ease;
+}
+
+.wrapper .team .team_member .btn_grp a:first-child:hover {
+  background: #7bbb5e;
+  color: #fff;
+}
+
+.wrapper .team .team_member .btn_grp a:last-child:hover {
+  background: #3a8bbb;
+  color: #fff;
+}
+
+/* Navigation bar style */
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.navbar{
+    width: 1200px;
+    height: 75px;
+    margin: auto;
+}
+
+.icon{
+    width: 200px;
+    float: left;
+    height: 70px;
+}
+
+.logo{
+    color: #ff7200;
+    font-size: 35px;
+    font-family: 'Poppins';
+    padding-left: 20px;
+    float: left;
+    padding-top: 10px;
+    margin-top: 5px
+}
+
+.menu{
+    width: 400px;
+    float: left;
+    height: 70px;
+}
+
+ul{
+    float: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+ul li{
+    list-style: none;
+    margin-left: 62px;
+    margin-top: 27px;
+    font-size: 14px;
+}
+
+ul li a{
+    text-decoration: none;
+    color: #fff;
+    font-family: 'Poppins';
+    font-weight: bold;
+    transition: 0.4s ease-in-out;
+}
+
+ul li a:hover{
+    color: #ff7200;
+}
+
+.search{
+    width: 330px;
+    float: left;
+    margin-left: 270px;
+}
+
+.srch{
+    font-family: 'Poppins';
+    width: 200px;
+    height: 40px;
+    background: transparent;
+    border: 1px solid #ff7200;
+    margin-top: 13px;
+    color: #fff;
+    border-right: none;
+    font-size: 16px;
+    float: left;
+    padding: 10px;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+}
+
+.btn{
+    width: 100px;
+    height: 40px;
+    background: #ff7200;
+    border: 2px solid #ff7200;
+    margin-top: 13px;
+    color: #fff;
+    font-size: 15px;
+    border-bottom-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    transition: 0.2s ease;
+    cursor: pointer;
+}
+p{
+  color: black;
+  font-size: 15px;
+}
+h5{
+  color: #ff7200;
+}
+
+.icons a{
+    text-decoration: none;
+    color: black;
+}
+.icons ion-icon{
+    color: black;
+    font-size: 30px;
+    padding-left: 14px;
+    padding-top: 5px;
+    transition: 0.3s ease;
+}
+.icons ion-icon:hover{
+    color: #ff7200;
+}
+
+
+.about-us{
+    font-family: 'Poppins';
+    color: white;
+    font-size: 50px;
+    font-weight: bold;
+    text-align: center;
+    justify-content: center;
+    margin-top: 60px;
+    margin-left: 40px;
+}
+
+.about-sub{
+    font-family: 'Poppins';
+    color: white;
+    font-size: 25px;
+    font-weight: 300;
+    text-align: center;
+    justify-content: center;
+    margin-top: 25px;
+    margin-right: 5px;
+}
+
+
+
+        </style>
+    </head>
+    <body>
+      <div class="navbar">
+        <div class="icon">
+            <h2 class="logo">Snipp It</h2>
+        </div>
+
+        <div class="menu">
+            <ul>
+                <li><a href="index">HOME</a></li>
+               <li><a href="pub">SNIPPETS</a></li>
+
+                <li><a href="service">SERVICE</a></li>
+                <li><a href="aboutus">ABOUT</a></li>
+                <li><a href="contactus">CONTACT</a></li>
+            </ul>
+        </div>
+
+        <div class="search">
+            <input class="srch" type="search" name="" placeholder="Type To text">
+            <a href="#"> <button class="btn">Search</button></a>
+        </div>
+          
+             
+          
+          
+          
+    </div> 
+    <!-- html of about us  -->
+        <div class="wrapper">
+            
+            
+            
+            <div class="container">
+              
+              <div class="about-us">
+         About Us
+         <br><!-- comment -->
+         <div class="about-sub"> Get to know us! </div>
+     </div>
+              
+          </div>
+            
+            
+            
+            <div class="title" style="top: 2rem">The Team</div>
+            <div class="team" style="margin-bottom: 5rem;">
+              <div class="team_member">
+                <img src="my_image.png" alt="team_member_image">
+                <h3>Manthan Nanaware</h3>
+                <span>manthan@gmail.com</span>
+<!--                <h5>Front-End Manager</h5>
+                <p> Manages the design and management of web-application, in order ot maintain the requirements of user and making users  aware of this website using dynamic design of web-application
+                     </p>-->
+                     <div class="icons">
+                      <a href="#"><ion-icon name="logo-facebook"></ion-icon></a>
+                      <a href="#"><ion-icon name="logo-instagram"></ion-icon></a>
+                      <a href="#"><ion-icon name="logo-twitter"></ion-icon></a>
+                      <a href="#"><ion-icon name="logo-google"></ion-icon></a>
+                      <a href="#"><ion-icon name="logo-skype"></ion-icon></a>
+                  </div>
+              </div>
+              <div class="team_member">
+                <img src="a-modified.png" alt="team_member_image">
+                <h3>Aryan Parab</h3>
+                <span>aryan@gmail.com</span>
+<!--                <h5>Back-End Manager</h5>
+                <p>Manages the Back-end mechanisms and build and maintain the mechanisms that process data and perform actions on websites</p>-->
+                <div class="icons">
+                  <a href="#"><ion-icon name="logo-facebook"></ion-icon></a>
+                  <a href="#"><ion-icon name="logo-instagram"></ion-icon></a>
+                  <a href="#"><ion-icon name="logo-twitter"></ion-icon></a>
+                  <a href="#"><ion-icon name="logo-google"></ion-icon></a>
+                  <a href="#"><ion-icon name="logo-skype"></ion-icon></a>
+              </div>
+              </div>
+                
+                <div class="team_member">
+                <img src="k-modified.png" alt="team_member_image">
+                <h3>Kaustubh Gaikwad</h3>
+                <span>kaustubh@gmail.com</span>
+<!--                <h5>Back-End Manager</h5>
+                <p>Manages the Back-end mechanisms and build and maintain the mechanisms that process data and perform actions on websites</p>-->
+                <div class="icons">
+                  <a href="#"><ion-icon name="logo-facebook"></ion-icon></a>
+                  <a href="#"><ion-icon name="logo-instagram"></ion-icon></a>
+                  <a href="#"><ion-icon name="logo-twitter"></ion-icon></a>
+                  <a href="#"><ion-icon name="logo-google"></ion-icon></a>
+                  <a href="#"><ion-icon name="logo-skype"></ion-icon></a>
+              </div>
+              </div>
+                
+                
+                
+                <div class="team_member" style="margin-left: 2rem">
+                <img src="user.png" alt="team_member_image">
+                <h3>Yaksh Rajput</h3>
+                <span>yaksh@gmail.com</span>
+<!--                <h5>Back-End Manager</h5>
+                <p>Manages the Back-end mechanisms and build and maintain the mechanisms that process data and perform actions on websites</p>-->
+                <div class="icons">
+                  <a href="#"><ion-icon name="logo-facebook"></ion-icon></a>
+                  <a href="#"><ion-icon name="logo-instagram"></ion-icon></a>
+                  <a href="#"><ion-icon name="logo-twitter"></ion-icon></a>
+                  <a href="#"><ion-icon name="logo-google"></ion-icon></a>
+                  <a href="#"><ion-icon name="logo-skype"></ion-icon></a>
+              </div>
+              </div>
+                
+                <div class="team_member">
+                <img src="user.png" alt="team_member_image">
+                <h3>Anish Mhatre</h3>
+                <span>anish@gmail.com</span>
+<!--                <h5>Back-End Manager</h5>
+                <p>Manages the Back-end mechanisms and build and maintain the mechanisms that process data and perform actions on websites</p>-->
+                <div class="icons">
+                  <a href="#"><ion-icon name="logo-facebook"></ion-icon></a>
+                  <a href="#"><ion-icon name="logo-instagram"></ion-icon></a>
+                  <a href="#"><ion-icon name="logo-twitter"></ion-icon></a>
+                  <a href="#"><ion-icon name="logo-google"></ion-icon></a>
+                  <a href="#"><ion-icon name="logo-skype"></ion-icon></a>
+              </div>
+              </div>
+               
+            </div>
+          </div>
+          <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
+
+    </body>
+</html>

@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html> 
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    
+<head xmlns::th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns="http://www.w3.org/1999/xhtml">
+      <link href="/assets/css/theme.css" rel="stylesheet" type="text/css">
+
+
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/atom-one-light.min.css" integrity="sha512-o5v54Kh5PH0dgnf9ei0L+vMRsbm5fvIvnR/XkrZZjN4mqdaeH7PW66tumBoQVIaKNVrLCZiBEfHzRY4JJSMK/Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+  <title>Snippets Storage</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src = "https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=html&amp;skin=sunburst"></script>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/atom-one-light.min.css" integrity="sha512-o5v54Kh5PH0dgnf9ei0L+vMRsbm5fvIvnR/XkrZZjN4mqdaeH7PW66tumBoQVIaKNVrLCZiBEfHzRY4JJSMK/Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
+  <style>
+      
+      
+      *{
+          font-family: 'Poppins';
+      }
+    
+    body{
+      background-color: black;
+    }
+    @media (min-width: 576px) {
+
+      .jumbotron {
+        padding: 1rem 2rem;
+      }
+    }
+    .errdiv {
+      color: #ff7200;
+      font-weight: bold;
+
+    }
+     
+    
+    .text-center{
+      color: white;
+      padding-bottom: 5px;
+      
+    }
+    
+    .no-record{
+    color: white;
+    padding-bottom: 5px;
+    text-align: center;
+    }
+    
+    #btnSave{
+      background-color: #ff7200;
+    }
+
+    label {
+      margin-bottom: 0;
+    }
+
+    .tdAction {
+      width: 25%;
+      text-align: center;
+    }
+
+    .tdSr {
+      width: 7%;
+    }
+
+    .jumbotron {
+      margin-bottom: 0.5rem;
+    }
+
+    strong {
+      font-size: 24px !important;
+    }
+
+    input.largerCheckbox {
+      width: 20px;
+      height: 20px;
+    }
+    .color{
+      color:white;
+      font-weight: bold;
+    }
+    #btnClear {
+
+      background-color:#ff7200;
+      padding-left: 5px;
+    }
+    .txtAddress{
+      color:white;
+      background-color:black
+    }
+    .txtName{
+      color:white;
+      background-color:black;
+    }
+    /* Styele of Navigaion */
+    .main{
+    width: 100%;
+    background:black;
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+}
+
+.navbar{
+    width: 1200px;
+    height: 75px;
+    margin: auto;
+}
+
+.icon{
+    width: 200px;
+    float: left;
+    height: 70px;
+}
+
+.logo{
+    color: #ff7200;
+    font-size: 35px;
+    font-family: 'Poppins';
+    padding-left: 20px;
+    float: left;
+    padding-top: 10px;
+    margin-top: 5px;
+    font-weight: bold;
+}
+
+.menu{
+    width: 160px;
+    float: right;
+    height: 70px;
+}
+
+ul{
+    position: relative;
+    margin-left: 250px;
+    /*float: left;*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+ul li{
+    text-decoration: none;
+    list-style: none;
+    margin-left: 70px;
+    margin-top: 27px;
+    font-size: 14px;
+}
+
+ul li a{
+    text-decoration: none;
+    color: #fff;
+    font-family: 'Poppins';
+    font-weight: bold;
+    transition: 0.4s ease-in-out;
+}
+
+ul li a:hover{
+    color: #ff7200;
+}
+
+.search{
+    width: 300px;
+    float: left;
+    margin-left: 500px;
+}
+
+.srch{
+    font-family: 'Poppins';
+    width: 200px;
+    height: 40px;
+    background: transparent;
+    border: 1px solid #ff7200;
+    margin-top: 13px;
+    color: #fff;
+    border-right: none;
+    font-size: 16px;
+    float: left;
+    padding: 10px;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+}
+
+.btn{
+    width: 100px;
+    height: 40px;
+    background: #ff7200;
+    border: 2px solid #ff7200;
+    margin-top: 13px;
+    color: #fff;
+    font-size: 15px;
+    border-bottom-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    transition: 0.2s ease;
+    cursor: pointer;
+}
+.btn:hover{
+    color: #000;
+}
+
+.btn:focus{
+    outline: none;
+}
+
+.srch:focus{
+    outline: none;
+}
+    
+.container{
+  margin-top: 90px;
+}
+.txtId{
+    color: #fff;
+}
+
+.txtAddresses{
+  color: white;
+}
+
+.txtNames{
+  color: white;
+}
+
+
+.txtName{
+    color: #666666;
+   border: 2px solid transparent;
+  outline: none;
+  font-size: 16px;
+  background-color: #F0F1F8;
+  border-radius: 6px;
+  transition: all 0.2s;
+  padding: 1em;
+  
+}
+
+.txtName:hover{
+    cursor: pointer;
+    background: #bebebe;
+}
+
+
+.txtAddress{
+    color: #666666;
+   border: 2px solid transparent;
+  outline: none;
+  font-size: 16px;
+  background-color: #F0F1F8;
+  border-radius: 6px;
+  transition: all 0.2s;
+  padding: 1em;
+  
+}
+
+.txtAddress:hover{
+    cursor: pointer;
+    background: #bebebe;
+}
+
+.table td{
+         white-space: pre;
+     }
+     
+#account{
+  display: flex;
+  margin-left: 75.5rem;
+  margin-top: -3rem;
+  justify-content: right;
+  font-size: 40px;
+  color:aliceblue;
+  cursor: pointer;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+  
+.dropdown-content a:hover {background-color: #efefef;}
+.dropdown:hover .dropdown-content {display: block;}
+
+.logout{
+  margin-left: 1.1rem;
+  margin-bottom: 1rem;
+  margin-top: 0.5rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  background-color: #ff7200;
+  border: none;
+  padding: 0.3rem 0.3rem;
+  font-size: 1.1rem;
+}
+
+.logout:hover{
+  background-color: #e56600;
+  transition: 0.3s all; 
+}
+
+.button{
+    
+    background-color: white;
+    
+    left: 40px;
+    color: black;
+    border: none;
+    border-radius: 3px;
+    padding: 9px;
+    min-height: 30px;
+    max-height: 120px;
+    font-family: 'Poppins';
+    font-weight: bold;
+    font-size: 17px;
+}
+
+.button:hover{
+    background-color: #ced4da;
+    transition: 0.7s;
+}
+
+.button a{
+    text-decoration: none;
+    color: black;
+}
+
+
+
+.head{
+    display: flex;
+    color: #fff;
+    font-weight: bold;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    white-space: pre;
+    margin-right: 65rem;
+    margin-left: -10rem;
+    padding: 1rem 0 32rem 7rem;
+    padding-right: -20rem;
+    background-color: #181818;
+    
+    /* background-color: #181818;
+    padding-left: 1rem;
+    
+    margin-right: 65rem; */
+}
+
+
+#add{
+    color: #ff7200;
+    margin-left: 7rem;
+    cursor: pointer;
+    font-size: 2rem;
+}
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: -50px;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 80%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+  from {top:-300px; opacity:0} 
+  to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.close {
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-header {
+  padding: 2px 16px;
+  background-color: #ff7200;
+  color: white;
+}
+
+.modal-body {padding: 2px 16px;}
+
+.modal-footer {
+  padding: 2px 16px;
+  background-color: #ff7200;
+  color: white;
+}
+
+.textarea{
+    align-items: center;
+    align-content: center;
+    
+    color: #666666;
+   border: 2px solid transparent;
+  outline: none;
+  font-size: 16px;
+  margin-top: 30px;
+  margin-left: 20px;
+  margin-bottom: 2rem;
+  background: #F0F1F8;
+  border-radius: 6px;
+  transition: all 0.2s;
+  padding: 1em;
+}
+
+
+.textarea2{
+    align-items: center;
+    align-content: center;
+    
+    color: #666666;
+   border: 2px solid transparent;
+  outline: none;
+  font-size: 16px;
+  margin-top: 30px;
+  margin-left: 20px;
+  background: #F0F1F8;
+  border-radius: 6px;
+  transition: all 0.2s;
+  padding: 1em;
+}
+
+.tables{
+    
+    font-family: 'Poppins';
+    font-size: 15px;
+    margin-bottom: 50px;
+    border-collapse: separate;
+    border-spacing:0 0px;
+    color: white;
+    margin-top: -0.8rem;
+   
+}
+
+.tables td{
+    white-space: pre;
+}
+
+
+thead{
+  background-color: #efefef;
+  color: black;
+  font-family: 'Poppins';
+}
+
+thead th {
+  width: 25%;
+}
+
+.table{
+    /*margin-top: 150px;*/
+    border-collapse: collapse;
+    font-size: 22px;
+}
+
+th, td {
+  border: 1px solid white;
+  padding: 8px;
+  border-radius: 5px;
+}
+
+.allprisnipp{
+    margin-left: 18rem;
+    margin-top: -40rem;
+    
+}
+
+.ptitle{
+    font-size: 18px;
+    color: white;
+    margin-top: -1.5rem;
+}
+
+
+  
+  </style>
+</head> 
+<body>
+
+  <script src="/assets/js/rainbow.js"></script>
+
+
+   <div class="main">
+            <div class="navbar">
+                <div class="icon">
+                    <h2 class="logo">Snipp It</h2>
+                </div>
+    
+                <div class="menu">
+                    <ul>
+                        <li><a href="index">HOME</a></li>
+                        <li><a href="pub">SNIPPETS</a></li>
+                        <li><a href="service">SERVICE</a></li>
+                        <li><a href="aboutus">ABOUT</a></li>
+                        <li><a href="contactus">CONTACT</a></li>
+<!--                        <li>
+                            <span class="username" th:text="${#authentication.getPrincipal().getUserName()}">Guest</span>
+                        </li>-->
+     
+                    </ul>
+                </div>
+    
+                <div class="search">
+                    <input class="srch" type="search" name="" id="myInput" onkeyup="myFunction()" placeholder="Type To text">
+                    <a href="#"> <button class="btn">Search</button></a>
+                </div>
+                
+                
+               <div class="dropdown">
+                <i id="account" class="material-icons">account_circle</i>
+                
+                
+                <div class="dropdown-content">
+                  <a href="#">Account</a>
+                  <a id="changePassword">Change Password</a>
+                
+                  <form th:action="@{/logout}" method="POST">
+                      <button class="logout" onClick="logout_f()">Logout</button>
+                  </form>
+                </div>
+              </div>
+                
+              
+
+                
+                
+                
+    
+            </div> 
+       
+       
+<!--  <form action="addsnippet" modelAttribute="data">-->
+       
+  
+
+<!--    <div class="form-row">
+      <div class="col-md-3">
+         <textarea id="txtNames" type="text" class="form-control txt txtName" rows="2" cols="10"
+         placeholder="Enter The title" required></textarea>
+        <input id="txtId" type="hidden" class="form-control txt">
+      </div>
+    </div>
+    <br>
+    <div class="form-row">
+      <div class="col-md-6 col-sm-7">
+         <textarea id="txtAddresses" class="form-control txt txtAddress" rows="5" minlength="15"
+          placeholder="Enter Your Snippets" required></textarea>
+      </div>
+    </div>
+    <div class="row pt-2">
+      <div class="col-md-2">
+        <button type="submit" class="btn btn-success" id="btnSave">Save</button>
+      </div>
+      <div class="col-md-2">
+        <button type="button" class="btn btn-secondary" id="btnClear">Clear</button>
+      </div>
+    </div>-->
+
+    <div class="container my-3 mt-4">
+            
+            <div class="side-bar">
+            <div>
+                <h5 class="head">MY LISTS <i id="add" class="material-icons" th:href="@{/showAddPrivateSnippet}">add_circle</i></h5>
+            
+            
+            </div>
+            
+            </div>
+
+            
+<!-- <button class="button"><a th:href="@{/showAddSnippet}">Add a Public Snippet</a></button> -->
+
+            <br>
+                <br>
+                    <br>
+      <!-- <h3 class="mt-5">Public Snippets</h3> -->
+      
+      <!-- <div id="notes" class="row container-fluid"></div>
+      
+      
+      <div align="left">
+          
+          <table class="tables">
+              <tbody>
+                  
+                  <tr th:each="data : ${listSnippets}">
+                      <pre><code><td class="tdata" th:text="${data.post}"></td></code></pre>
+                   
+                      
+                      </tr>
+                  
+                      
+              </tbody>
+          </table>
+      </div> -->
+      
+      <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        
+        <div class="modal-content">
+          <div class="modal-header">
+            <span class="close">&times;</span>
+            <h4 style="margin-top: 0.3rem;">Create Snippet</h4>
+          </div>
+          <div class="modal-body">
+              
+              <form th:action="@{/savePrivateSnippet}" modelAttribute="pri" method="POST">
+            
+                <label style="display: flex; padding-left: 1.5rem; margin-top: 1rem; margin-bottom: -1.5rem; font-size: 1.2rem;">Title:</label>
+                <textarea class="textarea2" path="title" name="title" field="*{title}" cols="50" rows="2" placeholder="Enter the title"></textarea>
+                
+                <label style="display: flex; padding-left: 1.5rem; margin-top: 1rem; margin-bottom: -1.5rem; font-size: 1.2rem;">Code:</label>
+                <textarea class="textarea" path="post" name="post" field="*{post}" cols="100" rows="7" placeholder="Enter your Snippet"></textarea>
+                
+                 <div class="modal-footer">
+            <h3><button type="submit" class="button">Create</button></h3>
+          </div>
+                </form>
+            
+          </div>
+         
+        </div>
+            
+      </div>
+      
+      <div id="myModal2" class="modal">
+
+        <!-- Modal content -->
+        
+        <div class="modal-content">
+          <div class="modal-header">
+            <span class="close">&times;</span>
+            <h4 style="margin-top: 0.3rem;">Change Password</h4>
+          </div>
+          <div class="modal-body">
+              
+              <form th:action="@{/change-password}" method="POST">
+            
+                <label style="display: flex; padding-left: 1.5rem; margin-top: 1rem; margin-bottom: -1.5rem; font-size: 1.2rem;">Current Password:</label>
+                <input class="textarea2" path="title" name="currentPassword" field="*{currentPassword}" cols="50" rows="2" placeholder="Enter current password"/>
+                
+                <label style="display: flex; padding-left: 1.5rem; margin-top: 1rem; margin-bottom: -1.5rem; font-size: 1.2rem;">New Password:</label>
+                <input class="textarea" path="post" name="newPassword" field="*{newPassword}" cols="50" rows="2" placeholder="Enter new password"/>
+                
+                 <div class="modal-footer">
+            <h3><button type="submit" class="button">Create</button></h3>
+          </div>
+                </form>
+            
+          </div>
+         
+        </div>
+            
+      </div>
+
+      
+      
+    </div>
+        
+<div class="allprisnipp">
+    <div  id="myMenu" th:each="pri : ${listPrivateSnippets}">
+    <span><div id="titlep" class="ptitle" th:text="${pri.title}"></div>
+<!--          <pre><code><p class="rcorners2" th:text="${data.post}"></p></code></pre>-->
+<table id="myTable" class="tables">
+    <tbody>
+        <tr>
+        <pre><code><td class="tdata" th:text="${pri.post}"></td></code></pre>
+        </tr>
+    </tbody>
+    
+</table>
+</span>
+
+</div>
+</div>
+        <!--
+    
+    <div class="row pt-3">
+      <div class="col-md-12 col-sm-12 col-12 p-2 ">
+        <table id="tblData" class="table table-bordered table-hover table-striped">
+          <thead>
+            <tr>
+              <th class="color">No.</th>
+              <th class="color">Title</th>
+              <th class="color">Snippet</th>
+              <th class="text-center">Action</th>
+            </tr>
+          </thead>
+          <tbody> 
+          </tbody>
+        </table>
+      </div>
+    </div>-->
+    
+  </div>
+       
+  <!--</form>-->
+
+
+  
+       
+       
+       
+  <script>
+      
+      
+      var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("add");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+
+/***********************************/
+
+var modal2 = document.getElementById("myModal2");
+
+// Get the button that opens the modal
+var btn2 = document.getElementById("changePassword");
+
+// Get the <span> element that closes the modal
+var span2 = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn2.onclick = function() {
+  modal2.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span2.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal2) {
+    modal2.style.display = "none";
+  }
+}
+
+
+function myFunction() {
+    // Get the search input element
+    var input = document.getElementById("myInput");
+
+    // Get the div containing items to filter
+    var menu = document.getElementById("myMenu");
+
+    // Get all the items within the div
+    var items = menu.getElementsByClassName("ptitle");
+    console.log("Items: ", items);
+
+    // Convert the input value to lowercase for case-insensitive matching
+    var filter = input.value.toLowerCase().trim();
+
+    // Loop through the items and hide/show based on the filter
+    for (var i = 0; i < items.length; i++) {
+        var title = items[i].textContent.toLowerCase().trim();
+        var item = items[i].closest('span');
+
+        if (title.includes(filter)) {
+            item.style.display = "block";  // Show the item
+        } else {
+            item.style.display = "none";  // Hide the item
+        }
+    }
+}
+
+//    var emptyRow = "<tr><pre><code><td class='tdata' colspan='6' class='no-record'> No Records Available</td></code></pre></tr>";
+//    $(document).ready(function () {
+//      loadDataFromLocal();
+//      $('#tblData').on('click', '.btn-edit', function () {
+//        debugger;
+//        const name = $(this).parent().parent().find(".txtNames").html();
+//        const address = $(this).parent().parent().find(".txtAddresses").html();
+//        const id = $(this).parent().parent().find(".txtNames").attr("data-id");
+//        $("#txtNames").val(name);
+//         $("#txtAddresses").val(address);
+//        $("#txtId").val(id);
+//        $("#btnSave").text("Update");
+//      });
+//
+//      $('#tblData').on('click', '.btn-delete', function () {
+//        debugger;
+//        const id = $(this).parent().parent().find(".txtNames").attr("data-id");
+//        deleteDataFromLocal(id);
+//      });
+//
+//      $("#btnSave").click(function () {
+//        debugger;
+//        if ($("#txtId").val() == '') {
+//          addDataToLocal();
+//        } else {
+//          updateDataFromLocal();
+//        }
+//      });
+//
+//      $("#btnClear").click(function () {
+//        debugger;
+//        clearForm();
+//      });
+//    });
+//
+//    function clearForm() {
+//      debugger;
+//      $("#txtNames").val("");
+//       $("#txtAddresses").val("");
+//      $("#btnSave").text("Add");
+//    }
+//
+//    function addEmptyRow() {
+//      debugger;
+//      if ($("#tblData tbody").children().children().length == 0) {
+//        $("#tblData tbody").append(emptyRow);
+//      }
+//    }
+//
+//    function loadDataFromLocal() {
+//      debugger;
+//      let localData = localStorage.getItem('localData');
+//      if (localData) {
+//        $("#tblData tbody").html("");
+//        let localArray = JSON.parse(localData);
+//        let index = 1;
+//        localArray.forEach(element => {
+//          let dynamicTR = "<tr>";
+//          dynamicTR = dynamicTR + "<td class='txtId'> " + index + "</td>";
+//          dynamicTR = dynamicTR + "<td class='txtNames'  data-id=" + element.id + ">" + element.name + "</td>";
+//           dynamicTR = dynamicTR + "<pre><code><td class='txtAddresses'>" + element.address + "</td></code></pre>";
+//          dynamicTR = dynamicTR + "    <td class='tdAction'>";
+//          dynamicTR = dynamicTR + "        <button class='btn btn-sm btn-success btn-edit'> Edit</button>";
+//          dynamicTR = dynamicTR + "        <button class='btn btn-sm btn-danger btn-delete'> Delete</button>";
+//          dynamicTR = dynamicTR + "    </td>";
+//          dynamicTR = dynamicTR + " </tr>";
+//          $("#tblData tbody").append(dynamicTR);
+//          index++;
+//        });
+//      }
+//      addEmptyRow();
+//    }
+//
+//    function addDataToLocal() {
+//      debugger;
+//      let localData = localStorage.getItem('localData');
+//      if (localData) {
+//        let localArray = JSON.parse(localData);
+//        const obj = {
+//          id: localArray.length + 1,
+//          name: $("#txtNames").val(),
+//           address: $("#txtAddresses").val()
+//        };
+//        localArray.push(obj);
+//        localStorage.setItem('localData', JSON.stringify(localArray));
+//        loadDataFromLocal();
+//      } else {
+//        const arryObj = [];
+//        const obj = {
+//          id: 1,
+//          name: $("#txtNames").val(),
+//           address: $("#txtAddresses").val()
+//        };
+//        arryObj.push(obj);
+//        localStorage.setItem('localData', JSON.stringify(arryObj));
+//        loadDataFromLocal();
+//      }
+//      clearForm();
+//    }
+//
+//    function updateDataFromLocal() {
+//      debugger;
+//      let localData = localStorage.getItem('localData');
+//      let localArray = JSON.parse(localData);
+//      const oldRecord = localArray.find(m => m.id == $("#txtId").val());
+//      oldRecord.name = $("#txtNames").val();
+//       oldRecord.address = $("#txtAddresses").val();
+//      localStorage.setItem('localData', JSON.stringify(localArray));
+//      loadDataFromLocal();
+//      clearForm();
+//    }
+//
+//    function deleteDataFromLocal(id) {
+//      debugger;
+//      let localData = localStorage.getItem('localData');
+//      let localArray = JSON.parse(localData);
+//      let i = 0;
+//      while (i < localArray.length) {
+//        if (localArray[i].id === Number(id)) {
+//          localArray.splice(i, 1);
+//        } else {
+//          ++i;
+//        }
+//      }
+//      localStorage.setItem('localData', JSON.stringify(localArray));
+//      loadDataFromLocal();
+//    }
+    
+    function logout_f(){
+        alert("Logged out Successfully!");
+    }
+
+  </script>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script>
+
+<!-- <script>hljs.initHighlightingOnLoad();</script> -->
+<!--<script>
+document.querySelectorAll('td.txtAddresses').forEach(el => {
+  // then highlight each
+        hljs.highlightElement(el);
+});
+</script>-->
+
+<script>
+        document.querySelectorAll('td.tdata').forEach(el => {
+  // then highlight each
+        hljs.highlightElement(el);
+});
+    </script>
+  
+</body>
+
+</html>

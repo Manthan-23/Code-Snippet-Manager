@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
+    <head xmlns::th="http://www.thymeleaf.org"
+          xmlns="http://www.w3.org/1999/xhtml">
+        <title>Add Snippet</title>
+        <link rel="icon" href="Snippets.png"/>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            
+        <link href="ckeditor/plugins/codesnippet/lib/highlight/styles/default.css" rel="stylesheet">
+        <script src="ckeditor/plugins/codesnippet/lib/highlight/highlight.pack.js"></script>
+            
+    <style>
+       *{
+    margin: 0;
+    padding: 0;
+        }
+        
+body{  
+ background: black;
+ }
+        
+.navbar{
+     
+  
+    width: 1200px;
+    height: 75px;
+    margin: auto;
+}
+
+.icon{
+    width: 200px;
+    float: left;
+    height: 70px;
+}
+
+.logo{
+    color: #ff7200;
+    font-size: 35px;
+    font-family: Poppins;
+    padding-left: 20px;
+    float: left;
+    padding-top: 10px;
+    margin-top: 5px
+}
+
+.menu{
+    width: 400px;
+    float: left;
+    height: 70px;
+}
+
+ul{
+    float: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+ul li{
+    list-style: none;
+    margin-left: 62px;
+    margin-top: 27px;
+    font-size: 14px;
+}
+
+ul li a{
+    text-decoration: none;
+    color: #fff;
+    font-family: Poppins;
+    font-weight: bold;
+    transition: 0.4s ease-in-out;
+}
+
+ul li a:hover{
+    color: #ff7200;
+}
+
+.search{
+    width: 330px;
+    float: left;
+    margin-left: 270px;
+}
+
+.srch{
+    font-family: Poppins;
+    width: 200px;
+    height: 40px;
+    margin-left: 10px;
+    background: transparent;
+    border: 1px solid #ff7200;
+    margin-top: 13px;
+    color: #fff;
+    border-right: none;
+    font-size: 16px;
+    float: left;
+    padding: 10px;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+}
+
+.btn{
+    width: 100px;
+    height: 40px;
+    background: #ff7200;
+    border: 2px solid #ff7200;
+    margin-right: 20px;
+    margin-top: 13px;
+    color: #fff;
+    font-size: 15px;
+    border-bottom-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    transition: 0.2s ease;
+    cursor: pointer;
+}
+.btn:hover{
+    color: #000;
+}
+
+.btn:focus{
+    outline: none;
+}
+
+.srch:focus{
+    outline: none;
+}
+ 
+.card-title{
+   color:white;  
+}
+ 
+.card {
+     border: 1px solid #ced4da;
+     background-color: black;
+
+}
+
+.card-body{
+    background: black;
+}
+.card-text{
+    color: white;
+}
+ 
+h3{
+    color:white;
+}
+h2{
+    font-weight: bold;
+}
+
+
+.textarea{
+    align-items: center;
+    align-content: center;
+    
+    color: #666666;
+   border: 2px solid transparent;
+  outline: none;
+  font-size: 16px;
+  margin-top: 30px;
+  margin-left: 220px;
+  background: #F0F1F8;
+  border-radius: 6px;
+  transition: all 0.2s;
+  padding: 1em;
+}
+
+.textarea:hover{
+    cursor: pointer;
+    background: #bebebe;
+   
+}
+
+.main-heading{
+    color: white;
+    font-family: Poppins;
+    font-size: 30px;
+    margin-left: 220px;
+    margin-top: 60px;
+    float: left;
+    font-weight: bold;
+}
+
+.button{
+    position: absolute;
+    background-color: #ff7200;
+    top: 520px;
+    left: 220px;
+    color: black;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    min-height: 30px;
+    max-height: 120px;
+    font-family: Poppins;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.button:hover{
+    background-color: white;
+    transition: 0.7s;
+}
+
+
+.textarea2{
+    position: relative;
+    align-items: center;
+    align-content: center;
+    
+    color: #666666;
+   border: 2px solid transparent;
+  outline: none;
+  font-size: 16px;
+  margin-top: 150px;
+  right: 355px;
+  background: #F0F1F8;
+  border-radius: 6px;
+  transition: all 0.2s;
+  padding: 1em;
+}
+
+.textarea2:hover{
+    cursor: pointer;
+    background: #bebebe;
+}
+
+</style>
+    </head>
+    <body>
+        
+        
+        <div class="navbar" align="center">
+            <div class="icon">
+                <h2 class="logo">Snipp It</h2>
+            </div>
+
+            <div class="menu">
+                <ul>
+                    <li><a href="index">HOME</a></li>
+                    <li><a href="pub">SNIPPETS</a></li>
+                    <li><a href="service">SERVICE</a></li>
+                    <li><a href="aboutus">ABOUT</a></li>
+                    <li><a href="contactus">CONTACT</a></li>
+                </ul>
+            </div>
+
+            <div class="search">
+                <input class="srch" type="search" name="" placeholder="Type To text">
+                <a href="#"> <button class="btn">Search</button></a>
+            </div>
+            
+            
+            
+
+        </div> 
+        
+        
+        
+        <div class="container">
+            <div class="main-heading">Add your Public Snippet</div>
+        
+        
+        <form th:action="@{/saveSnippet}" modelAttribute="data" method="POST">
+            
+            <textarea class="textarea2" path="title" name="title" field="*{title}" cols="50" rows="2" placeholder="Enter the title"></textarea>
+            
+            <textarea class="textarea" path="post" name="post" field="*{post}" cols="100" rows="7" placeholder="Enter your Snippet"></textarea>
+            
+            <button type="submit" class="button">Add Snippet</button>    
+        </form>
+        
+        
+        </div>
+        
+        <script>hljs.initHighlightingOnLoad();</script>
+        
+    </body>
+</html>

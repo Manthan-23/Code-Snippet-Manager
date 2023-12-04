@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <head xmlns::th="http://www.thymeleaf.org"
+          xmlns="http://www.w3.org/1999/xhtml">
+        <title>Public Snippets</title>
+        <link rel="icon" href="Snippets.png"/>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+      crossorigin="anonymous"
+    />
+        
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/atom-one-light.min.css" integrity="sha512-o5v54Kh5PH0dgnf9ei0L+vMRsbm5fvIvnR/XkrZZjN4mqdaeH7PW66tumBoQVIaKNVrLCZiBEfHzRY4JJSMK/Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+        
+        
+    <style>
+       *{
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins';
+        }
+        
+body{  
+ background: black;
+ }
+        
+.navbar{
+    width: 1200px;
+    height: 60px;
+    bottom: 7px;
+    margin-left: 71px;
+}
+
+.icon{
+    width: 200px;
+    float: left;
+    height: 70px;
+    left: 10px;
+}
+
+.logo{
+    color: #ff7200;
+    font-size: 35px;
+    font-family: 'Poppins';
+    padding-left: 20px;
+    float: left;
+    padding-top: 10px;
+    margin-left: 30px;
+    margin-top: 10px
+}
+
+.menu{
+    width: 400px;
+    float: left;
+    height: 70px;
+}
+
+ul{
+    float: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+ul li{
+    list-style: none;
+    margin-left: 62px;
+    margin-top: 27px;
+    font-size: 14px;
+}
+
+ul li a{
+    text-decoration: none;
+    color: #fff;
+    font-family: 'Poppins';
+    font-weight: bold;
+    transition: 0.4s ease-in-out;
+}
+
+ul li a:hover{
+    color: #ff7200;
+}
+
+.search{
+    width: 330px;
+    float: left;
+    margin-left: 270px;
+}
+
+.srch{
+    font-family: 'Poppins';
+    width: 200px;
+    height: 40px;
+    margin-left: 20px;
+    background: transparent;
+    border: 1px solid #ff7200;
+    margin-top: 13px;
+    color: #fff;
+    border-right: none;
+    font-size: 16px;
+    float: left;
+    padding: 10px;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+}
+
+.btn{
+    width: 100px;
+    height: 40px;
+    background: #ff7200;
+    border: 2px solid #ff7200;
+    margin-top: 13px;
+    
+    color: #fff;
+    font-size: 15px;
+    border-bottom-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    transition: 0.2s ease;
+    cursor: pointer;
+}
+.btn:hover{
+    color: #000;
+}
+
+.btn:focus{
+    outline: none;
+}
+
+.srch:focus{
+    outline: none;
+}
+ 
+.card-title{
+   color:white;  
+}
+ 
+.card {
+     border: 1px solid #ced4da;
+     background-color: black;
+
+}
+
+.card-body{
+    background: black;
+}
+.card-text{
+    color: white;
+}
+ 
+h3{
+    
+    color:white;
+}
+h2{
+    font-weight: bold;
+}
+
+
+.tables{
+    
+    font-family: 'Poppins';
+    font-size: 15px;
+    margin-bottom: 50px;
+    border-collapse: separate;
+    border-spacing:0 0px;
+    color: white;
+    margin-top: -0.8rem;
+   
+}
+
+.tdata{
+    font-size: 15px
+}
+
+.tables td{
+    white-space: pre;
+}
+
+
+thead{
+  background-color: #efefef;
+  color: black;
+  font-family: 'Poppins';
+}
+
+thead th {
+  width: 25%;
+}
+
+.table{
+    margin-top: 30px;
+    border-collapse: collapse;
+    font-size: 22px;
+}
+
+th, td {
+  border: 1px solid white;
+  padding: 8px;
+  border-radius: 5px;
+}
+
+.button{
+    position: absolute;
+    background-color: #ff7200;
+    top: 120px;
+    left: 8rem;
+    color: black;
+    border: none;
+    border-radius: 10px;
+    padding: 9px;
+    min-height: 30px;
+    max-height: 120px;
+    font-family: 'Poppins';
+    font-weight: bold;
+    font-size: 19px;
+}
+
+.button:hover{
+    background-color: white;
+    transition: 0.7s;
+}
+
+.button a{
+    text-decoration: none;
+    color: black;
+}
+
+.mt-5{
+    position: absolute;
+    margin-top: 10px;
+}
+
+.rcorners2 {
+  border-radius: 25px;
+  border: 2px solid #73AD21;
+  padding: 20px; 
+  width: 200px;
+  height: 150px;  
+}
+
+.ptitle{
+    color: white;
+    font-family: Poppins;
+    font-size: 18px;
+    margin-top: -1.5rem;
+    
+}
+
+
+</style>
+        
+        
+</head>
+    
+
+<body>
+        <div class="navbar">
+            <div class="icon">
+                <h2 class="logo">Snipp It</h2>
+            </div>
+
+            <div class="menu">
+                <ul>
+                    <li><a href="index">HOME</a></li>
+                    <li><a href="pub">SNIPPETS</a></li>
+                    <li><a href="service">SERVICE</a></li>
+                    <li><a href="aboutus">ABOUT</a></li>
+                    <li><a href="contactus">CONTACT</a></li>
+                </ul>
+            </div>
+
+            <div class="search">
+                <input class="srch" type="text" id="myInput" onkeyup="myFunction()" name="" placeholder="Type To text">
+                <a href="#"> <button class="btn">Search</button></a>
+            </div>
+            
+            
+<!--            <h5>Welcome, <span th:text="${getFirstName}">Welcome guest!</span></h5>-->
+            
+
+        </div> 
+        
+        
+        <div class="container my-3 mt-4">
+            
+            
+      
+<button class="button"><a th:href="@{/showAddSnippet}">Add a Public Snippet</a></button>
+
+            <br>
+                <br>
+                    <br>
+      <h3 class="mt-5">Public Snippets</h3>
+      <br><!-- comment -->
+          <br>
+              <br><!-- comment -->
+                  <br><!-- comment -->
+                      <br><!-- comment -->
+      <div id="notes" class="row container-fluid"></div>
+      
+      
+      <div align="left">
+         
+<!--          <table class="tables">
+              <tbody>
+                 
+                  <thead>
+                  <tr th:each="data : ${listSnippets}">
+                      <td class="heading" th:text="${data.title}"></td>
+                      <td th:text="${data.title}"></td>
+                      <pre><code><td class="tdata" th:text="${data.post}"></td></code></pre>
+                   
+                      
+                      </tr>
+                  </thead>
+                      
+              </tbody>
+          </table>-->
+
+<div id="myMenu" th:each="data : ${listSnippets}">
+    <span><div id="titlep" class="ptitle" th:text="${data.title}"></div>
+          <!--<pre><code><p class="rcorners2" th:text="${data.post}"></p></code></pre>-->
+<table id="myTable" class="tables">
+    <tbody>
+        <tr>
+        <pre><code><td class="tdata" th:text="${data.post}"></td></code></pre>
+        </tr>
+    </tbody>
+    
+</table>
+</span>
+
+</div>
+
+
+          
+          
+          
+          
+          
+          
+          
+      </div>
+      
+
+      
+      
+    </div>
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script>
+
+    <!--<script>hljs.initHighlightingOnLoad();</script>-->
+    
+    
+     <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+      crossorigin="anonymous"
+    ></script>
+    
+    
+<!--    <script>
+        document.querySelectorAll('p.rcorners2').forEach(el => {
+  // then highlight each
+        hljs.highlightElement(el);
+});
+</script>-->
+    <script>
+        document.querySelectorAll('td.tdata').forEach(el => {
+  // then highlight each
+        hljs.highlightElement(el);
+});
+    </script>
+
+<script>
+//        function myFunction() {
+//            var input, filter, ul, li, a, i, txtValue;
+//            input = document.getElementById("myInput");
+//            filter = input.value.toUpperCase();
+//            ul = document.getElementById("myMenu");
+//            li = ul.getElementsByTagName("span");
+//            for (i = 0; i < li.length; i++) {
+//                a = li[i].getElementsByTagName("table")[0];
+//                txtValue = a.textContent || a.innerText;
+//                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+//                    li[i].style.display = "";
+//                } else {
+//                    li[i].style.display = "none";
+//                }
+//            }
+//        }
+        
+        function myFunction() {
+    // Get the search input element
+    var input = document.getElementById("myInput");
+
+    // Get the div containing items to filter
+    var menu = document.getElementById("myMenu");
+
+    // Get all the items within the div
+    var items = menu.getElementsByClassName("ptitle");
+
+    // Convert the input value to lowercase for case-insensitive matching
+    var filter = input.value.toLowerCase().trim();
+
+    // Loop through the items and hide/show based on the filter
+    for (var i = 0; i < items.length; i++) {
+        var title = items[i].textContent.toLowerCase().trim();
+        var item = items[i].closest('span');
+
+        if (title.includes(filter)) {
+            item.style.display = "";  // Show the item
+        } else {
+            item.style.display = "none";  // Hide the item
+        }
+    }
+}
+
+
+
+        </script>
+
+    
+    
+    
+    
+    </body>
+</html>
