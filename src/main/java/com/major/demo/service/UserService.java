@@ -16,6 +16,12 @@ public interface UserService {
    
    void save(User user);
    
+   public void saveOtpForUser(String email, String otp);
+   
+   public String generateOtp();
+   
+   public boolean verifyOtp(String email, String otp);
+           
    void delete(int id);
    
    public void delete();

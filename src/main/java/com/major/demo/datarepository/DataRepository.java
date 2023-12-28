@@ -5,6 +5,7 @@
 package com.major.demo.datarepository;
 
 import com.major.demo.data.Data;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -12,5 +13,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DataRepository extends JpaRepository<Data, Long> {
-    
+    List<Data> findByTitleContaining(String title);
 }

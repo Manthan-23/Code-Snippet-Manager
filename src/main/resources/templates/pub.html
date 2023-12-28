@@ -4,7 +4,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to c
 Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
 -->
 <html>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap">
     <head xmlns::th="http://www.thymeleaf.org"
           xmlns="http://www.w3.org/1999/xhtml">
         <title>Public Snippets</title>
@@ -27,7 +28,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
        *{
     margin: 0;
     padding: 0;
-    font-family: 'Poppins';
+    font-family: 'Inter';
         }
         
 body{  
@@ -51,7 +52,7 @@ body{
 .logo{
     color: #ff7200;
     font-size: 35px;
-    font-family: 'Poppins';
+    font-family: 'Inter';
     padding-left: 20px;
     float: left;
     padding-top: 10px;
@@ -81,14 +82,17 @@ ul li{
 
 ul li a{
     text-decoration: none;
-    color: #fff;
-    font-family: 'Poppins';
-    font-weight: bold;
-    transition: 0.4s ease-in-out;
+    color: #FF7A00;
+    font-family: 'Inter';
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    /*font-weight: bold;*/
+    transition: 0.3s ease-in-out;
 }
 
 ul li a:hover{
-    color: #ff7200;
+    color: white;
 }
 
 .search{
@@ -98,7 +102,7 @@ ul li a:hover{
 }
 
 .srch{
-    font-family: 'Poppins';
+    font-family: 'Inter';
     width: 200px;
     height: 40px;
     margin-left: 20px;
@@ -167,30 +171,36 @@ h2{
 
 
 .tables{
-    
-    font-family: 'Poppins';
+/*    box-shadow: 0px 0px 106px -60px #FF4D00;
+    border: 3px solid rgba(255, 77, 0, 0.13);
+    border-radius: 15px;*/
+    font-family: 'Inter';
     font-size: 15px;
     margin-bottom: 50px;
     border-collapse: separate;
     border-spacing:0 0px;
-    color: white;
+    background-color: black;
     margin-top: -0.8rem;
    
 }
 
 .tdata{
-    font-size: 15px
+    font-size: 15px;
+    font-family: 'Fira Code';
+    background-color: black;
+    color: white;
 }
 
 .tables td{
     white-space: pre;
+    
 }
 
 
 thead{
   background-color: #efefef;
   color: black;
-  font-family: 'Poppins';
+  font-family: 'Inter';
 }
 
 thead th {
@@ -204,9 +214,14 @@ thead th {
 }
 
 th, td {
-  border: 1px solid white;
+    box-shadow: 0px 0px 106px -60px #FF4D00;
+    border: 3px solid rgba(255, 77, 0, 0.13);
+    border-radius: 15px;
+    background-color: black;
+  /*border: 1px solid white;*/
   padding: 8px;
-  border-radius: 5px;
+  /*border-radius: 5px;*/
+  
 }
 
 .button{
@@ -220,7 +235,7 @@ th, td {
     padding: 9px;
     min-height: 30px;
     max-height: 120px;
-    font-family: 'Poppins';
+    font-family: 'Inter';
     font-weight: bold;
     font-size: 19px;
 }
@@ -250,7 +265,7 @@ th, td {
 
 .ptitle{
     color: white;
-    font-family: Poppins;
+    font-family: 'Inter';
     font-size: 18px;
     margin-top: -1.5rem;
     
@@ -271,21 +286,24 @@ th, td {
 
             <div class="menu">
                 <ul>
-                    <li><a href="index">HOME</a></li>
-                    <li><a href="pub">SNIPPETS</a></li>
-                    <li><a href="service">SERVICE</a></li>
-                    <li><a href="aboutus">ABOUT</a></li>
-                    <li><a href="contactus">CONTACT</a></li>
+                    <li><a href="index">Home</a></li>
+                    <li><a href="pub">Snippet</a></li>
+                    <li><a href="service">Service</a></li>
+                    <li><a href="aboutus">About</a></li>
+                    <li><a href="contactus">Contact</a></li>
                 </ul>
             </div>
 
+
+
             <div class="search">
-                <input class="srch" type="text" id="myInput" onkeyup="myFunction()" name="" placeholder="Type To text">
-                <a href="#"> <button class="btn">Search</button></a>
+                <form th:action="@{/search}" method="get">
+                    <input class="srch" type="text" name="query" placeholder="Type To text">
+                <button type="submit" class="btn">Search</button>
+                </form>
             </div>
             
             
-<!--            <h5>Welcome, <span th:text="${getFirstName}">Welcome guest!</span></h5>-->
             
 
         </div> 
@@ -311,21 +329,7 @@ th, td {
       
       <div align="left">
          
-<!--          <table class="tables">
-              <tbody>
-                 
-                  <thead>
-                  <tr th:each="data : ${listSnippets}">
-                      <td class="heading" th:text="${data.title}"></td>
-                      <td th:text="${data.title}"></td>
-                      <pre><code><td class="tdata" th:text="${data.post}"></td></code></pre>
-                   
-                      
-                      </tr>
-                  </thead>
-                      
-              </tbody>
-          </table>-->
+
 
 <div id="myMenu" th:each="data : ${listSnippets}">
     <span><div id="titlep" class="ptitle" th:text="${data.title}"></div>
@@ -384,22 +388,8 @@ th, td {
     </script>
 
 <script>
-//        function myFunction() {
-//            var input, filter, ul, li, a, i, txtValue;
-//            input = document.getElementById("myInput");
-//            filter = input.value.toUpperCase();
-//            ul = document.getElementById("myMenu");
-//            li = ul.getElementsByTagName("span");
-//            for (i = 0; i < li.length; i++) {
-//                a = li[i].getElementsByTagName("table")[0];
-//                txtValue = a.textContent || a.innerText;
-//                if (txtValue.toUpperCase().indexOf(filter) > -1) {
-//                    li[i].style.display = "";
-//                } else {
-//                    li[i].style.display = "none";
-//                }
-//            }
-//        }
+
+    
         
         function myFunction() {
     // Get the search input element

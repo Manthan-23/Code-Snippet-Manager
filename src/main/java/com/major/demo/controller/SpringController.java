@@ -4,9 +4,15 @@
  */
 package com.major.demo.controller;
 
+import com.sendgrid.*;
+import com.sendgrid.helpers.mail.Mail;
+import com.sendgrid.helpers.mail.objects.Email;
+import com.sendgrid.helpers.mail.objects.Content;
 import com.major.demo.CustomUserDetails;
 import com.major.demo.PasswordChangeRequest;
 import com.major.demo.User;
+import com.major.demo.OTPGenerator;
+import static com.major.demo.OTPGenerator.generateOTP;
 import com.major.demo.UserRepository;
 import com.major.demo.data.Data;
 import com.major.demo.datarepository.DataRepository;
@@ -30,13 +36,28 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import com.major.demo.privaterepository.PrivateRepository;
+import com.major.demo.service.OtpService;
+
 import com.major.demo.service.PrivateService;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+
 
 
 
 @Controller
 public class SpringController {
+    
+//    @Autowired
+//    private EmailService emailService;
     
     @Autowired
     private UserService userService;
@@ -56,6 +77,14 @@ public class SpringController {
     @Autowired
     private PrivateService priService;
     
+    @Autowired
+    private OtpService otpService;
+
+//    @Autowired
+//    public OtpController(OtpService otpService) {
+//        this.otpService = otpService;
+//    }
+    
     
     private User user;
     
@@ -72,7 +101,17 @@ public class SpringController {
     
     @GetMapping("/index")
     public String index(){
-        return "index";  
+       return "index";  
+    }
+    
+    @GetMapping("/enter-otp-page")
+    public String otp(){
+        return "enter-otp-page";
+    }
+    
+    @GetMapping("/editor")
+    public String editor() {
+        return "editor";
     }
     
     @GetMapping("/snippets")
@@ -101,34 +140,241 @@ public class SpringController {
         return "service";  
     }
     
-    @GetMapping("/privatesnippets")
-    public String privatesnippets(Model model){
-        model.addAttribute("listPrivateSnippets", priService.getAllData());
-        return "privatesnippets";  
+    @GetMapping("/verify-otp-page")
+    public String verify(){
+        return "verify-otp-page";   
     }
     
-//    @PostMapping("/change-password")
-//    public String changePassword(@RequestBody PasswordChangeRequest request) {
-//        boolean success = userService.changePassword(request.getEmail(), request.getCurrentPassword(), request.getNewPassword());
-//        
-//        if (success) {
-//            return "redirect:/login";
-//        } else {
-//            return "redirect:/index";
-//        }
-//    }
-    @PostMapping("/change-password")
-    public String changePassword(@RequestParam("currentPassword") String currentPassword, @RequestParam("newPassword") String newPassword, String email, Model model,HttpSession session){
-        System.out.println("Old Password: "+currentPassword);
-        System.out.println("New Password: "+newPassword);
-//        User persistedUser = repo.findByEmail(email);
-        User userName = repo.findByEmail(email);
-        System.out.println(userName);
-//        User currentUser = this.repo.findByEmail(userName);
-        System.out.println(userName.getPassword());
-              
-        return "privatesnippets";
+    @GetMapping("/change-password")
+    public String password(){
+        return "change-password";   
     }
+    
+    @GetMapping("/forgot-send-otp")
+    public String forgotOtp(){
+        return "forgot-send-otp";
+    }
+    
+    @GetMapping("/forgot-verify-otp")
+    public String forgotVOtp(){
+        return "forgot-verify-otp";
+    }
+    
+     @GetMapping("/forgot-password")
+    public String forgotPassword(){
+        return "forgot-password";
+    }
+    
+//    @GetMapping("/privatesnippets")
+//    public String privatesnippets(Model model){
+//        model.addAttribute("listPrivateSnippets", priService.getAllData());
+//        return "privatesnippets";  
+//    }
+    
+    
+    @GetMapping("/privatesnippets")
+    public String privatesnippets(Model model, HttpSession session) {
+        System.out.println("Inside privatesnippets method");
+    // Get the currently authenticated user's username
+    String email = (String) session.getAttribute("loginEmail");
+    
+    User userNew = repo.findByEmail(email);
+    
+    System.out.println("User = " + userNew);
+    
+    String username = userNew.getFirstName();
+    // Retrieve the user from the database based on the username
+//    User user = userService.findByUsername(username);
+
+    if (userNew != null) {
+        // Fetch user-specific snippets
+        List<Private> userSnippets = priService.getUserPrivateSnippets(userNew.getId());
+        
+        System.out.println("Number of user snippets: " + userSnippets.size());
+
+        // Pass the snippets to the frontend
+        model.addAttribute("listPrivateSnippets", userSnippets);
+
+        return "privatesnippets";
+    } else {
+        // Handle the case where the user is not found
+        return "redirect:/error";  // Redirect to an error page or handle as needed
+    }
+}
+
+    
+    
+    public static String encodeEmailAddress(String emailAddress) {
+        try {
+            return URLEncoder.encode(emailAddress, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException("Error encoding email address", e);
+        }
+    }
+    
+    
+    
+    @PostMapping("/send-otp")
+    public String sendOtp(@RequestParam String email,  HttpSession session, Model model) {
+        String newEmail = (String) session.getAttribute("loginEmail");
+        
+        if(email.equals(newEmail)){
+        
+        try {
+        System.out.println("Email"+email);
+        String otp = userService.generateOtp();
+        userService.saveOtpForUser(email, otp);
+//        session.setAttribute("email", email);
+        System.out.println("OTP sent successfully");
+        model.addAttribute("message", "OTP sent successfully on your Email!");
+        return "verify-otp-page";
+    } catch (Exception e) {
+        // Handle exceptions appropriately
+        return "Failed to send OTP: " + e.getMessage();
+        
+    }
+        
+        } else {
+            model.addAttribute("error", "The email is not registered with us! Please check your email");
+            return "enter-otp-page";
+        }
+ 
+    }
+    
+    @PostMapping("/verify-otp")
+    public String verifyOtp(@RequestParam("otp") String enteredOtp, Model model, HttpSession session) {
+         String email = (String) session.getAttribute("loginEmail");
+//         System.out.println("Entered Email: " + enteredEmail);
+//    System.out.println("Stored Email: " + email);
+    
+        
+        User user = repo.findByEmail(email);
+
+        if (userService.verifyOtp(email, enteredOtp)) {
+            // OTP verification successful
+            model.addAttribute("message", "Verified!");
+            return "change-password";
+        } else {
+            model.addAttribute("errorTwo", "OTP is invalid! Please try again!");
+            return "enter-otp-page";
+        }
+
+      
+    }
+    
+    @PostMapping("/submit-password-change")
+    public String changePassword(@RequestParam("newPassword") String newPassword, @RequestParam("currentPassword") String currentPassword, HttpSession session, Model model) {
+    String email = (String) session.getAttribute("loginEmail");
+
+    if (email != null) {
+        // Retrieve the user by email
+        User user = repo.findByEmail(email);
+
+        if (user != null && currentPassword.equals(user.getPassword())) {
+            // Set the new password and save the user
+            user.setPassword(newPassword);
+            repo.save(user);
+
+            // You may want to clear the OTP-related session attributes here
+             model.addAttribute("successMessage", "Password changed successfully! Please login!");
+            // Redirect to a success page or login page
+            return "login"; // Assuming this is the view name for success
+        }
+    }
+
+    // Handle the case where email is not found or user is not retrieved
+    model.addAttribute("errorMessage", "Unable to change password. Please login and try again");
+    return "login"; // Assuming this is the view name for login
+}
+
+    
+    
+    ////////////////////////////////////////////////
+    ////////////////////////////////////////////////
+    //////////**FORGOT PASSWORD LOGIC**/////////////
+    
+    @PostMapping("/forgot-send-otp-check")
+    public String forgotSendOtp(@RequestParam String email,  HttpSession session, Model model) {
+        session.setAttribute("forgotEmail", email);
+//        String newEmail = (String) session.getAttribute("loginEmail");
+        
+        User emailExists = repo.findByEmail(email);
+        if(emailExists != null){
+        
+        try {
+        System.out.println("Email"+email);
+        String otp = userService.generateOtp();
+        userService.saveOtpForUser(email, otp);
+//        session.setAttribute("email", email);
+        System.out.println("OTP sent successfully");
+        model.addAttribute("message", "OTP sent successfully on your Email!");
+        return "forgot-verify-otp";
+    } catch (Exception e) {
+        // Handle exceptions appropriately
+        return "Failed to send OTP: " + e.getMessage();
+        
+    }
+        
+        } else {
+            model.addAttribute("error", "The email is not registered with us! Please check your email");
+            return "forgot-send-otp";
+        }
+ 
+    }
+    
+    
+    
+    
+    @PostMapping("/forgot-verify-otp-check")
+    public String forgotVerifyOtp(@RequestParam("otp") String enteredOtp, Model model, HttpSession session) {
+         String email = (String) session.getAttribute("forgotEmail");
+//         System.out.println("Entered Email: " + enteredEmail);
+//    System.out.println("Stored Email: " + email);
+    
+        
+        User user = repo.findByEmail(email);
+
+        if (userService.verifyOtp(email, enteredOtp)) {
+            // OTP verification successful
+            model.addAttribute("message", "Verified!");
+            return "forgot-password";
+        } else {
+            model.addAttribute("errorTwo", "OTP is invalid! Please try again!");
+            return "forgot-send-otp";
+        }
+
+      
+    }
+    
+    
+    
+    @PostMapping("/forgot-submit-password-change")
+    public String forgotChangePassword(@RequestParam("newPassword") String newPassword, @RequestParam("confirmNewPassword") String confirmNewPassword, HttpSession session, Model model) {
+    String email = (String) session.getAttribute("forgotEmail");
+
+    if (email != null) {
+        // Retrieve the user by email
+        User user = repo.findByEmail(email);
+
+        if (user != null && newPassword.equals(confirmNewPassword)) {
+            // Set the new password and save the user
+            user.setPassword(newPassword);
+            repo.save(user);
+
+            // You may want to clear the OTP-related session attributes here
+             model.addAttribute("successMessage", "Password changed successfully! Please login!");
+            // Redirect to a success page or login page
+            return "login"; // Assuming this is the view name for success
+        }
+    }
+
+    // Handle the case where email is not found or user is not retrieved
+    model.addAttribute("errorMessage", "Unable to change password. Please login and try again");
+    return "login"; // Assuming this is the view name for login
+}
+        
+       
+    
     
     @GetMapping("/test")
     public String test(){
@@ -142,6 +388,7 @@ public class SpringController {
     
     @GetMapping("/login")
     public String login(){
+//        model.addAttribute("user", new User());
         return "login";  
     }
     
@@ -168,25 +415,38 @@ public class SpringController {
     
     
     
-    @RequestMapping(value="/loginuser")
+    @RequestMapping("/loginuser")
     public String loginUser(@RequestParam("email") String email,
-            @RequestParam("password") String password,Model model,HttpSession session){
+            @RequestParam("password") String password, 
+//            @Valid @ModelAttribute("user") User user,
+            Model model,HttpSession session){
 
         User persistedUser = repo.findByEmail(email);
+        session.setAttribute("loginEmail", email);
 //        System.out.println(persistedUser);
 
-        if(persistedUser!=null && persistedUser.getEmail().equals(email)){
+        if(persistedUser!=null && persistedUser.getEmail().equals(email) && persistedUser.getPassword().equals(password)){
             session.setAttribute("user", persistedUser);
-            
+            model.addAttribute("user", persistedUser);
+            model.addAttribute("message", "Login successful!");
+            model.addAttribute("messageType", "success");
+//            System.out.println("Persisted user details: " + persistedUser);
+            List<Private> userSnippets = priService.getUserPrivateSnippets(persistedUser.getId());
+//            System.out.println("Number of user snippets: " + userSnippets.size());
+            model.addAttribute("listPrivateSnippets", userSnippets);
             return "privatesnippets";
             
             
-        }else{
-            model.addAttribute("error", "Incorrect username or password, Please try again!");
-            return "index";
         }
-
+        
+            model.addAttribute("error", "Incorrect email or password, Please try again!");
+            model.addAttribute("messageType", "error");
+            return "login";
+   
     }
+    
+    
+   
     
     
     
@@ -202,6 +462,7 @@ public class SpringController {
         ModelAndView mav = new ModelAndView("index");
         userService.save(userObj);
         mav.addObject("list",userService.get());
+//        model.addAttribute("signupSuccess", "Registered Successfully!");
         return mav;
     }
     
@@ -236,19 +497,77 @@ public class SpringController {
     @PostMapping("/saveSnippet")
     public String saveSnippet(@ModelAttribute("data") Data data){
         dataService.saveSnippet(data);
+        System.out.println("Post Content: " + data.getPost());
         return "redirect:/pub";
     }
     
+//    @PostMapping("/savePrivateSnippet")
+//    public String savePrivateSnippet(@ModelAttribute("pri") Private pri){  
+////        String userEmail = userDetails.getUsername(); 
+////        Long userId = repo.findUserIdByEmail(userEmail);
+////
+////    // Set the user_id in the Data entity
+////        pri.setUserId(userId);
+//        priService.savePrivateSnippet(pri);
+//        return "redirect:/privatesnippets";
+//    }
+    
+    
+    
     @PostMapping("/savePrivateSnippet")
-    public String savePrivateSnippet(@ModelAttribute("pri") Private pri){  
-//        String userEmail = userDetails.getUsername(); 
-//        Long userId = repo.findUserIdByEmail(userEmail);
-//
-//    // Set the user_id in the Data entity
-//        pri.setUserId(userId);
+    public String savePrivateSnippet(@ModelAttribute("pri") Private pri, @RequestParam("post") String post, HttpSession session) {
+    
+    String email = (String) session.getAttribute("loginEmail");
+        
+    // Get the email from the Private entity
+//    String userEmail = pri.getEmail();
+
+    // Retrieve the user from the database based on the email
+    User user = repo.findByEmail(email);
+
+    // Check if the user exists
+    if (user != null) {
+        // Get the user ID
+        Long userId = user.getId();
+
+        // Set the user_id in the Private entity
+        pri.setUserId(userId);
+        
+         pri.setPost(post);
+        
+        System.out.println("Title: " + pri.getTitle());
+        System.out.println("Post Content before saving: " + pri.getPost());
+
+        // Save the private snippet
         priService.savePrivateSnippet(pri);
+        System.out.println("Post Content after saving: " + pri.getPost());
+
         return "redirect:/privatesnippets";
+    } else {
+        // Handle the case where the user with the specified email is not found
+        // You might want to redirect to an error page or display an error message
+        return "redirect:/error"; // Adjust this based on your application's error handling mechanism
     }
+}
+    
+    @PostMapping("/delete-item")
+    public String deleteItem(@RequestParam Long itemId, HttpSession session, Model model) {
+        String email = (String) session.getAttribute("loginEmail");
+        User user = repo.findByEmail(email);
+
+        if (user != null) {
+            priService.deleteSnippet(itemId, user.getId());
+            
+            List<Private> updatedSnippets = priService.getUserPrivateSnippets(user.getId());
+
+        // Pass the updated list to the frontend
+            model.addAttribute("listPrivateSnippets", updatedSnippets);
+        }
+
+        // Redirect to the original page or a different page
+        return "privatesnippets";
+    }
+
        
     
     
@@ -263,6 +582,15 @@ public class SpringController {
     model.addAttribute("usersnippet", user);
     return "privatesnippets";
   }
+  
+  
+  @GetMapping("/search")
+public String searchSnippets(@RequestParam("query") String query, Model model) {
+    List<Data> searchResults = dataService.findByTitleContaining(query);
+    model.addAttribute("listSnippets", searchResults);
+    System.out.println(searchResults);
+    return "pub"; // Replace with the actual page name
+}
   
     
     

@@ -4,40 +4,29 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to c
 Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
 -->
 <html>
-    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
     <head xmlns::th="http://www.thymeleaf.org"
           xmlns="http://www.w3.org/1999/xhtml">
-        <title>Sign-up</title>
-        <link rel="icon" href="Snippets.png"/>
-         <meta charset="UTF-8">
+        
+        <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            
-              <link rel="icon" href="Snippets.png">
-
-            
-    </head>
-   
-    
-    
-    
-    <script>
         
-        function myFunction() {
-            if(!alert('You have registered successfully! Please Log In to continue.'));
-
+         <script th:inline="javascript">
+        /*<![CDATA[*/
+        function clearMessage() {
+            setTimeout(function () {
+                var messageElement = document.getElementById('message');
+                if (messageElement) {
+                    messageElement.remove();
+                }
+            }, 4000); // 5000 milliseconds (5 seconds)
         }
-        
+        /*]]>*/
     </script>
-    
-    
-        
         
         <style>
-            
-        
-
-
-* {
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -51,9 +40,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         .heading {
             color: #FFF;
             margin-left: 20rem;
-            margin-top: 3rem;
+            margin-top: 5rem;
             font-family: 'Inter';
-            font-size: 50px;
+            font-size: 45px;
             font-style: normal;
             font-weight: 600;
             line-height: normal;
@@ -77,7 +66,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             color: white;
             padding: 10px;
             font-size: 1rem;
-            margin-bottom: 2rem;
         }
 
 
@@ -89,12 +77,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             flex-direction: column;
             align-items: center;
 
-            margin-top: -36rem;
+            margin-top: -35rem;
         }
 
         .button-1 {
             width: 100px;
-            margin-top: 2rem;
+            margin-top: 5rem;
             height: 35px;
             border: none;
             border-radius: 22.896px;
@@ -115,24 +103,64 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             top: -30rem;
 
         }
-
-        .already{
-            color: #FFF;
-cursor: pointer;
-font-family: 'Inter';
-font-size: 15.088px;
-font-style: normal;
-font-weight: 300;
-line-height: normal;
-font-family: 'Inter';
-        }
-        </style>
         
-       
+        #message-container {
+            position: fixed;
+            margin: 20px auto;
+            transform: translate(-50%, -50%);  
+            left: 50%;
+            font-family: 'Inter';
+        top: 10%;
+        text-align: center;
+    }
 
-<body>
+    #message {
+        width: 300px; /* Adjust the width as needed */
+        padding: 10px; /* Optional: Adjust padding for spacing within the container */
+        border: 1px solid #000; /* Optional: Add a border for better visibility */
+        display: inline-block; /* Ensure inline-block for margin to take effect */
+        font-family: 'Inter';
+        color: red;
+    }
+        
+        .error {
+            background-color: #f2dede; /* Adjust the background color for error */
+            border-radius: 5px;
+        }
+        
+        .success {
+            background-color: #dff0d8; /* Adjust the background color for success */
+            border: 1px solid #3c763d; /* Adjust the border color for success */
+        }
+    </style>
+        
+    </head>
+    <body onload="clearMessage()">
+        
+        
+<!--        <form th:action="@{/send-otp}" method="POST">
+            
+                <label style="display: flex; padding-left: 1.5rem; margin-top: 1rem; margin-bottom: -1.5rem; font-size: 1.2rem;">Enter email:</label>
+                <input type="email" class="textarea2" path="email" name="email" field="*{email}" cols="50" rows="2" placeholder="Enter your Email"/>
+                
 
-            <div class="heading">Sign up</div>
+                 <div class="modal-footer">
+            <h3><button type="submit" class="button" href="verify-otp-page">Send OTP</button></h3>
+          </div>
+
+                </form>-->
+
+
+                 <div id="message-container" th:if="${error}">
+    <p id="message" th:text="${error}" class="error"></p>
+</div>
+
+<div id="message-container" th:if="${errorTwo}">
+    <p id="message" th:text="${errorTwo}" class="error"></p>
+</div>
+
+        
+        <div class="heading">Update Password</div>
     <div class="eclipse-1"></div>
     <div class="eclipse-2"><svg xmlns="http://www.w3.org/2000/svg" width="184" height="182" viewBox="0 0 184 182"
             fill="none">
@@ -146,22 +174,18 @@ font-family: 'Inter';
                 </linearGradient>
             </defs>
         </svg></div>
-    
-    
-    <form action="publish" modelAttribute="user">
 
+    <form th:action="@{/forgot-send-otp-check}" method="POST">
     <div class="main">
-        <input class="input-1" path="email" name="email" field="*{email}" required placeholder="Email" />
-        <input class="input-1" placeholder="Password" type="password" path="password" name="password" field="*{password}" required/>
-        <input class="input-1" placeholder="First Name" path="firstName" name="firstName" field="*{firstName}" required/>
-        <input class="input-1" placeholder="Last Name" path="lastName" name="lastName" field="*{lastName}" required/>
-        <div class="already"><a href="login" style="text-decoration: none; color: white;">Already a user? Login</a></div>
-        <button onclick="myFunction()" type="submit" class="button-1">Sign Up</button>
-    </div>
         
+        <input class="input-1" placeholder="Enter your email" type="email" path="email" name="email" field="*{email}"/>
+        <button class="button-1" type="submit" href="forgot-verify-otp">Confirm</button>
+        
+    </div>
     </form>
-            
-        <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
         
     </body>
+    
+        
+   
 </html>

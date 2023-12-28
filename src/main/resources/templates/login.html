@@ -5,7 +5,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
 -->
 <html>
     
-    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
     
     <head xmlns::th="http://www.thymeleaf.org"
           xmlns="http://www.w3.org/1999/xhtml">
@@ -15,215 +15,256 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         <link rel="icon" href="Snippets.png"/>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            
+            
+            <script th:inline="javascript">
+        /*<![CDATA[*/
+        function clearMessage() {
+            setTimeout(function () {
+                var messageElement = document.getElementById('message');
+                if (messageElement) {
+                    messageElement.remove();
+                }
+            }, 4000); // 5000 milliseconds (5 seconds)
+        }
+        
+        
+        /*]]>*/
+    </script>
     </head>
-    <body>
+    
+        
         
       
         
         <style>
             
-            *{
-                background: black;
-            }
+
+
+
+
+* {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #000000;
+
+        }
+
+        .heading {
+            color: #FFF;
+            margin-left: 20rem;
+            margin-top: 5rem;
+            font-family: 'Inter';
+            font-size: 50px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+        }
+
+        .eclipse-1 {
+            width: 450px;
+            height: 450px;
+            flex-shrink: 0;
+            border-radius: 574px;
+            background: radial-gradient(365.8% 354.89% at 247.65% -101.16%, #FF4D00 0%, rgba(255, 77, 0, 0.20) 56.77%, rgba(255, 77, 0, 0.00) 70.84%);
+        }
+
+        input {
+            border-radius: 28.5px;
+            border: 3px solid #FF4D00;
+            /* Set the border color to orange */
+            width: 450px;
+            height: 42px;
+            background-color: transparent;
+            color: white;
+            padding: 10px;
+            font-size: 1rem;
+            margin-bottom: 2rem;
+        }
+
+
+
+        .main {
+            display: flex;
+            position: relative;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+
+            margin-top: -36rem;
+        }
+
+        .button-1 {
+            width: 100px;
+            margin-top: 2rem;
+            height: 35px;
+            border: none;
+            border-radius: 22.896px;
+            background-color: #FF4D00;
+            cursor: pointer;
+            color: white;
+            font-size: 0.8rem;
+        }
+
+        .eclipse-2 {
+            position: relative;
+            width: 180.306px;
+            height: 182.329px;
+            transform: rotate(-78.771deg);
+            flex-shrink: 0;
+            fill: linear-gradient(213deg, #FF4D00 -321.7%, rgba(255, 77, 0, 0.00) 55.25%);
+            margin-left: 65rem;
+            top: -30rem;
+
+        }
+
+        .forgot{
             
-            
-            
-            .form{
-    width: 250px;
-    height: 400px;
-    background: black;
-    position: absolute;
-    top: 100px;
-    left: 550px;
-    text-align: center;
-    align-content: center;
-    align-items: center;
-    transform: translate(0%,-5%);
-    border-radius: 10px;
-    padding: 25px;
-}
+cursor: pointer;
+font-family: 'Inter';
+font-size: 15.088px;
+font-style: normal;
+font-weight: 300;
+line-height: normal;
+font-family: 'Inter';
+        }
+        
+/*        #message {
+        width: 300px;
+        height: 50px;  
+        margin: 20px auto;
+        position: fixed;
+        top: 10%;
+        font-family: 'Inter';
+        left: 50%;
+        transform: translate(-50%, -50%);    
+        text-align: center;
+        border-radius: 5px;
+        }*/
 
-.form h2{
-    width: 220px;
-    font-family: 'Poppins';
-    text-align: center;
-    color: #ff7200;
-    font-size: 22px;
-    background-color: white;
-    border-radius: 10px;
-    margin: 2px;
-    padding: 8px;
-}
+        #message-container {
+            position: fixed;
+            margin: 20px auto;
+            transform: translate(-50%, -50%);  
+            left: 50%;
+        top: 10%;
+        text-align: center;
+    }
 
-.form input{
-    width: 240px;
-    height: 35px;
-    background: transparent;
-    border-bottom: 1px solid #ff7200;
-    border-top: none;
-    border-right: none;
-    border-left: none;
-    color: white;
-    font-weight: 400;
-    font-size: 15px;
-    letter-spacing: 1px;
-    margin-top: 30px;
-    font-family: 'Poppins';
-}
-
-.form input:focus{
-    outline: none;
-}
-
-::placeholder{
-    color: white;
-    font-family: Arial;
-}
-
-.btnn{
-    width: 240px;
-    height: 40px;
-    background: #ff7200;
-    border: none;
-    margin-top: 30px;
-    font-family: 'Poppins';
-    font-size: 18px;
-    font-weight: bold;
-    border-radius: 10px;
-    cursor: pointer;
-    color: #fff;
-    transition: 0.4s ease;
-}
-.btnn:hover{
-    background: white;
-    color: #ff7200;
-}
-.btnn a{
-    text-decoration: none;
-    color: #000;
-    font-weight: bold;
-}
-.form .link{
-    font-family: 'Poppins';
-    font-size: 17px;
-    color: white;
-    padding-top: 20px;
-    text-align: center;
-}
-.form .link a{
-    text-decoration: none;
-    color: #ff7200;
-}
-.liw{
-    color: white;
-    font-family: 'Poppins';
-    padding-top: 2px;
-    padding-bottom: 10px;
-    text-align: center;
-}
-.icons a{
-    text-decoration: none;
-    color: white;
-}
-.icons ion-icon{
-    color: white;
-    font-size: 30px;
-    padding-left: 14px;
-    padding-top: 0px;
-    transition: 0.3s ease;
-}
-.icons ion-icon:hover{
-    color: #ff7200;
-}
-
-/*.password-container {
-  position: relative;
-}
-
-#passwordField {
-  padding-right: 40px;  Provide space for the eye button 
-}
-
-#togglePassword {
-  position: absolute;
-  top: 50%;
-  right: 10px;
-  font-size: 20px;
-  transform: translateY(-50%);
-  cursor: pointer;
-  background: white;
-  border: none;
-  outline: none;
-}
-
-#visiblePasswordField {
-  display: none;
-  padding-right: 40px;  Provide space for the eye button 
-}*/
+    #message {
+        width: 300px; /* Adjust the width as needed */
+        padding: 10px; /* Optional: Adjust padding for spacing within the container */
+        border: 1px solid #000; /* Optional: Add a border for better visibility */
+        display: inline-block; /* Ensure inline-block for margin to take effect */
+        font-family: 'Inter';
+        color: red;
+    }
+    
+    #message2 {
+        width: 300px; /* Adjust the width as needed */
+        padding: 10px; /* Optional: Adjust padding for spacing within the container */
+        border: 1px solid #000; /* Optional: Add a border for better visibility */
+        display: inline-block; /* Ensure inline-block for margin to take effect */
+        font-family: 'Inter';
+        color: green;
+    }
+        
+        .error {
+            background-color: #f2dede; /* Adjust the background color for error */
+            border-radius: 5px;
+        }
+        
+        .success {
+            background-color: #dff0d8; /* Adjust the background color for success */
+             border-radius: 5px;
+            /*border: 1px solid #3c763d;  Adjust the border color for success */
+        }
 
         </style>
         
         
         
         
+        <body onload="clearMessage()">
         
+
+
+ <div id="message-container" th:if="${error}">
+    <p id="message" th:text="${error}" class="error"></p>
+</div>
+
+
+
+<!--///////////////////////////////////-->
+
+<div id="message-container" th:if="${successMessage}">
+    <p id="message2" th:text="${successMessage}" class="success"></p>
+</div>
+
+
+<div id="message-container" th:if="${errorMessage}">
+    <p id="message" th:text="${errorMessage}" class="error"></p>
+</div>
+
+
+
+
+                <div class="heading">Log In</div>
+    <div class="eclipse-1"></div>
+    <div class="eclipse-2"><svg xmlns="http://www.w3.org/2000/svg" width="184" height="182" viewBox="0 0 184 182"
+            fill="none">
+            <ellipse cx="91.9752" cy="91.18" rx="90.153" ry="91.1646" transform="rotate(-78.7708 91.9752 91.18)"
+                fill="url(#paint0_linear_30_47)" />
+            <defs>
+                <linearGradient id="paint0_linear_30_47" x1="591.915" y1="-697.62" x2="74.4698" y2="95.512"
+                    gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#FF4D00" />
+                    <stop offset="1" stop-color="#FF4D00" stop-opacity="0" />
+                </linearGradient>
+            </defs>
+        </svg></div>
+
+    <form action="loginuser" modelAttribute="user" onsubmit="return handleFormSubmission()">
+    <div class="main">
         
-        <div class="form">
-                    
-                    <form action="loginuser" modelAttribute="user">
-                    
-                    <h2>Login Here</h2>
-                    <input path="email" name="email" placeholder="Enter Email Here" field="*{email}" required>
-                    <div class="password-container">
-                    <input type="password" id="passwordField" path="password" name="password" placeholder="Enter Password Here" field="*{password}" required>
-                    
-                    </div>
-                    <button type="submit" class="btnn">Login</button>
+        <input class="input-1" placeholder="Email" path="email" name="email" field="*{email}" required/>
+        <input class="input-1" placeholder="Password" type="password" id="passwordField" path="password" name="password" field="*{password}" required/>
+        <div class="forgot"><a href="forgot-send-otp" style="text-decoration: none; color: white;">Forgot Password?</a></div>
+        <button type="submit" class="button-1">Log In</button>
+    </div>
+    </form>
+    
+    
 
-                    <p class="link">Don't have an account<br>
-                    <a href="showUserForm">Sign up </a> here</p>
-                    <p class="liw">Log in with</p>
 
-                    <div class="icons">
-                        <a href="#"><ion-icon name="logo-facebook"></ion-icon></a>
-                        <a href="#"><ion-icon name="logo-instagram"></ion-icon></a>
-                        <a href="#"><ion-icon name="logo-twitter"></ion-icon></a>
-                        <a href="#"><ion-icon name="logo-google"></ion-icon></a>
-                        <a href="#"><ion-icon name="logo-skype"></ion-icon></a>
-                    </div>
-                    
-                    </form>
+    
 
-                </div>
+ </body>
+
+
                 <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
                 
                 <script>
-//                    const passwordField = document.getElementById("togglePassword");
-//                    const visiblePasswordField = document.getElementById("visiblePasswordField");
-//                    const toggleButton = document.getElementById("togglePassword");
-//                    
-//                    toggleButton.addEventListener("click", function () {
-//  if (passwordField.style.display === "none") {
-//    passwordField.style.display = "block";
-//    visiblePasswordField.style.display = "none";
-//  } else {
-//    passwordField.style.display = "none";
-//    visiblePasswordField.style.display = "block";
-//  }
-//});
+                     function handleFormSubmission() {
+        
+        var message = /*[[${message}]]*/ null;
+        var error = /*[[${error}]]*/ null;
 
-//                    const passwordField = document.getElementById("passwordField");
-//const toggleButton = document.getElementById("togglePassword");
-//
-//toggleButton.addEventListener("click", function () {
-//  if (passwordField.type === "password") {
-//    passwordField.type = "text";
-//  } else {
-//    passwordField.type = "password";
-//  }
-//});
+        if (message) {
+            alert(message); // Display a success message alert
+        } else if (error) {
+            alert(error);   // Display an error message alert
+        }
+
+        return true; // Proceed with form submission (or false to cancel)
+    }
+
 
                 </script>
 
-    </body>
+   
 </html>

@@ -25,4 +25,8 @@ public interface PrivateService {
    
     public void delete();
     
+    List<Private> getUserPrivateSnippets(Long userId); 
+    
+    void deleteSnippet(Long snippetId, Long userId);
+    
 }

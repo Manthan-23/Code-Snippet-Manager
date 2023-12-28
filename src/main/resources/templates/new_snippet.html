@@ -4,7 +4,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to c
 Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
 -->
 <html>
-        <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
 
     <head xmlns::th="http://www.thymeleaf.org"
           xmlns="http://www.w3.org/1999/xhtml">
@@ -15,7 +15,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             
         <link href="ckeditor/plugins/codesnippet/lib/highlight/styles/default.css" rel="stylesheet">
         <script src="ckeditor/plugins/codesnippet/lib/highlight/highlight.pack.js"></script>
-            
+<!--        <script src="https://unpkg.com/monaco-editor@0.27.0/min/vs/loader.js"></script>-->
+        <link rel="stylesheet" data-name="vs/editor/editor.main" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.32.1/min/vs/editor/editor.main.css">
+    
+        
     <style>
        *{
     margin: 0;
@@ -43,7 +46,7 @@ body{
 .logo{
     color: #ff7200;
     font-size: 35px;
-    font-family: Poppins;
+    font-family: 'Inter';
     padding-left: 20px;
     float: left;
     padding-top: 10px;
@@ -72,14 +75,17 @@ ul li{
 
 ul li a{
     text-decoration: none;
-    color: #fff;
-    font-family: Poppins;
-    font-weight: bold;
+    color: #FF7A00;
+    font-family: 'Inter';
+    font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+    /*font-weight: bold;*/
     transition: 0.4s ease-in-out;
 }
 
 ul li a:hover{
-    color: #ff7200;
+    color: white;
 }
 
 .search{
@@ -89,7 +95,7 @@ ul li a:hover{
 }
 
 .srch{
-    font-family: Poppins;
+    font-family: 'Inter';
     width: 200px;
     height: 40px;
     margin-left: 10px;
@@ -180,7 +186,7 @@ h2{
 
 .main-heading{
     color: white;
-    font-family: Poppins;
+    font-family: 'Inter';
     font-size: 30px;
     margin-left: 220px;
     margin-top: 60px;
@@ -191,15 +197,14 @@ h2{
 .button{
     position: absolute;
     background-color: #ff7200;
-    top: 520px;
-    left: 220px;
+    top: 290px;
     color: black;
     border: none;
     border-radius: 10px;
     padding: 10px;
     min-height: 30px;
     max-height: 120px;
-    font-family: Poppins;
+    font-family: 'Inter';
     font-weight: bold;
     font-size: 20px;
 }
@@ -207,6 +212,7 @@ h2{
 .button:hover{
     background-color: white;
     transition: 0.7s;
+    cursor: pointer;
 }
 
 
@@ -232,6 +238,40 @@ h2{
     background: #bebebe;
 }
 
+#title-input {
+ width: 600px;
+ height: 40px;
+ padding: 0 15px;
+ font-size: 18px;
+ border: 2px solid grey;
+ border-radius: 2px;
+ outline: none;
+ color: white;
+ background-color: transparent;
+ transition: border-color 0.2s; /* add a transition for the border color */
+}
+
+#editor{
+    width: 700px;
+    height: 200px;
+    margin-top: 1rem;
+}
+
+form{
+    display: flex;
+    justify-content: left;
+    flex-direction: column;
+    
+}
+
+.form-align{
+    position: absolute;
+    margin-right: 10rem;
+    margin-left: 15rem;
+    margin-top: 9rem;
+}
+
+
 </style>
     </head>
     <body>
@@ -244,11 +284,11 @@ h2{
 
             <div class="menu">
                 <ul>
-                    <li><a href="index">HOME</a></li>
-                    <li><a href="pub">SNIPPETS</a></li>
-                    <li><a href="service">SERVICE</a></li>
-                    <li><a href="aboutus">ABOUT</a></li>
-                    <li><a href="contactus">CONTACT</a></li>
+                    <li><a href="index">Home</a></li>
+                    <li><a href="pub">Snippet</a></li>
+                    <li><a href="service">Service</a></li>
+                    <li><a href="aboutus">About</a></li>
+                    <li><a href="contactus">Contact</a></li>
                 </ul>
             </div>
 
@@ -264,23 +304,65 @@ h2{
         
         
         
-        <div class="container">
+        <!--<div class="container">-->
             <div class="main-heading">Add your Public Snippet</div>
         
-        
-        <form th:action="@{/saveSnippet}" modelAttribute="data" method="POST">
+            <div class="form-align">
+        <form th:action="@{/saveSnippet}" modelAttribute="data" method="POST" onsubmit="updateEditorContent(event)">
             
-            <textarea class="textarea2" path="title" name="title" field="*{title}" cols="50" rows="2" placeholder="Enter the title"></textarea>
+            <input id="title-input" path="title" name="title" field="*{title}" cols="50" rows="2" placeholder="Enter the title"></input>
             
-            <textarea class="textarea" path="post" name="post" field="*{post}" cols="100" rows="7" placeholder="Enter your Snippet"></textarea>
+            <!--<textarea id="editor-container" class="textarea" path="post" name="post" field="*{post}" cols="100" rows="7" placeholder="Enter your Snippet"></textarea>-->
+            <!--<input type="hidden" path="post" name="post" field="*{post}" />-->
+            
+            
+            <div id="editor" path="post" name="post" field="*{post}" ></div>
+            
+            <input type="hidden" id="editorContent" name="post" field="*{post}" />
+            
             
             <button type="submit" class="button">Add Snippet</button>    
         </form>
+            </div>
         
         
-        </div>
+        <!--</div>-->
         
-        <script>hljs.initHighlightingOnLoad();</script>
+        <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.32.1/min/vs/loader.js"></script>
+        
+        <script>
+            
+            document.getElementById('title-input').addEventListener('click', function() {
+ this.style.borderColor = '#ff7200';
+});
+
+document.getElementById('title-input').addEventListener('blur', function() {
+ this.style.borderColor = 'grey';
+});
+            
+            var myEditor; // Variable to store the editor instance
+
+    function updateEditorContent() {
+        var editorContent = myEditor.getValue();
+        document.getElementById('editorContent').value = editorContent;
+    }
+            
+
+            
+            require.config({ paths: { 'vs': 'https://cdn.jsdelivr.net/npm/monaco-editor@0.32.1/min/vs' }});
+    require(['vs/editor/editor.main'], function() {
+    myEditor = monaco.editor.create(document.getElementById('editor'), {
+            value: 'console.log("Hello, Enter your snippet!");',
+            language: 'javascript',
+            theme: 'vs-dark'
+        });
+    // Your initialization code here
+  });
+            
+
+        
+        
+        </script>
         
     </body>
 </html>

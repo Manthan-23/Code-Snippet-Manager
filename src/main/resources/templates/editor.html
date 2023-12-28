@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" data-name="vs/editor/editor.main" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.32.1/min/vs/editor/editor.main.css">
+
+        <!--<link rel="stylesheet" data-name="vs/editor/editor.main" href="/webjars/monaco-editor/0.44.0/min/vs/editor/editor.main.css">-->
+    </head>
+    <body>
+         <div id="editor" style="width: 800px; height: 600px; border: 1px solid #ccc;"></div>
+         <!--<script src="/webjars/requirejs/2.3.6/require.js"></script>-->
+         <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.32.1/min/vs/loader.js"></script>
+<script>
+  
+    
+    require.config({ paths: { 'vs': 'https://cdn.jsdelivr.net/npm/monaco-editor@0.32.1/min/vs' }});
+    require(['vs/editor/editor.main'], function() {
+    var editor = monaco.editor.create(document.getElementById('editor'), {
+            value: 'console.log("Hello, Monaco Editor!");',
+            language: 'javascript',
+            theme: 'vs-dark'
+        });
+    // Your initialization code here
+  });
+//       require.config({
+//        paths: {
+//            'vs': '/webjars/monaco-editor/0.32.1/min/vs',
+//        }
+    //});
+//
+//        require(['vs/editor/editor.main'], function() {
+//            var editor = monaco.editor.create(document.getElementById('editor'), {
+//                value: '',
+//                language: 'javascript',
+//                theme: 'vs-dark',
+//                suggestOnTriggerCharacters: true,
+//                wordBasedSuggestions: true,
+//            });
+        //});
+    </script>
+    </body>
+</html>

@@ -4,12 +4,21 @@
  */
 package com.major.demo;
 
+import com.major.demo.privatepost.Private;
+import java.util.Date;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+import jdk.jshell.Snippet;
+
 
 
 
@@ -21,9 +30,13 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
+//    @Email(message = "Please provide a valid email address")
+//    @NotBlank(message = "Email is required")
     @Column(nullable = false, unique = true, length = 45)
     private String email;
     
+//    @Size(min = 6, message = "Password must be at least 6 characters long")
+//    @NotBlank(message = "Password is required")
     @Column(nullable = false, length = 64)
     private String password;
     
@@ -33,16 +46,35 @@ public class User {
     @Column(nullable = false, length = 20)
     private String lastName;
     
-//    @Column(nullable = false)
-//    private String snippet;
-//
-//    public String getSnippet() {
-//        return snippet;
-//    }
-//
-//    public void setSnippet(String snippet) {
-//        this.snippet = snippet;
-//    }    
+    @Column(nullable = false, length = 20)
+    private String otp;
+    
+    
+    @Column(nullable = false, length = 64)
+    private Date expiry_time;
+    
+    @OneToMany(mappedBy = "user")
+    private List<Private> privates;
+    
+    
+
+    public String getOtp() {
+        return otp;
+    }
+
+    public void setOtp(String otp) {
+        this.otp = otp;
+    }
+
+    public Date getExpiry_time() {
+        return expiry_time;
+    }
+
+    public void setExpiry_time(Date expiry_time) {
+        this.expiry_time = expiry_time;
+    }
+    
+    
 
     public Long getId() {
         return id;

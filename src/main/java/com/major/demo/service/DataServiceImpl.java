@@ -63,6 +63,11 @@ public class DataServiceImpl implements DataService {
         this.data.save(data);
     }
     
+    @Override
+    public List<Data> findByTitleContaining(String title) {
+    return data.findByTitleContaining(title);
+}
+    
     
     
 }

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html>
+    <head xmlns::th="http://www.thymeleaf.org"
+          xmlns="http://www.w3.org/1999/xhtml">
+        <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+         <script th:inline="javascript">
+        /*<![CDATA[*/
+        function clearMessage() {
+            setTimeout(function () {
+                var messageElement = document.getElementById('message');
+                if (messageElement) {
+                    messageElement.remove();
+                }
+            }, 4000); // 5000 milliseconds (5 seconds)
+        }
+        /*]]>*/
+    </script>
+        
+        <style>
+            * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+/*         #message {
+        width: 300px;
+        height: 50px;  
+        margin: auto;
+        position: fixed;
+        top: 10%;
+        left: 50%;
+        transform: translate(-50%, -50%);    
+        text-align: center;
+         
+        }*/
+
+        #message-container {
+            position: fixed;
+            margin: 20px auto;
+            transform: translate(-50%, -50%);  
+            left: 50%;
+        top: 10%;
+        text-align: center;
+    }
+
+    #message {
+        width: 300px; /* Adjust the width as needed */
+        padding: 10px; /* Optional: Adjust padding for spacing within the container */
+        border: 1px solid #000; /* Optional: Add a border for better visibility */
+        display: inline-block; /* Ensure inline-block for margin to take effect */
+        font-family: 'Inter';
+        color: green;
+    }
+        
+        .error {
+            background-color: #f2dede; /* Adjust the background color for error */
+            border-radius: 5px;
+        }
+        
+        .success {
+            background-color: #dff0d8; /* Adjust the background color for success */
+            border-radius: 5px;
+        }
+        
+        body {
+            background-color: #000000;
+
+        }
+
+        .heading {
+            color: #FFF;
+            margin-left: 20rem;
+            margin-top: 5rem;
+            font-family: 'Inter';
+            font-size: 45px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+        }
+
+        .eclipse-1 {
+            width: 450px;
+            height: 450px;
+            flex-shrink: 0;
+            border-radius: 574px;
+            background: radial-gradient(365.8% 354.89% at 247.65% -101.16%, #FF4D00 0%, rgba(255, 77, 0, 0.20) 56.77%, rgba(255, 77, 0, 0.00) 70.84%);
+        }
+
+        input {
+            border-radius: 28.5px;
+            border: 3px solid #FF4D00;
+            /* Set the border color to orange */
+            width: 450px;
+            height: 42px;
+            background-color: transparent;
+            color: white;
+            padding: 10px;
+            font-size: 1rem;
+        }
+
+
+
+        .main {
+            display: flex;
+            position: relative;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+
+            margin-top: -35rem;
+        }
+
+        .button-1 {
+            width: 100px;
+            margin-top: 5rem;
+            height: 35px;
+            border: none;
+            border-radius: 22.896px;
+            background-color: #FF4D00;
+            cursor: pointer;
+            color: white;
+            font-size: 0.8rem;
+        }
+
+        .eclipse-2 {
+            position: relative;
+            width: 180.306px;
+            height: 182.329px;
+            transform: rotate(-78.771deg);
+            flex-shrink: 0;
+            fill: linear-gradient(213deg, #FF4D00 -321.7%, rgba(255, 77, 0, 0.00) 55.25%);
+            margin-left: 65rem;
+            top: -30rem;
+
+        }
+        </style>    
+    </head>
+    <body onload="clearMessage()">
+<!--        <form th:action="@{/verify-otp}" method="POST">
+            
+                <input type="hidden" name="email" th:value="${email}" />
+            
+                <label style="display: flex; padding-left: 1.5rem; margin-top: 1rem; margin-bottom: -1.5rem; font-size: 1.2rem;">Enter OTP:</label>
+                <input type="text" class="textarea2" path="otp" name="otp" field="*{otp}" cols="50" rows="2" placeholder="Enter the OTP sent on your Email"/>
+                
+                <div class="modal-footer">
+            <h3><button type="submit" class="button" href="change-password">Send OTP</button></h3>
+          </div>
+                
+        </form>-->
+
+<!--        <div id="message" th:if="${message}" class="alert alert-success">
+        <p th:text="${message}"></p>
+    </div>-->
+
+<div id="message-container" th:if="${message}">
+    <p id="message" th:text="${message}" class="success"></p>
+</div>
+        
+        
+        <div class="heading">Update Password</div>
+    <div class="eclipse-1"></div>
+    <div class="eclipse-2"><svg xmlns="http://www.w3.org/2000/svg" width="184" height="182" viewBox="0 0 184 182"
+            fill="none">
+            <ellipse cx="91.9752" cy="91.18" rx="90.153" ry="91.1646" transform="rotate(-78.7708 91.9752 91.18)"
+                fill="url(#paint0_linear_30_47)" />
+            <defs>
+                <linearGradient id="paint0_linear_30_47" x1="591.915" y1="-697.62" x2="74.4698" y2="95.512"
+                    gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#FF4D00" />
+                    <stop offset="1" stop-color="#FF4D00" stop-opacity="0" />
+                </linearGradient>
+            </defs>
+        </svg></div>
+
+    <form th:action="@{/forgot-verify-otp-check}" method="POST">
+    <div class="main">
+        <input type="hidden" name="email" th:value="${email}" />
+        <input class="input-1" placeholder="Enter OTP sent on your Email" type="text" path="otp" name="otp" field="*{otp}"/>
+        <button class="button-1" type="submit" href="forgot-password">Verify</button>
+    </div>
+    </form>
+
+        
+        <script>
+//        function verifyOtp() {
+//            var otp = document.getElementById('otp').value;
+//
+//            var data = {
+//                "otp": otp
+//            };
+//
+//            fetch('/verify-otp', {
+//                method: 'POST',
+//                headers: {
+//                    'Content-Type': 'application/json',
+//                },
+//                body: JSON.stringify(data),
+//            })
+//            .then(response => response.text())
+//            .then(data => {
+//                console.log('Success:', data);
+//                // Handle the response as needed, e.g., show a success message
+//            })
+//            .catch((error) => {
+//                console.error('Error:', error);
+//                // Handle the error as needed, e.g., show an error message
+//            });
+//        }
+    </script>
+    </body>
+</html>

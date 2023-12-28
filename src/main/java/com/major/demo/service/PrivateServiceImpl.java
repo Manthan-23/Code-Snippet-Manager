@@ -73,4 +73,18 @@ public class PrivateServiceImpl implements PrivateService {
         this.pri.save(pri);
     }
     
+    public List<Private> getUserPrivateSnippets(Long userId) {
+        return pri.findByUserId(userId);
+    }
+
+    public List<Private> getUserPrivateSnippets() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
+    @Override
+    @Transactional
+    public void deleteSnippet(Long snippetId, Long userId) {
+        pri.deleteByIdAndUserId(snippetId, userId);
+    }
+    
 }

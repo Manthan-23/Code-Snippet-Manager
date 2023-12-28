@@ -19,5 +19,8 @@ import org.springframework.stereotype.Repository;
 public interface PrivateRepository extends JpaRepository<Private, Long> {
     
     List<Private> findByUser(User user);
+     List<Private> findByUserId(Long userId);
+     
+     void deleteByIdAndUserId(Long id, Long userId);
     
 }

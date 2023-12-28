@@ -5,7 +5,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
 -->
 <html> 
     
-    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap">
+
     
 <head xmlns::th="http://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
@@ -25,15 +27,46 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
   <script src = "https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=html&amp;skin=sunburst"></script>
   
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/atom-one-light.min.css" integrity="sha512-o5v54Kh5PH0dgnf9ei0L+vMRsbm5fvIvnR/XkrZZjN4mqdaeH7PW66tumBoQVIaKNVrLCZiBEfHzRY4JJSMK/Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  
+  <link rel="stylesheet" data-name="vs/editor/editor.main" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.32.1/min/vs/editor/editor.main.css">
+      
+      
+      <script th:inline="javascript">
+        /*<![CDATA[*/
+        function clearMessage() {
+            setTimeout(function () {
+                var messageElement = document.getElementById('message');
+                if (messageElement) {
+                    messageElement.remove();
+                }
+            }, 4000); // 5000 milliseconds (5 seconds)
+        }
+        /*]]>*/
+    </script>
+      
+      
   <style>
       
       
       *{
-          font-family: 'Poppins';
+          font-family: 'Inter';
       }
+      
+      #message {
+        width: 300px;
+        height: 50px;  
+        margin: auto;
+        position: fixed;
+        top: 10%;
+        left: 50%;
+        transform: translate(-50%, -50%);    
+        text-align: center;
+         
+        }
+
     
     body{
+        margin: 0;
+        height: 100%;
       background-color: black;
     }
     @media (min-width: 576px) {
@@ -131,7 +164,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
 .logo{
     color: #ff7200;
     font-size: 35px;
-    font-family: 'Poppins';
+    font-family: 'Inter';
     padding-left: 20px;
     float: left;
     padding-top: 10px;
@@ -145,10 +178,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
     height: 70px;
 }
 
-ul{
+/*ul{
     position: relative;
     margin-left: 250px;
-    /*float: left;*/
+    float: left;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -165,13 +198,45 @@ ul li{
 ul li a{
     text-decoration: none;
     color: #fff;
-    font-family: 'Poppins';
+    font-family: 'Inter';
     font-weight: bold;
     transition: 0.4s ease-in-out;
 }
 
 ul li a:hover{
     color: #ff7200;
+}*/
+
+.nav-ul{
+    position: relative;
+    margin-left: 250px;
+    /*float: left;*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-ul .nav-li{
+    text-decoration: none;
+    list-style: none;
+    margin-left: 70px;
+    margin-top: 27px;
+    font-size: 14px;
+}
+
+.nav-ul .nav-li a{
+    text-decoration: none;
+    color: #FF7A00;
+    font-family: 'Inter';
+    font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+    /*font-weight: bold;*/
+    transition: 0.4s ease-in-out;
+}
+
+.nav-ul .nav-li a:hover{
+    color: white;
 }
 
 .search{
@@ -181,7 +246,7 @@ ul li a:hover{
 }
 
 .srch{
-    font-family: 'Poppins';
+    font-family: 'Inter';
     width: 200px;
     height: 40px;
     background: transparent;
@@ -326,7 +391,7 @@ ul li a:hover{
 .button{
     
     background-color: white;
-    
+    margin-top: 30px;
     left: 40px;
     color: black;
     border: none;
@@ -334,7 +399,7 @@ ul li a:hover{
     padding: 9px;
     min-height: 30px;
     max-height: 120px;
-    font-family: 'Poppins';
+    font-family: 'Inter';
     font-weight: bold;
     font-size: 17px;
 }
@@ -351,31 +416,39 @@ ul li a:hover{
 
 
 
-.head{
+/* .head{
     display: flex;
+    height: 100vh;
+    padding: 20px;
+    flex: 1;
+    /* display: flex;
     color: #fff;
     font-weight: bold;
     justify-content: space-evenly;
     align-items: flex-start;
     white-space: pre;
-    margin-right: 65rem;
-    margin-left: -10rem;
-    padding: 1rem 0 32rem 7rem;
-    padding-right: -20rem;
-    background-color: #181818;
+    height: 100%;
+    /* margin-right: 65rem; */
+    /* margin-left: -10rem; */
+    /* padding: 1rem 0 32rem 7rem; */
+    /* padding-right: -20rem; */
+    /* background-color: #181818; */
     
     /* background-color: #181818;
     padding-left: 1rem;
     
     margin-right: 65rem; */
-}
+/* } */
 
 
-#add{
+#openDrawerButton{
+    /* position: absolute; */
     color: #ff7200;
     margin-left: 7rem;
+    margin-right: 1.8rem;
+    /* margin-top: 1rem; */
     cursor: pointer;
-    font-size: 2rem;
+    font-size: 1.7rem;
 }
 
 .modal {
@@ -386,7 +459,7 @@ ul li a:hover{
   left: 0;
   top: -50px;
   width: 100%; /* Full width */
-  height: 100%; /* Full height */
+  height: 150%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
   background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
@@ -483,7 +556,7 @@ ul li a:hover{
 
 .tables{
     
-    font-family: 'Poppins';
+    font-family: 'Inter';
     font-size: 15px;
     margin-bottom: 50px;
     border-collapse: separate;
@@ -501,7 +574,7 @@ ul li a:hover{
 thead{
   background-color: #efefef;
   color: black;
-  font-family: 'Poppins';
+  font-family: 'Inter';
 }
 
 thead th {
@@ -515,14 +588,17 @@ thead th {
 }
 
 th, td {
-  border: 1px solid white;
+    box-shadow: 0px 0px 106px -60px #FF4D00;
+    border: 3px solid rgba(255, 77, 0, 0.13);
+    border-radius: 15px;
+  /*border: 1px solid white;*/
   padding: 8px;
-  border-radius: 5px;
+  /*border-radius: 5px;*/
 }
 
 .allprisnipp{
-    margin-left: 18rem;
-    margin-top: -40rem;
+    margin-left: 20rem;
+    margin-top: -32rem;
     
 }
 
@@ -533,10 +609,209 @@ th, td {
 }
 
 
+ .drawer {
+          position: fixed;
+          z-index: 1;
+          top: 0;
+          right: 0;
+          width: 600px;
+          height: 100%;
+          overflow: auto;
+          background-color: #f8f8ff;
+          border-left: 1px solid #888;
+          padding: 10px;
+          display: none;
+        }
+       
+        .drawer-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-top: 2rem;
+        }
+       
+        .drawer-header h2 {
+          margin: 0;
+        }
+       
+        .button-close-drawer {
+          cursor: pointer;
+          font-size: 2rem;
+        }
+        
+        .create-drawer-button{
+            background: transparent;
+           border: 2px solid black;
+    margin-top: 29px;
+    left: 40px;
+    color: black;
+    border-radius: 3px;
+    padding: 9px;
+    min-height: 30px;
+    max-height: 120px;
+    font-family: 'Inter';
+    font-weight: bold;
+    font-size: 17px;
+        }
+        
+        .create-drawer-button:hover {
+            background-color: #f5f5f5;
+            transition: 0.4s;
+        }
+
+        
+        #title-input {
+            position: relative;
+ width: 500px;
+ height: 40px;
+ padding: 0 15px;
+ font-size: 18px;
+ border: 2px solid black;
+ right: 20px;
+ margin-bottom: 1rem;
+ border-radius: 2px;
+ outline: none;
+ color: black;
+ background-color: transparent;
+ transition: border-color 0.2s; /* add a transition for the border color */
+}
+
+/*.list-li{
+    position: relative;
+    margin-top: -60rem;
+    margin-left: -90rem;
+    list-style-type: none;   Remove default list styling 
+   margin-bottom: 8px;
+   padding: 12px;
+               Add padding to the list items 
+    position: relative;
+    margin-top: -60rem;
+    margin-left: -90rem;  Set a background color for each list item 
+    border-radius: 4px;     
+}*/
+
+.list-item-wrapper {
+    position: relative;
+    top: -35rem;
+  left: -1rem;
+    margin-bottom: 12px;
+    color: white;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    padding-right: 6rem 
+    
+    /*position: relative;*//*    margin-top: -60rem;
+    margin-left: -90rem;*/
+}
+
+.ul-list{
+    /*position: relative;*/
+    display: flex;
+    list-style: none;
+    /* flex-direction: column; */
+    margin-top: 1rem 
+}
+
+/*.list-item-wrapper{
+    position: relative;
+     margin-top: auto; 
+    left: -8.5rem;
+     margin-bottom: 12px; 
+    color: white;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+     position: relative; 
+}*/
+
+
+.list-item-wrapper i.delete-icon {
+        display: none;          /* Hide the delete icon by default */
+        position: absolute;     /* Position the icon absolutely within the list item */
+        top: 50%;               /* Center the icon vertically */
+        right: 8px;             /* Adjust the distance from the right edge */
+        transform: translateY(-50%); /* Center the icon vertically */
+        cursor: pointer;        /* Add a pointer cursor on hover */
+    }
+
+.list-item-wrapper:hover i.delete-icon {
+        display: inline-block;  /* Show the delete icon when hovering over the list item */
+    }
+
+    .side-bar{
+        display: flex;
+    height: 100%;
+    
+    }
+
+    .head{
+        width: 20%;
+    background-color: #181818;
+    padding: 20px 0 0 20px;
+    color: white;
+    display: flex;
+    box-sizing: border-box;
+    margin-bottom: -2rem;
+    margin-top: 1rem;
+    justify-content: center;
+    }
+
+    .delete-button{
+        position: relative;
+    /*color: #e56600;*/
+    /*cursor: pointer;*/
+    left: 5.5rem;
+        color: #e56600;
+        cursor: pointer;
+    /*margin-left: 10px;*/
+    background: none; /* Remove background */
+    border: none; /* Remove border */
+    padding: 0; /* Remove padding */
+    opacity: 0;
+    }
+
+    #delete-icon{
+        position: relative;
+        margin-top: 3px;
+    }
+
+    .list-li :hover .delete-button {
+    opacity: 1; /* Set opacity to 1 on hover to show the icon */
+    
+}
+
+.list-li:hover .delete-button {
+    opacity: 1; /* Set opacity to 1 on hover to show the icon */
+    border-color: red; /* Change border color on hover */
+}
+.tdata{
+    font-family: 'Fira Code';
+    background-color: black;
+    color: white;
+}
+
+/*.ul-list{
+    display: flex;
+    flex-direction: column;
+}
+
+
+.list-li{
+    
+}*/
+    
+
   
   </style>
 </head> 
-<body>
+<body onload="clearMessage()">
 
   <script src="/assets/js/rainbow.js"></script>
 
@@ -548,12 +823,12 @@ th, td {
                 </div>
     
                 <div class="menu">
-                    <ul>
-                        <li><a href="index">HOME</a></li>
-                        <li><a href="pub">SNIPPETS</a></li>
-                        <li><a href="service">SERVICE</a></li>
-                        <li><a href="aboutus">ABOUT</a></li>
-                        <li><a href="contactus">CONTACT</a></li>
+                    <ul class="nav-ul">
+                        <li class="nav-li"><a href="index">Home</a></li>
+                        <li class="nav-li"><a href="pub">Snippet</a></li>
+                        <li class="nav-li"><a href="service">Service</a></li>
+                        <li class="nav-li"><a href="aboutus">About</a></li>
+                        <li class="nav-li"><a href="contactus">Contact</a></li>
 <!--                        <li>
                             <span class="username" th:text="${#authentication.getPrincipal().getUserName()}">Guest</span>
                         </li>-->
@@ -572,11 +847,11 @@ th, td {
                 
                 
                 <div class="dropdown-content">
-                  <a href="#">Account</a>
-                  <a id="changePassword">Change Password</a>
+                  <a href="#" th:text="${user.firstName + ' ' + user.lastName}"></a>
+                  <a href="enter-otp-page">Change Password</a>
                 
                   <form th:action="@{/logout}" method="POST">
-                      <button class="logout" onClick="logout_f()">Logout</button>
+                      <button class="logout">Logout</button>
                   </form>
                 </div>
               </div>
@@ -589,71 +864,33 @@ th, td {
     
             </div> 
        
-       
-<!--  <form action="addsnippet" modelAttribute="data">-->
-       
-  
-
-<!--    <div class="form-row">
-      <div class="col-md-3">
-         <textarea id="txtNames" type="text" class="form-control txt txtName" rows="2" cols="10"
-         placeholder="Enter The title" required></textarea>
-        <input id="txtId" type="hidden" class="form-control txt">
-      </div>
+       <div id="message" th:if="${message}" class="alert alert-success">
+        <p th:text="${message}"></p>
     </div>
-    <br>
-    <div class="form-row">
-      <div class="col-md-6 col-sm-7">
-         <textarea id="txtAddresses" class="form-control txt txtAddress" rows="5" minlength="15"
-          placeholder="Enter Your Snippets" required></textarea>
-      </div>
-    </div>
-    <div class="row pt-2">
-      <div class="col-md-2">
-        <button type="submit" class="btn btn-success" id="btnSave">Save</button>
-      </div>
-      <div class="col-md-2">
-        <button type="button" class="btn btn-secondary" id="btnClear">Clear</button>
-      </div>
-    </div>-->
+       
+       
 
-    <div class="container my-3 mt-4">
-            
-            <div class="side-bar">
-            <div>
-                <h5 class="head">MY LISTS <i id="add" class="material-icons" th:href="@{/showAddPrivateSnippet}">add_circle</i></h5>
-            
-            
-            </div>
-            
-            </div>
 
-            
-<!-- <button class="button"><a th:href="@{/showAddSnippet}">Add a Public Snippet</a></button> -->
+    <div class="side-bar">
+        <h5 class="head" style="white-space: pre">MY LISTS <i id="openDrawerButton" class="material-icons">add_circle</i></h5>
+        </div>
+        <ul class="ul-list" th:each="pri : ${listPrivateSnippets}">
+            <li class="list-li" th:id="${'snippet-' + pri.id}">
+                <div class="list-item-wrapper">
+                <span th:text="${pri.title}"></span>
+                
+                
+                <form th:action="@{/delete-item}" method="post">
+            <input type="hidden" name="itemId" th:value="${pri.id}" />
+            <button type="submit" class="delete-button" title="Delete"><i id="delete-icon" class="material-icons">delete</i></button>
+        </form>
+                
+                
+                </div>
+            </li>
+        </ul>
+    
 
-            <br>
-                <br>
-                    <br>
-      <!-- <h3 class="mt-5">Public Snippets</h3> -->
-      
-      <!-- <div id="notes" class="row container-fluid"></div>
-      
-      
-      <div align="left">
-          
-          <table class="tables">
-              <tbody>
-                  
-                  <tr th:each="data : ${listSnippets}">
-                      <pre><code><td class="tdata" th:text="${data.post}"></td></code></pre>
-                   
-                      
-                      </tr>
-                  
-                      
-              </tbody>
-          </table>
-      </div> -->
       
       <div id="myModal" class="modal">
 
@@ -669,10 +906,14 @@ th, td {
               <form th:action="@{/savePrivateSnippet}" modelAttribute="pri" method="POST">
             
                 <label style="display: flex; padding-left: 1.5rem; margin-top: 1rem; margin-bottom: -1.5rem; font-size: 1.2rem;">Title:</label>
-                <textarea class="textarea2" path="title" name="title" field="*{title}" cols="50" rows="2" placeholder="Enter the title"></textarea>
+                <input id="title-input" class="textarea2" path="title" name="title" field="*{title}" cols="50" rows="2" placeholder="Enter the title"></input>
                 
-                <label style="display: flex; padding-left: 1.5rem; margin-top: 1rem; margin-bottom: -1.5rem; font-size: 1.2rem;">Code:</label>
-                <textarea class="textarea" path="post" name="post" field="*{post}" cols="100" rows="7" placeholder="Enter your Snippet"></textarea>
+                <div id="editor2" path="post" name="post" field="*{post}" ></div>
+            
+            <input type="hidden" id="editorContent2" name="post" field="*{post}" />
+                
+<!--                <label style="display: flex; padding-left: 1.5rem; margin-top: 1rem; margin-bottom: -1.5rem; font-size: 1.2rem;">Code:</label>
+                <textarea class="textarea" path="post" name="post" field="*{post}" cols="100" rows="7" placeholder="Enter your Snippet"></textarea>-->
                 
                  <div class="modal-footer">
             <h3><button type="submit" class="button">Create</button></h3>
@@ -684,6 +925,35 @@ th, td {
         </div>
             
       </div>
+      
+      
+      
+      
+      <div id="myDrawer" class="drawer">
+        <div class="drawer-header">
+          <h2>Create Snippet</h2>
+          <span class="button-close-drawer" onclick="closeDrawer()">&times;</span>
+        </div>
+          <form id="snippetForm" th:action="@{/savePrivateSnippet}" modelAttribute="pri" method="POST">
+        <input id="title-input" class="textarea2" path="title" name="title" field="*{title}" cols="50" rows="2" placeholder="Enter the title"></input>
+          
+        <div id="container" path="post" name="post" field="*{post}" style="width: 100%; height: 300px; border: 1px solid #ccc;"></div>
+        
+        <!--<input type="hidden" id="editorContent2" path="post" name="post" field="*{post}" />-->
+         <input type="hidden" id="post" name="post" field="*{post}" />
+        <h3><button type="submit" class="create-drawer-button" onclick="updateEditorContentAndSubmit()">Create</button></h3>
+          </form>
+       </div>
+       
+      
+      
+      
+      
+      
+      
+      
+      
+      
       
       <div id="myModal2" class="modal">
 
@@ -704,8 +974,11 @@ th, td {
                 <label style="display: flex; padding-left: 1.5rem; margin-top: 1rem; margin-bottom: -1.5rem; font-size: 1.2rem;">New Password:</label>
                 <input class="textarea" path="post" name="newPassword" field="*{newPassword}" cols="50" rows="2" placeholder="Enter new password"/>
                 
+<!--                 <label style="display: flex; padding-left: 1.5rem; margin-top: 1rem; margin-bottom: -1.5rem; font-size: 1.2rem;">Enter the OTP:</label>
+                <input class="textarea" path="otp" name="otp" field="*{otp}" cols="50" rows="2" placeholder="Enter the OTP sent on email"/>-->
+                
                  <div class="modal-footer">
-            <h3><button type="submit" class="button">Create</button></h3>
+            <h3><button class="button" href="enter-otp-page">Submit</button></h3>
           </div>
                 </form>
             
@@ -735,61 +1008,106 @@ th, td {
 
 </div>
 </div>
-        <!--
-    
-    <div class="row pt-3">
-      <div class="col-md-12 col-sm-12 col-12 p-2 ">
-        <table id="tblData" class="table table-bordered table-hover table-striped">
-          <thead>
-            <tr>
-              <th class="color">No.</th>
-              <th class="color">Title</th>
-              <th class="color">Snippet</th>
-              <th class="text-center">Action</th>
-            </tr>
-          </thead>
-          <tbody> 
-          </tbody>
-        </table>
-      </div>
-    </div>-->
-    
-  </div>
-       
-  <!--</form>-->
+        
 
 
   
        
        
-       
+  <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.32.1/min/vs/loader.js"></script>
   <script>
       
       
-      var modal = document.getElementById("myModal");
+       var drawer = document.getElementById("myDrawer");
+    
+    // When the user clicks on the button, open the drawer
+    function openDrawer() {
+     drawer.style.display = "block";
+     initMonaco();
+    }
+    
+    // When the user clicks on <span> (x), close the drawer
+    function closeDrawer() {
+     drawer.style.display = "none";
+    }
+    
+    // Load Monaco Editor from CDN
+    function loadScript(url, callback) {
+     var script = document.createElement("script");
+     script.type = "text/javascript";
+     script.src = url;
+     script.onload = callback;
+     document.getElementsByTagName("head")[0].appendChild(script);
+    }
+    
+    var myEditor; // Variable to store the editor instance
 
-// Get the button that opens the modal
-var btn = document.getElementById("add");
 
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
+    
+    // Initialize Monaco Editor
+    var monacoInitialized = false;
 
-// When the user clicks the button, open the modal 
-btn.onclick = function() {
-  modal.style.display = "block";
+function initMonaco() {
+ require.config({ paths: { 'vs': 'https://cdn.jsdelivr.net/npm/monaco-editor@0.32.1/min/vs' }});
+ require(['vs/editor/editor.main'], function() {
+    if (!monacoInitialized) {
+        myEditor = monaco.editor.create(document.getElementById('container'), {
+          value: '// type your code here',
+          language: 'javascript',
+          theme: 'vs-dark'
+        });
+        monacoInitialized = true;
+    }
+ });
 }
+    
+    // Load the script and initialize Monaco Editor when the button is clicked
+    function openAndInitDrawer() {
+     if (typeof monaco === 'undefined') {
+        loadScript('https://cdn.jsdelivr.net/npm/monaco-editor@0.32.1/min/vs', initMonaco);
+     } else {
+        initMonaco();
+     }
+     openDrawer();
+    }
+    
+    document.getElementById("openDrawerButton").onclick = openAndInitDrawer;
+    
+      function updateEditorContentAndSubmit() {
+    if (myEditor) {
+        var editorContent = myEditor.getValue().replace(/^,+/g, '');;
+        document.getElementById('editorContent2').value = editorContent;
+        console.log("Editor content updated:", editorContent);
 
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-  modal.style.display = "none";
-}
+        // Explicitly set the value for the hidden input
+//        document.getElementById("editorContent2").value = editorContent;
+        
+        document.getElementById("post").value = editorContent;
 
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
+        // Log before the form submission
+        console.log("Submitting the form...");
+
+        // Submit the form
+        document.getElementById("snippetForm").submit();
+    } else {
+        console.error("Monaco Editor is not initialized.");
+    }
 }
+    
+    
+    document.getElementById('title-input').addEventListener('click', function() {
+ this.style.borderColor = 'orange';
+});
+
+document.getElementById('title-input').addEventListener('blur', function() {
+ this.style.borderColor = 'grey';
+});
+    
+    
+      
+      
+      
+
 
 
 /***********************************/
@@ -847,133 +1165,7 @@ function myFunction() {
     }
 }
 
-//    var emptyRow = "<tr><pre><code><td class='tdata' colspan='6' class='no-record'> No Records Available</td></code></pre></tr>";
-//    $(document).ready(function () {
-//      loadDataFromLocal();
-//      $('#tblData').on('click', '.btn-edit', function () {
-//        debugger;
-//        const name = $(this).parent().parent().find(".txtNames").html();
-//        const address = $(this).parent().parent().find(".txtAddresses").html();
-//        const id = $(this).parent().parent().find(".txtNames").attr("data-id");
-//        $("#txtNames").val(name);
-//         $("#txtAddresses").val(address);
-//        $("#txtId").val(id);
-//        $("#btnSave").text("Update");
-//      });
-//
-//      $('#tblData').on('click', '.btn-delete', function () {
-//        debugger;
-//        const id = $(this).parent().parent().find(".txtNames").attr("data-id");
-//        deleteDataFromLocal(id);
-//      });
-//
-//      $("#btnSave").click(function () {
-//        debugger;
-//        if ($("#txtId").val() == '') {
-//          addDataToLocal();
-//        } else {
-//          updateDataFromLocal();
-//        }
-//      });
-//
-//      $("#btnClear").click(function () {
-//        debugger;
-//        clearForm();
-//      });
-//    });
-//
-//    function clearForm() {
-//      debugger;
-//      $("#txtNames").val("");
-//       $("#txtAddresses").val("");
-//      $("#btnSave").text("Add");
-//    }
-//
-//    function addEmptyRow() {
-//      debugger;
-//      if ($("#tblData tbody").children().children().length == 0) {
-//        $("#tblData tbody").append(emptyRow);
-//      }
-//    }
-//
-//    function loadDataFromLocal() {
-//      debugger;
-//      let localData = localStorage.getItem('localData');
-//      if (localData) {
-//        $("#tblData tbody").html("");
-//        let localArray = JSON.parse(localData);
-//        let index = 1;
-//        localArray.forEach(element => {
-//          let dynamicTR = "<tr>";
-//          dynamicTR = dynamicTR + "<td class='txtId'> " + index + "</td>";
-//          dynamicTR = dynamicTR + "<td class='txtNames'  data-id=" + element.id + ">" + element.name + "</td>";
-//           dynamicTR = dynamicTR + "<pre><code><td class='txtAddresses'>" + element.address + "</td></code></pre>";
-//          dynamicTR = dynamicTR + "    <td class='tdAction'>";
-//          dynamicTR = dynamicTR + "        <button class='btn btn-sm btn-success btn-edit'> Edit</button>";
-//          dynamicTR = dynamicTR + "        <button class='btn btn-sm btn-danger btn-delete'> Delete</button>";
-//          dynamicTR = dynamicTR + "    </td>";
-//          dynamicTR = dynamicTR + " </tr>";
-//          $("#tblData tbody").append(dynamicTR);
-//          index++;
-//        });
-//      }
-//      addEmptyRow();
-//    }
-//
-//    function addDataToLocal() {
-//      debugger;
-//      let localData = localStorage.getItem('localData');
-//      if (localData) {
-//        let localArray = JSON.parse(localData);
-//        const obj = {
-//          id: localArray.length + 1,
-//          name: $("#txtNames").val(),
-//           address: $("#txtAddresses").val()
-//        };
-//        localArray.push(obj);
-//        localStorage.setItem('localData', JSON.stringify(localArray));
-//        loadDataFromLocal();
-//      } else {
-//        const arryObj = [];
-//        const obj = {
-//          id: 1,
-//          name: $("#txtNames").val(),
-//           address: $("#txtAddresses").val()
-//        };
-//        arryObj.push(obj);
-//        localStorage.setItem('localData', JSON.stringify(arryObj));
-//        loadDataFromLocal();
-//      }
-//      clearForm();
-//    }
-//
-//    function updateDataFromLocal() {
-//      debugger;
-//      let localData = localStorage.getItem('localData');
-//      let localArray = JSON.parse(localData);
-//      const oldRecord = localArray.find(m => m.id == $("#txtId").val());
-//      oldRecord.name = $("#txtNames").val();
-//       oldRecord.address = $("#txtAddresses").val();
-//      localStorage.setItem('localData', JSON.stringify(localArray));
-//      loadDataFromLocal();
-//      clearForm();
-//    }
-//
-//    function deleteDataFromLocal(id) {
-//      debugger;
-//      let localData = localStorage.getItem('localData');
-//      let localArray = JSON.parse(localData);
-//      let i = 0;
-//      while (i < localArray.length) {
-//        if (localArray[i].id === Number(id)) {
-//          localArray.splice(i, 1);
-//        } else {
-//          ++i;
-//        }
-//      }
-//      localStorage.setItem('localData', JSON.stringify(localArray));
-//      loadDataFromLocal();
-//    }
+
     
     function logout_f(){
         alert("Logged out Successfully!");
@@ -985,13 +1177,7 @@ function myFunction() {
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script>
 
-<!-- <script>hljs.initHighlightingOnLoad();</script> -->
-<!--<script>
-document.querySelectorAll('td.txtAddresses').forEach(el => {
-  // then highlight each
-        hljs.highlightElement(el);
-});
-</script>-->
+
 
 <script>
         document.querySelectorAll('td.tdata').forEach(el => {

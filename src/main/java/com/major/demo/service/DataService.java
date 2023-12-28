@@ -22,4 +22,6 @@ public interface DataService {
    
     public void delete();
     
+    List<Data> findByTitleContaining(String title);
+    
 }
