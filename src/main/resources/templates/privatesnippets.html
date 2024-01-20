@@ -7,27 +7,21 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
     
     <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+              <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
     
 <head xmlns::th="http://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
       xmlns="http://www.w3.org/1999/xhtml">
-      <link href="/assets/css/theme.css" rel="stylesheet" type="text/css">
 
 
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/atom-one-light.min.css" integrity="sha512-o5v54Kh5PH0dgnf9ei0L+vMRsbm5fvIvnR/XkrZZjN4mqdaeH7PW66tumBoQVIaKNVrLCZiBEfHzRY4JJSMK/Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
+      
   <title>Snippets Storage</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src = "https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=html&amp;skin=sunburst"></script>
   
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/atom-one-light.min.css" integrity="sha512-o5v54Kh5PH0dgnf9ei0L+vMRsbm5fvIvnR/XkrZZjN4mqdaeH7PW66tumBoQVIaKNVrLCZiBEfHzRY4JJSMK/Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" data-name="vs/editor/editor.main" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.32.1/min/vs/editor/editor.main.css">
       
       
       <script th:inline="javascript">
@@ -813,7 +807,7 @@ th, td {
 </head> 
 <body onload="clearMessage()">
 
-  <script src="/assets/js/rainbow.js"></script>
+  <!--<script src="/assets/js/rainbow.js"></script>-->
 
 
    <div class="main">
@@ -847,7 +841,7 @@ th, td {
                 
                 
                 <div class="dropdown-content">
-                  <a href="#" th:text="${user.firstName + ' ' + user.lastName}"></a>
+                  <!--<a href="#" th:text="${user.firstName + ' ' + user.lastName}"></a>-->
                   <a href="enter-otp-page">Change Password</a>
                 
                   <form th:action="@{/logout}" method="POST">
@@ -889,6 +883,8 @@ th, td {
                 </div>
             </li>
         </ul>
+       
+        </div>
     
 
       
@@ -946,52 +942,7 @@ th, td {
        </div>
        
       
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      <div id="myModal2" class="modal">
-
-        <!-- Modal content -->
-        
-        <div class="modal-content">
-          <div class="modal-header">
-            <span class="close">&times;</span>
-            <h4 style="margin-top: 0.3rem;">Change Password</h4>
-          </div>
-          <div class="modal-body">
-              
-              <form th:action="@{/change-password}" method="POST">
             
-                <label style="display: flex; padding-left: 1.5rem; margin-top: 1rem; margin-bottom: -1.5rem; font-size: 1.2rem;">Current Password:</label>
-                <input class="textarea2" path="title" name="currentPassword" field="*{currentPassword}" cols="50" rows="2" placeholder="Enter current password"/>
-                
-                <label style="display: flex; padding-left: 1.5rem; margin-top: 1rem; margin-bottom: -1.5rem; font-size: 1.2rem;">New Password:</label>
-                <input class="textarea" path="post" name="newPassword" field="*{newPassword}" cols="50" rows="2" placeholder="Enter new password"/>
-                
-<!--                 <label style="display: flex; padding-left: 1.5rem; margin-top: 1rem; margin-bottom: -1.5rem; font-size: 1.2rem;">Enter the OTP:</label>
-                <input class="textarea" path="otp" name="otp" field="*{otp}" cols="50" rows="2" placeholder="Enter the OTP sent on email"/>-->
-                
-                 <div class="modal-footer">
-            <h3><button class="button" href="enter-otp-page">Submit</button></h3>
-          </div>
-                </form>
-            
-          </div>
-         
-        </div>
-            
-      </div>
-
-      
-      
-    </div>
-        
 <div class="allprisnipp">
     <div  id="myMenu" th:each="pri : ${listPrivateSnippets}">
     <span><div id="titlep" class="ptitle" th:text="${pri.title}"></div>
@@ -1112,58 +1063,58 @@ document.getElementById('title-input').addEventListener('blur', function() {
 
 /***********************************/
 
-var modal2 = document.getElementById("myModal2");
-
-// Get the button that opens the modal
-var btn2 = document.getElementById("changePassword");
-
-// Get the <span> element that closes the modal
-var span2 = document.getElementsByClassName("close")[0];
-
-// When the user clicks the button, open the modal 
-btn2.onclick = function() {
-  modal2.style.display = "block";
-}
-
-// When the user clicks on <span> (x), close the modal
-span2.onclick = function() {
-  modal.style.display = "none";
-}
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal2) {
-    modal2.style.display = "none";
-  }
-}
-
-
-function myFunction() {
-    // Get the search input element
-    var input = document.getElementById("myInput");
-
-    // Get the div containing items to filter
-    var menu = document.getElementById("myMenu");
-
-    // Get all the items within the div
-    var items = menu.getElementsByClassName("ptitle");
-    console.log("Items: ", items);
-
-    // Convert the input value to lowercase for case-insensitive matching
-    var filter = input.value.toLowerCase().trim();
-
-    // Loop through the items and hide/show based on the filter
-    for (var i = 0; i < items.length; i++) {
-        var title = items[i].textContent.toLowerCase().trim();
-        var item = items[i].closest('span');
-
-        if (title.includes(filter)) {
-            item.style.display = "block";  // Show the item
-        } else {
-            item.style.display = "none";  // Hide the item
-        }
-    }
-}
+//var modal2 = document.getElementById("myModal2");
+//
+//// Get the button that opens the modal
+//var btn2 = document.getElementById("changePassword");
+//
+//// Get the <span> element that closes the modal
+//var span2 = document.getElementsByClassName("close")[0];
+//
+//// When the user clicks the button, open the modal 
+//btn2.onclick = function() {
+//  modal2.style.display = "block";
+//}
+//
+//// When the user clicks on <span> (x), close the modal
+//span2.onclick = function() {
+//  modal.style.display = "none";
+//}
+//
+//// When the user clicks anywhere outside of the modal, close it
+//window.onclick = function(event) {
+//  if (event.target == modal2) {
+//    modal2.style.display = "none";
+//  }
+//}
+//
+//
+//function myFunction() {
+//    // Get the search input element
+//    var input = document.getElementById("myInput");
+//
+//    // Get the div containing items to filter
+//    var menu = document.getElementById("myMenu");
+//
+//    // Get all the items within the div
+//    var items = menu.getElementsByClassName("ptitle");
+//    console.log("Items: ", items);
+//
+//    // Convert the input value to lowercase for case-insensitive matching
+//    var filter = input.value.toLowerCase().trim();
+//
+//    // Loop through the items and hide/show based on the filter
+//    for (var i = 0; i < items.length; i++) {
+//        var title = items[i].textContent.toLowerCase().trim();
+//        var item = items[i].closest('span');
+//
+//        if (title.includes(filter)) {
+//            item.style.display = "block";  // Show the item
+//        } else {
+//            item.style.display = "none";  // Hide the item
+//        }
+//    }
+//}
 
 
     

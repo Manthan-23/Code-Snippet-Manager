@@ -41,14 +41,18 @@ import com.major.demo.service.OtpService;
 import com.major.demo.service.PrivateService;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.MediaType;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 
@@ -183,6 +187,8 @@ public class SpringController {
     System.out.println("User = " + userNew);
     
     String username = userNew.getFirstName();
+    
+    
     // Retrieve the user from the database based on the username
 //    User user = userService.findByUsername(username);
 
@@ -201,6 +207,38 @@ public class SpringController {
         return "redirect:/error";  // Redirect to an error page or handle as needed
     }
 }
+
+
+//@RequestMapping("/privatesnippets")
+//public String privatesnippets(Model model, HttpSession session) {
+//    // Retrieve necessary data from the session or other sources
+//    User user = (User) session.getAttribute("user");
+//    List<Private> listPrivateSnippets = (List<Private>) session.getAttribute("listPrivateSnippets");
+//
+//    // Check if data is available
+//    if (user != null && listPrivateSnippets != null) {
+//        // Add data to the model
+//        model.addAttribute("user", user);
+//        model.addAttribute("listPrivateSnippets", listPrivateSnippets);
+//
+//        // Return the view name
+//        return "privatesnippets";
+//    } else {
+//        // Handle case where data is missing
+//        return "redirect:/index";  // Redirect to index or handle as needed
+//    }
+//}
+    
+
+    
+    
+    
+//    @GetMapping("/privatesnippets")
+//public String privatesnippets(Model model, HttpSession session) {
+//    return "privatesnippets";
+//}
+
+
 
     
     
@@ -418,22 +456,20 @@ public class SpringController {
     @RequestMapping("/loginuser")
     public String loginUser(@RequestParam("email") String email,
             @RequestParam("password") String password, 
-//            @Valid @ModelAttribute("user") User user,
             Model model,HttpSession session){
 
         User persistedUser = repo.findByEmail(email);
         session.setAttribute("loginEmail", email);
-//        System.out.println(persistedUser);
+        
 
         if(persistedUser!=null && persistedUser.getEmail().equals(email) && persistedUser.getPassword().equals(password)){
             session.setAttribute("user", persistedUser);
             model.addAttribute("user", persistedUser);
             model.addAttribute("message", "Login successful!");
             model.addAttribute("messageType", "success");
-//            System.out.println("Persisted user details: " + persistedUser);
             List<Private> userSnippets = priService.getUserPrivateSnippets(persistedUser.getId());
-//            System.out.println("Number of user snippets: " + userSnippets.size());
             model.addAttribute("listPrivateSnippets", userSnippets);
+
             return "privatesnippets";
             
             
@@ -443,7 +479,59 @@ public class SpringController {
             model.addAttribute("messageType", "error");
             return "login";
    
+
     }
+    
+    
+    @RequestMapping("/loginuser2")
+@ResponseBody
+public ResponseEntity<Map<String, Object>> loginUser2(@RequestParam("email") String email,
+        @RequestParam("password") String password, 
+        Model model, HttpSession session) {
+
+    User persistedUser = repo.findByEmail(email);
+    session.setAttribute("loginEmail", email);
+
+    Map<String, Object> response = new HashMap<>();
+    if(persistedUser != null && persistedUser.getEmail().equals(email) && persistedUser.getPassword().equals(password)) {
+        session.setAttribute("user", persistedUser);
+        List<Private> userSnippets = priService.getUserPrivateSnippets(persistedUser.getId());
+        
+        response.put("message", "Login successful!");
+        response.put("user", persistedUser);
+        response.put("listPrivateSnippets", userSnippets);
+        response.put("redirectUrl", "/privatesnippets");
+
+//        redirectAttributes.addAttribute("userId", persistedUser.getId());
+        return ResponseEntity.ok(response);
+    } else {
+        response.put("error", "Incorrect email or password, Please try again!");
+        return ResponseEntity.badRequest().body(response);
+    }
+}
+
+    
+//    
+//    @RequestMapping("/loginuser")
+//public String loginUser(@RequestParam("email") String email,
+//                        @RequestParam("password") String password,
+//                        HttpSession session) {
+//
+//    User persistedUser = repo.findByEmail(email);
+//    session.setAttribute("loginEmail", email);
+//
+//    if (persistedUser != null && persistedUser.getEmail().equals(email) && persistedUser.getPassword().equals(password)) {
+//        session.setAttribute("user", persistedUser);
+//        session.setAttribute("message", "Login successful!");
+//        session.setAttribute("messageType", "success");
+//        return "privatesnippets";
+//    }
+//
+//    session.setAttribute("error", "Incorrect email or password, Please try again!");
+//    session.setAttribute("messageType", "error");
+//    return "login"; // Redirect to the login page
+//}
+
     
     
    
@@ -515,7 +603,7 @@ public class SpringController {
     
     
     @PostMapping("/savePrivateSnippet")
-    public String savePrivateSnippet(@ModelAttribute("pri") Private pri, @RequestParam("post") String post, HttpSession session) {
+    public String savePrivateSnippet(@ModelAttribute("pri") Private pri, @RequestParam("post") String post, HttpSession session, RedirectAttributes redirectAttributes) {
     
     String email = (String) session.getAttribute("loginEmail");
         
@@ -546,9 +634,15 @@ public class SpringController {
     } else {
         // Handle the case where the user with the specified email is not found
         // You might want to redirect to an error page or display an error message
-        return "redirect:/error"; // Adjust this based on your application's error handling mechanism
+        return "login"; // Adjust this based on your application's error handling mechanism
     }
 }
+    
+    
+    
+    
+    
+    
     
     @PostMapping("/delete-item")
     public String deleteItem(@RequestParam Long itemId, HttpSession session, Model model) {
@@ -562,10 +656,17 @@ public class SpringController {
 
         // Pass the updated list to the frontend
             model.addAttribute("listPrivateSnippets", updatedSnippets);
-        }
+            
+            return "privatesnippets";
+            
+        } else {
 
+         System.out.println("Problem deleting the snippet");
+        return "login";
+        
+        }
         // Redirect to the original page or a different page
-        return "privatesnippets";
+        
     }
 
        

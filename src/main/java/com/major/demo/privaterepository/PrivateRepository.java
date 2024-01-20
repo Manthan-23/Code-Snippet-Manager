@@ -8,7 +8,11 @@ import com.major.demo.User;
 import com.major.demo.privatepost.Private;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -22,5 +26,10 @@ public interface PrivateRepository extends JpaRepository<Private, Long> {
      List<Private> findByUserId(Long userId);
      
      void deleteByIdAndUserId(Long id, Long userId);
+     
+     @Modifying
+     @Transactional
+    @Query("DELETE FROM Private p WHERE p.id = :snippetId AND p.user.id = :userId")
+    void deleteSnippet(@Param("snippetId") Long snippetId, @Param("userId") Long userId);
     
 }

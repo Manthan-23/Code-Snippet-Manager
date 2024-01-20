@@ -4,7 +4,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to c
 Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
 -->
 <html>
-    <head>
+    <head xmlns::th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns="http://www.w3.org/1999/xhtml">
+        
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,6 +19,27 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
          <div id="editor" style="width: 800px; height: 600px; border: 1px solid #ccc;"></div>
          <!--<script src="/webjars/requirejs/2.3.6/require.js"></script>-->
          <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.32.1/min/vs/loader.js"></script>
+         
+         
+         
+     <div class="side-bar">
+        <h5 class="head" style="white-space: pre">MY LISTS <i id="openDrawerButton" class="material-icons">add_circle</i></h5>
+        </div>
+        <ul class="ul-list" th:each="pri : ${listPrivateSnippets}">
+            <li class="list-li" th:id="${'snippet-' + pri.id}">
+                <div class="list-item-wrapper">
+                <span th:text="${pri.title}"></span>
+                
+                
+                <form th:action="@{/delete-item}" method="post">
+            <input type="hidden" name="itemId" th:value="${pri.id}" />
+            <button type="submit" class="delete-button" title="Delete"><i id="delete-icon" class="material-icons">delete</i></button>
+        </form>
+                
+                
+                </div>
+            </li>
+        </ul>    
 <script>
   
     

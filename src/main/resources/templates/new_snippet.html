@@ -13,11 +13,19 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
             
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
+
+            
         <link href="ckeditor/plugins/codesnippet/lib/highlight/styles/default.css" rel="stylesheet">
         <script src="ckeditor/plugins/codesnippet/lib/highlight/highlight.pack.js"></script>
 <!--        <script src="https://unpkg.com/monaco-editor@0.27.0/min/vs/loader.js"></script>-->
         <link rel="stylesheet" data-name="vs/editor/editor.main" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.32.1/min/vs/editor/editor.main.css">
-    
+        <!-- Reference the Monaco Editor files directly -->
+    <script src="/static/min/vs/loader.js"></script>
+    <script src="/static/min/vs/editor/editor.main.nls.js"></script>
+    <script src="/static/min/vs/editor/editor.main.js"></script>
+    <!-- Include additional language services if needed -->
+    <script src="/static/min/vs/language/java/monaco.contribution.js"></script>
         
     <style>
        *{
@@ -330,6 +338,8 @@ form{
         
         <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.32.1/min/vs/loader.js"></script>
         
+        <!--<script src="/static/min/vs/loader.js"></script>-->
+        
         <script>
             
             document.getElementById('title-input').addEventListener('click', function() {
@@ -346,10 +356,9 @@ document.getElementById('title-input').addEventListener('blur', function() {
         var editorContent = myEditor.getValue();
         document.getElementById('editorContent').value = editorContent;
     }
-            
-
-            
-            require.config({ paths: { 'vs': 'https://cdn.jsdelivr.net/npm/monaco-editor@0.32.1/min/vs' }});
+    
+    
+     require.config({ paths: { 'vs': 'https://cdn.jsdelivr.net/npm/monaco-editor@0.32.1/min/vs' }});
     require(['vs/editor/editor.main'], function() {
     myEditor = monaco.editor.create(document.getElementById('editor'), {
             value: 'console.log("Hello, Enter your snippet!");',
@@ -358,6 +367,29 @@ document.getElementById('title-input').addEventListener('blur', function() {
         });
     // Your initialization code here
   });
+            
+
+            
+//            require.config({ paths: { 'vs': '/static/min/vs' }});
+//    require(['vs/editor/editor.main'], function() {
+//    myEditor = monaco.editor.create(document.getElementById('editor'), {
+//            value: 'console.log("Hello, Enter your snippet!");',
+//            language: 'javascript',
+//            
+//            theme: 'vs-dark'
+//        });
+//    // Your initialization code here
+//  });
+
+//require(['vs/editor/editor.main'], function() {
+//            // Initialize the editor
+//            myEditor = monaco.editor.create(document.getElementById('editor'), {
+//                value: 'System.out.println("Hello, Enter your snippet!");',
+//                language: 'java',  // Specify the language
+//                theme: 'vs-dark'
+//            });
+//            // Your initialization code here
+//        });
             
 
         

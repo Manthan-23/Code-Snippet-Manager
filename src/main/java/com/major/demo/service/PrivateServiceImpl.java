@@ -84,7 +84,7 @@ public class PrivateServiceImpl implements PrivateService {
     @Override
     @Transactional
     public void deleteSnippet(Long snippetId, Long userId) {
-        pri.deleteByIdAndUserId(snippetId, userId);
+        pri.deleteSnippet(snippetId, userId);
     }
     
 }

@@ -4,6 +4,7 @@
  */
 package com.major.demo.privatepost;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.major.demo.User;
 import javax.persistence.Column;
 import javax.persistence.Entity;
