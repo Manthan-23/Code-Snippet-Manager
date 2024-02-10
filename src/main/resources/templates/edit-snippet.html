@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html>
+    <head xmlns::th="http://www.thymeleaf.org"
+          xmlns="http://www.w3.org/1999/xhtml">
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/atom-one-light.min.css" integrity="sha512-o5v54Kh5PH0dgnf9ei0L+vMRsbm5fvIvnR/XkrZZjN4mqdaeH7PW66tumBoQVIaKNVrLCZiBEfHzRY4JJSMK/Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    </head>
+    <style>
+         * {
+        margin: 0;
+        padding: 0;
+        font-family: 'Inter';
+    }
+
+    body {
+        /* width: 550px;
+        height: 650px; */
+        background-color: black;
+        font-family: 'Inter';
+    }
+
+    .main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+
+        font-size: 27px;
+        /* padding: 1rem; */
+        color: orangered;
+        white-space: nowrap;
+    }
+
+    /* p {
+        position: relative;
+        left: 10px;
+        top: 10px;
+    }
+
+    .no-record {
+        color: black;
+        font-size: 18px;
+    }
+
+    .section {
+        position: relative;
+        text-align: center;
+
+        left: 50px;
+    }
+
+    .myBtn {
+        width: 50px;
+        height: 20px;
+        margin-left: 120px;
+    }
+
+    .btn-delete {
+        width: 50px;
+        height: 20px;
+    }
+
+
+
+    td {
+        background-color: aqua;
+
+    }
+
+    #snippet-container {
+        display: flex;
+        justify-content: left;
+    }
+
+    *,
+    *:before,
+    *:after {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    } */
+
+    body {
+        background-color: black;
+    }
+
+    
+
+    
+
+    
+    form {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        height: 450px;
+        width: 700px;
+        margin-top: 75rem;
+        margin-left: 47rem;
+        background-color: rgba(255, 255, 255, 0.13);
+        position: absolute;
+        transform: translate(-50%, -50%);
+        /* top: 740%;
+        left: 125%; */
+       
+        border-radius: 10px;
+        backdrop-filter: blur(10px);
+        box-shadow: 0px 0px 106px -60px #FF4D00;
+        border: 3px solid rgba(255, 77, 0, 0.13);
+        padding: 50px 35px;
+    }
+
+    form * {
+        font-family: 'Inter';
+        color: #ffffff;
+        letter-spacing: 0.5px;
+        outline: none;
+        border: none;
+        
+    }
+
+    form h3 {
+        font-size: 25px;
+        font-weight: 500;
+        line-height: 42px;
+        text-align: center;
+        font-family: 'Inter';
+        margin-bottom: -0.5rem;
+    }
+
+    label {
+        display: block;
+        margin-top: 30px;
+        font-size: 16px;
+        font-weight: 500;
+    }
+
+    input {
+        display: block;
+        height: 55px;
+        width: 97%;
+        background-color: rgba(255, 255, 255, 0.07);
+        border-radius: 3px;
+        padding: 0 10px;
+        margin-top: 8px;
+        font-size: 14px;
+        font-weight: 300;
+        font-family: 'Inter';
+    }
+
+    textarea{
+        width: 675px;
+        height: 180px;
+        color: black;
+        padding: 10px;
+        margin-top:6px;
+        border-radius: 5px;
+        font-family: 'Fira Code';
+    }
+
+    button {
+        margin-top: 50px;
+        width: 100%;
+        background-color: #ffffff;
+        color: #080710;
+        padding: 15px 0;
+        font-size: 18px;
+        font-weight: 600;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    </style>    
+    <body>
+        <div class="main"> 
+        <form th:action="@{/edit-snippet-content}" method="post">
+            <h3>Edit Snippet</h3>
+            <input type="hidden" name="id" th:value="${snippet.id}" />
+    <input type="hidden" name="snippetId" th:value="${snippet.id}" />
+    <label for="title">Title:</label>
+    <input type="text" id="title" name="title" th:value="${snippet.title}" />
+    
+    <label for="content">Content:</label>
+    <textarea class="text-area-high" id="content" name="post" th:text="${snippet.post}"></textarea>
+    <button type="submit" class="button-1">Save</button>
+</form>
+        </div>
+    </body>
+    <script>
+        document.getElementsByClassName('text-area-high').forEach(el => {
+  // then highlight each
+        hljs.highlightElement(el);
+});
+    </script>
+</html>

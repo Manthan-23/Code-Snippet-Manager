@@ -9,6 +9,8 @@ import com.major.demo.dao.PrivateDAO;
 import com.major.demo.privatepost.Private;
 import com.major.demo.privaterepository.PrivateRepository;
 import java.util.List;
+import java.util.Optional;
+import javassist.NotFoundException;
 import jdk.jshell.Snippet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -87,4 +89,30 @@ public class PrivateServiceImpl implements PrivateService {
         pri.deleteSnippet(snippetId, userId);
     }
     
+    
+    @Transactional
+    @Override
+    public Private getSnippetById(Long snippetId) {
+        return pri.findById(snippetId)
+                .orElseThrow(() -> new RuntimeException("Snippet not found with id: " + snippetId));
+    }
+    
+    @Override
+    public Private editPrivate(Long privateId, Private editedPrivate) throws NotFoundException {
+        Optional<Private> existingPrivateOptional = pri.findById(privateId);
+
+        if (existingPrivateOptional.isPresent()) {
+            Private existingPrivate = existingPrivateOptional.get();
+
+            // Update fields based on the editedPrivate
+            existingPrivate.setTitle(editedPrivate.getTitle());
+            existingPrivate.setPost(editedPrivate.getPost());
+
+            // Save the updated private entity
+            return pri.save(existingPrivate);
+        } else {
+            // Handle the case where the private entity is not found
+            throw new NotFoundException("Private entity not found with ID: " + privateId);
+        }
+    }
 }

@@ -228,9 +228,9 @@ font-family: 'Inter';
             </defs>
         </svg></div>
 
-    <form action="loginuser" modelAttribute="user" onsubmit="return handleFormSubmission()">
+    <form action="loginuser" modelAttribute="user" onsubmit="return handleFormSubmission()" method="post">
     <div class="main">
-        
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
         <input class="input-1" placeholder="Email" path="email" name="email" field="*{email}" required/>
         <input class="input-1" placeholder="Password" type="password" id="passwordField" path="password" name="password" field="*{password}" required/>
         <div class="forgot"><a href="forgot-send-otp" style="text-decoration: none; color: white;">Forgot Password?</a></div>

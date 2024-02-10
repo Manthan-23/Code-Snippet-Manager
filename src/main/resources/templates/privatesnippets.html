@@ -15,6 +15,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
       xmlns="http://www.w3.org/1999/xhtml">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/atom-one-light.min.css" integrity="sha512-o5v54Kh5PH0dgnf9ei0L+vMRsbm5fvIvnR/XkrZZjN4mqdaeH7PW66tumBoQVIaKNVrLCZiBEfHzRY4JJSMK/Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 
       
@@ -548,17 +549,19 @@ ul li a:hover{
   padding: 1em;
 }
 
-.tables{
-    
+/*.tables{
+     display: inline-block;
     font-family: 'Inter';
     font-size: 15px;
-    margin-bottom: 50px;
+    margin-left: -6.5rem;
+    margin-bottom: -0.5rem;
+    margin-right: 4px;
     border-collapse: separate;
     border-spacing:0 0px;
     color: white;
-    margin-top: -0.8rem;
+    margin-top: 0.5rem;
    
-}
+}*/
 
 .tables td{
     white-space: pre;
@@ -575,26 +578,29 @@ thead th {
   width: 25%;
 }
 
-.table{
-    /*margin-top: 150px;*/
+/*.table{
+    margin-top: 150px;
     border-collapse: collapse;
     font-size: 22px;
-}
+}*/
 
-th, td {
+/*th, td {
     box-shadow: 0px 0px 106px -60px #FF4D00;
     border: 3px solid rgba(255, 77, 0, 0.13);
     border-radius: 15px;
-  /*border: 1px solid white;*/
+  border: 1px solid white;
   padding: 8px;
-  /*border-radius: 5px;*/
-}
+  border-radius: 5px;
+}*/
 
-.allprisnipp{
-    margin-left: 20rem;
+/*.allprisnipp{
+     margin-left: 20rem;
     margin-top: -32rem;
+   border-radius: 15px;
+    position: absolute;
+
     
-}
+}*/
 
 .ptitle{
     font-size: 18px;
@@ -705,8 +711,9 @@ th, td {
 .ul-list{
     /*position: relative;*/
     display: flex;
+    /*justify-content: left;*/
     list-style: none;
-    /* flex-direction: column; */
+     /*flex-direction: column;*/ 
     margin-top: 1rem 
 }
 
@@ -741,8 +748,8 @@ th, td {
 
     .side-bar{
         display: flex;
-    height: 100%;
-    
+    height: 100vh;
+   
     }
 
     .head{
@@ -791,6 +798,32 @@ th, td {
     color: white;
 }
 
+.tables td{
+    white-space: pre;
+    
+}
+
+/*.edit-button{
+    cursor: pointer;
+    position: relative;
+     opacity: 0; 
+    color: #e56600;
+    background: none;
+    border: none;
+    background-color: white;
+    padding: 4px;
+    border-radius: 100rem;
+    font-size: 2px;
+    margin-left: 4.5rem;
+    opacity: 0;
+    top: -0.2rem;
+}*/
+
+/*.allprisnipp:hover .edit-button{
+    opacity: 1;
+}*/
+
+
 /*.ul-list{
     display: flex;
     flex-direction: column;
@@ -800,6 +833,69 @@ th, td {
 .list-li{
     
 }*/
+
+.uwa{
+    border: none;
+    background: transparent;
+    color: white;
+}
+
+.uwa:focus{
+    outline: none;
+}
+
+
+
+.allprisnipp {
+    width: 50%;
+    margin: -33rem auto;
+    top: 20px;
+}
+
+.myMenu {
+    background-color: #000000;
+    padding: 10px;
+    color: white;
+    margin-bottom: 10px;
+    box-shadow: 0px 0px 106px -60px #FF4D00;
+    border: 3px solid rgba(255, 77, 0, 0.13);
+    border-radius: 15px;
+}
+
+.allprisnipp {
+    position: relative;
+}
+
+.edit-button {
+    background-color: white;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    left: 103%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: 100rem;
+
+    padding: 2px 5px 1px 5px;
+}
+
+.allprisnipp:hover .edit-button {
+    opacity: 1;
+}
+
+#edit-icon {
+  position: relative;
+    margin-top: 2px;
+    font-size: 17px;
+    color: #e56600; /* Adjust icon color as needed */
+}
+
+.tables{
+    margin-top: -0.5rem;
+}
     
 
   
@@ -863,16 +959,19 @@ th, td {
     </div>
        
        
+       
+       
 
 
-    <div class="side-bar">
+     <div class="side-bar">
         <h5 class="head" style="white-space: pre">MY LISTS <i id="openDrawerButton" class="material-icons">add_circle</i></h5>
-        </div>
+         </div>
         <ul class="ul-list" th:each="pri : ${listPrivateSnippets}">
             <li class="list-li" th:id="${'snippet-' + pri.id}">
                 <div class="list-item-wrapper">
-                <span th:text="${pri.title}"></span>
-                
+                    <form th:action="@{/fetch-snippet/{snippetId}(snippetId=${pri.id})}" method="get">
+                    <button th:text="${pri.title}" class="uwa"></button>
+                    </form>
                 
                 <form th:action="@{/delete-item}" method="post">
             <input type="hidden" name="itemId" th:value="${pri.id}" />
@@ -883,9 +982,18 @@ th, td {
                 </div>
             </li>
         </ul>
-       
+        
+        
+      
         </div>
-    
+  
+  
+  
+  
+<!--        <div id="snippet-content" style="color:white">
+     <p th:text="${selectedSnippet}"></p>
+</div>
+    -->
 
       
       <div id="myModal" class="modal">
@@ -940,17 +1048,40 @@ th, td {
         <h3><button type="submit" class="create-drawer-button" onclick="updateEditorContentAndSubmit()">Create</button></h3>
           </form>
        </div>
-       
+    
+    <!--???????????????????????????-->
+    
+    
+   
+    
+    
+    
+<!--<div class="allprisnipp">
+        
+        <div class="myMenu" id="myMenu" th:each="pri : ${snippet}">
+          <div id="titlep" class="ptitle" th:text="${pri.title}"></div>
+                <div th:text="${pri.post}">
+                    
+                    <button type="submit" class="edit-button" title="Edit">
+                        <i id="edit-icon" class="material-icons">edit</i>
+                    </button>
+                </div>
+
+                
+        </div>
+    </div>-->
+    
       
             
 <div class="allprisnipp">
-    <div  id="myMenu" th:each="pri : ${listPrivateSnippets}">
+    <div class="myMenu"  id="myMenu" th:each="pri : ${snippet}">
     <span><div id="titlep" class="ptitle" th:text="${pri.title}"></div>
-<!--          <pre><code><p class="rcorners2" th:text="${data.post}"></p></code></pre>-->
+          <!--<pre><code><p class="rcorners2" th:text="${data.post}"></p></code></pre>-->
 <table id="myTable" class="tables">
     <tbody>
         <tr>
-        <pre><code><td class="tdata" th:text="${pri.post}"></td></code></pre>
+            <pre><code><td class="tdata" th:text="${pri.post}"></td></code></pre><button type="submit" class="edit-button" title="Edit"><a th:href="@{/edit-snippet(snippetId=${snippet.id})}"><i id="edit-icon" class="material-icons">edit</i></a></button>
+        
         </tr>
     </tbody>
     
@@ -969,6 +1100,15 @@ th, td {
   <script>
       
       
+      function fetchSnippetContent(snippetId) {
+    // Use AJAX (e.g., jQuery or Fetch API) to fetch snippet content from the server
+    $.get('/api/snippets/' + snippetId, function(data) {
+        // Update the content on the right side
+        $('#snippet-content').html(data.content);
+    });
+}
+      
+      
        var drawer = document.getElementById("myDrawer");
     
     // When the user clicks on the button, open the drawer
@@ -981,6 +1121,8 @@ th, td {
     function closeDrawer() {
      drawer.style.display = "none";
     }
+    
+    
     
     // Load Monaco Editor from CDN
     function loadScript(url, callback) {
@@ -1044,6 +1186,9 @@ function initMonaco() {
         console.error("Monaco Editor is not initialized.");
     }
 }
+
+
+
     
     
     document.getElementById('title-input').addEventListener('click', function() {

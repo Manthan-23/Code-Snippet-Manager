@@ -44,14 +44,22 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import javassist.NotFoundException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import org.hibernate.Session;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.csrf.CsrfToken;
+import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
@@ -112,6 +120,25 @@ public class SpringController {
     public String otp(){
         return "enter-otp-page";
     }
+    
+    @GetMapping("/edit-snippet")
+    public String edit(@RequestParam("snippetId") Long snippetId, Model model){
+        
+        model.addAttribute("snippet", priService.getSnippetById(snippetId));
+        return "edit-snippet";
+    }
+    
+    @PostMapping("/edit-snippet-content")
+    public String handleEditForm(@ModelAttribute Private editedPrivate, Model model) throws NotFoundException {
+        // Save the edited snippet details to the database
+        Long privateId = editedPrivate.getId();
+
+        Private edited = priService.editPrivate(privateId, editedPrivate);
+
+        // Redirect to the edited snippet by constructing the URL
+        return "redirect:/fetch-snippet/" + edited.getId();
+    }
+
     
     @GetMapping("/editor")
     public String editor() {
@@ -452,18 +479,34 @@ public class SpringController {
     }
     
     
+    @GetMapping("/getCsrfToken")
+public ResponseEntity<String> getCsrfToken(HttpServletRequest request) {
+    CsrfToken csrfToken = new HttpSessionCsrfTokenRepository().loadToken(request);
+
+    if (csrfToken != null) {
+        return new ResponseEntity<>(csrfToken.getToken(), HttpStatus.OK);
+    } else {
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+}
+    
     
     @RequestMapping("/loginuser")
     public String loginUser(@RequestParam("email") String email,
             @RequestParam("password") String password, 
             Model model,HttpSession session){
+        
+//        CsrfToken csrfToken = new HttpSessionCsrfTokenRepository().loadToken(request);
+//        System.out.println(csrfToken);
 
         User persistedUser = repo.findByEmail(email);
         session.setAttribute("loginEmail", email);
-        
+        System.out.println("User: " + persistedUser);
 
         if(persistedUser!=null && persistedUser.getEmail().equals(email) && persistedUser.getPassword().equals(password)){
             session.setAttribute("user", persistedUser);
+            System.out.println("Session Attributes: " + session.getAttributeNames());
+            
             model.addAttribute("user", persistedUser);
             model.addAttribute("message", "Login successful!");
             model.addAttribute("messageType", "success");
@@ -482,13 +525,15 @@ public class SpringController {
 
     }
     
-    
+    @CrossOrigin(origins = "http://localhost:8081")
     @RequestMapping("/loginuser2")
 @ResponseBody
 public ResponseEntity<Map<String, Object>> loginUser2(@RequestParam("email") String email,
         @RequestParam("password") String password, 
         Model model, HttpSession session) {
-
+    
+   
+    
     User persistedUser = repo.findByEmail(email);
     session.setAttribute("loginEmail", email);
 
@@ -504,6 +549,7 @@ public ResponseEntity<Map<String, Object>> loginUser2(@RequestParam("email") Str
 
 //        redirectAttributes.addAttribute("userId", persistedUser.getId());
         return ResponseEntity.ok(response);
+        
     } else {
         response.put("error", "Incorrect email or password, Please try again!");
         return ResponseEntity.badRequest().body(response);
@@ -636,6 +682,63 @@ public ResponseEntity<Map<String, Object>> loginUser2(@RequestParam("email") Str
         // You might want to redirect to an error page or display an error message
         return "login"; // Adjust this based on your application's error handling mechanism
     }
+}
+    
+   
+    
+@GetMapping("/fetch-snippet/{snippetId}")
+    public String fetchSnippet(@PathVariable Long snippetId, Model model, HttpSession session) {
+         String email = (String) session.getAttribute("loginEmail");
+// Fetch snippet data from the database using the snippetId
+        User persistedUser = repo.findByEmail(email);
+        Private snippet = priService.getSnippetById(snippetId);
+        System.out.println("Fetched snippet: " + snippet.getTitle());
+        System.out.println("Snippet is fetching");
+        // Add the snippet data to the model
+        model.addAttribute("snippet", snippet);
+        
+         List<Private> userSnippets = priService.getUserPrivateSnippets(persistedUser.getId());
+         model.addAttribute("listPrivateSnippets", userSnippets);
+
+        // Return the name of the HTML template for displaying snippet details
+        return "privatesnippets";
+    }
+    
+    
+     @PostMapping("/savePrivateSnippet2")
+    public String savePrivateSnippet2(@ModelAttribute("pri") Private pri, @RequestParam("post") String post, HttpSession session, RedirectAttributes redirectAttributes) {
+    
+    String email = (String) session.getAttribute("loginEmail");
+        
+    // Get the email from the Private entity
+//    String userEmail = pri.getEmail();
+
+    // Retrieve the user from the database based on the email
+    User user = repo.findByEmail(email);
+
+    // Check if the user exists
+//    if (user != null) {
+        // Get the user ID
+        Long userId = user.getId();
+
+        // Set the user_id in the Private entity
+        pri.setUserId(userId);
+        
+         pri.setPost(post);
+        
+        System.out.println("Title: " + pri.getTitle());
+        System.out.println("Post Content before saving: " + pri.getPost());
+
+        // Save the private snippet
+        priService.savePrivateSnippet(pri);
+        System.out.println("Post Content after saving: " + pri.getPost());
+
+        return "redirect:/privatesnippets";
+//    } else {
+//        // Handle the case where the user with the specified email is not found
+//        // You might want to redirect to an error page or display an error message
+//        return "login"; // Adjust this based on your application's error handling mechanism
+//    }
 }
     
     

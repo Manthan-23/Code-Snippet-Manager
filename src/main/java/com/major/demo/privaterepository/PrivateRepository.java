@@ -7,6 +7,7 @@ package com.major.demo.privaterepository;
 import com.major.demo.User;
 import com.major.demo.privatepost.Private;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -24,6 +25,8 @@ public interface PrivateRepository extends JpaRepository<Private, Long> {
     
     List<Private> findByUser(User user);
      List<Private> findByUserId(Long userId);
+     
+      Optional<Private> findById(Long snippetId);
      
      void deleteByIdAndUserId(Long id, Long userId);
      

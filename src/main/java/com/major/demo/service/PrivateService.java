@@ -6,6 +6,8 @@ package com.major.demo.service;
 
 import com.major.demo.privatepost.Private;
 import java.util.List;
+import java.util.Optional;
+import javassist.NotFoundException;
 
 /**
  *
@@ -27,6 +29,15 @@ public interface PrivateService {
     
     List<Private> getUserPrivateSnippets(Long userId); 
     
+    
     void deleteSnippet(Long snippetId, Long userId);
+    
+    Private getSnippetById(Long snippetId);
+    
+    Private editPrivate(Long privateId, Private editedPrivate) throws NotFoundException;
+    
+    public interface PriServ {
+    Private getSnippetById(Long snippetId);
+}
     
 }
