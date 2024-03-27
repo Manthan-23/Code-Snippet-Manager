@@ -59,6 +59,52 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Private> privates;
     
+    @Column()
+    private String code;
+    
+    @Column()
+    private String access_token;
+    
+    @Column()
+    private String refresh_token;
+    
+    @Column()
+    private String username;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+    
+    
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getAccess_token() {
+        return access_token;
+    }
+
+    public void setAccess_token(String access_token) {
+        this.access_token = access_token;
+    }
+
+    public String getRefresh_token() {
+        return refresh_token;
+    }
+
+    public void setRefresh_token(String refresh_token) {
+        this.refresh_token = refresh_token;
+    }
+    
     
 
     public String getOtp() {
@@ -117,5 +163,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+    
+    @Override
+    public String toString() {
+        return "User{" +
+                "email='" + email + '\'' +
+                ", firstname='" + firstName + '\'' +
+                ", accessToken='" + access_token + '\'' +
+                '}';
     }
 }

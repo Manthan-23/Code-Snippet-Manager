@@ -16,6 +16,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
       xmlns="http://www.w3.org/1999/xhtml">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/atom-one-light.min.css" integrity="sha512-o5v54Kh5PH0dgnf9ei0L+vMRsbm5fvIvnR/XkrZZjN4mqdaeH7PW66tumBoQVIaKNVrLCZiBEfHzRY4JJSMK/Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 
 
       
@@ -896,6 +899,10 @@ thead th {
 .tables{
     margin-top: -0.5rem;
 }
+
+.git-title{
+    display: flex;
+}
     
 
   
@@ -926,6 +933,7 @@ thead th {
                 <div class="dropdown-content">
                   <!--<a href="#" th:text="${user.firstName + ' ' + user.lastName}"></a>-->
                   <a href="enter-otp-page">Change Password</a>
+                  <a href="github-login">GitHub</a>
                 
                   <form th:action="@{/logout}" method="POST">
                       <button class="logout">Logout</button>
@@ -955,10 +963,23 @@ thead th {
          </div>
         <ul class="ul-list" th:each="pri : ${listPrivateSnippets}">
             <li class="list-li" th:id="${'snippet-' + pri.id}">
+                
+            <!-- Display GitHub logo -->
+            <!--<img src="path_to_github_logo.png" alt="GitHub Logo">-->
+        
                 <div class="list-item-wrapper">
                     <form th:action="@{/fetch-snippet/{snippetId}(snippetId=${pri.id})}" method="get">
-                    <button th:text="${pri.title}" class="uwa"></button>
+                        <div class="git-title" th:if="${pri.category == 'Github'}">
+            <i style="font-size: 1.5rem; color: white; margin-left: 1px; margin-top: 2px; position: relative;" class="fa fa-github"></i>
+            <button th:text="${pri.title}" class="uwa"></button>
+        </div>
+        <div th:unless="${pri.category == 'Github'}">
+            <button th:text="${pri.title}" class="uwa"></button>
+        </div>
+                        
                     </form>
+                    
+                    
                 
                 <form th:action="@{/delete-item}" method="post">
             <input type="hidden" name="itemId" th:value="${pri.id}" />

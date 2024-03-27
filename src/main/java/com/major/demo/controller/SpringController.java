@@ -41,6 +41,7 @@ import com.major.demo.service.OtpService;
 import com.major.demo.service.PrivateService;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -56,6 +57,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.csrf.CsrfToken;
@@ -91,6 +93,9 @@ public class SpringController {
     
     @Autowired
     private OtpService otpService;
+    
+    @Autowired
+    private HttpSession session;
 
 //    @Autowired
 //    public OtpController(OtpService otpService) {
@@ -195,6 +200,9 @@ public class SpringController {
     public String forgotPassword(){
         return "forgot-password";
     }
+   
+    
+    
     
 //    @GetMapping("/privatesnippets")
 //    public String privatesnippets(Model model){
@@ -494,7 +502,7 @@ public ResponseEntity<String> getCsrfToken(HttpServletRequest request) {
     @RequestMapping("/loginuser")
     public String loginUser(@RequestParam("email") String email,
             @RequestParam("password") String password, 
-            Model model,HttpSession session){
+            Model model){
         
 //        CsrfToken csrfToken = new HttpSessionCsrfTokenRepository().loadToken(request);
 //        System.out.println(csrfToken);
@@ -683,15 +691,16 @@ public ResponseEntity<Map<String, Object>> loginUser2(@RequestParam("email") Str
         return "login"; // Adjust this based on your application's error handling mechanism
     }
 }
-    
    
     
+   
 @GetMapping("/fetch-snippet/{snippetId}")
-    public String fetchSnippet(@PathVariable Long snippetId, Model model, HttpSession session) {
+public String fetchSnippet(@PathVariable Long snippetId, Model model, HttpSession session) {
          String email = (String) session.getAttribute("loginEmail");
 // Fetch snippet data from the database using the snippetId
         User persistedUser = repo.findByEmail(email);
         Private snippet = priService.getSnippetById(snippetId);
+        
         System.out.println("Fetched snippet: " + snippet.getTitle());
         System.out.println("Snippet is fetching");
         // Add the snippet data to the model
@@ -703,6 +712,33 @@ public ResponseEntity<Map<String, Object>> loginUser2(@RequestParam("email") Str
         // Return the name of the HTML template for displaying snippet details
         return "privatesnippets";
     }
+    
+    
+//    @GetMapping("/fetch-snippet/{encodedSnippetId}")
+//public String fetchSnippet(@PathVariable("encodedSnippetId") String encodedSnippetId, Model model, HttpSession session) {
+//         String email = (String) session.getAttribute("loginEmail");
+//// Fetch snippet data from the database using the snippetId
+//        User persistedUser = repo.findByEmail(email);
+////        Private snippet = priService.getSnippetById(encodedId);
+//        
+//        byte[] decodedBytes = Base64.getDecoder().decode(encodedSnippetId);
+//        String decodedId = new String(decodedBytes);
+//        Long snippetId = Long.parseLong(decodedId);
+//        
+//        Private snippet = priService.getSnippetById(snippetId);
+//        model.addAttribute("snippet", snippet);
+//        
+//        System.out.println("Fetched snippet: " + snippet.getTitle());
+//        System.out.println("Snippet is fetching");
+//        // Add the snippet data to the model
+////        model.addAttribute("snippet", snippet);
+//        
+//         List<Private> userSnippets = priService.getUserPrivateSnippets(persistedUser.getId());
+//         model.addAttribute("listPrivateSnippets", userSnippets);
+//
+//        // Return the name of the HTML template for displaying snippet details
+//        return "privatesnippets";
+//    }
     
     
      @PostMapping("/savePrivateSnippet2")

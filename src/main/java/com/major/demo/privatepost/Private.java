@@ -37,11 +37,22 @@ public class Private {
     
     @Column(name = "user_id")
     private Long userId;
+    
+    @Column
+    private String category;
 
     
     @ManyToOne
     @JoinColumn(name = "user_id", insertable = false, updatable = false)
     private User user;
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
     
 
     public Long getId() {
