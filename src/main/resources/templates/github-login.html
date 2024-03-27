@@ -293,16 +293,19 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         </div>
             
         </div>
-        
+      
+      
+            <div th:unless="${access_token != null}">
         <div class="container-1">
-        <div th:unless="${access_token != null}">
+        
          <form th:action="@{/github-repo}" method="get">
         <h2 style="text-align: center;" id="connect">Connect to your GitHub Account</h2>
         <button id="connect-button" type="submit"><a href="https://github.com/login/oauth/authorize?client_id=Iv1.5bb22f9228340798"><i style="font-size: 1.5rem; color: black;" class="fa fa-github"></i>Connect</a></button>
         </form>
         <h5 style="text-align: center; margin-top: 4rem; color: white;">You are just steps away...</h5>
-        </div>
+        
     </div>
+                </div>
         
 <!--        <div class="container" style="margin-top: -2rem;">
         <h2 class="open">Open a repository</h2><h5 style="color: white;">( Select the code, drag it and drop it in the compiler. Easy as this )</h5>
