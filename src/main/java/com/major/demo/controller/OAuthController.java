@@ -120,6 +120,7 @@ public ResponseEntity<String> test401() {
 
             // Pass username to the view
             model.addAttribute("username", userNew.getUsername());
+            model.addAttribute("access_token", userNew.getAccess_token());
             
             String username2 = userNew.getUsername();
             
