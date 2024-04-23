@@ -40,11 +40,22 @@ public class Private {
     
     @Column
     private String category;
+    
+    @Column
+    private String uuid;
 
     
     @ManyToOne
     @JoinColumn(name = "user_id", insertable = false, updatable = false)
     private User user;
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
 
     public String getCategory() {
         return category;
@@ -94,6 +105,11 @@ public class Private {
     public void setUser(User user) {
         this.user = user;
     }
+    
+    @Override
+public String toString() {
+    return "Private [title=" + title + ", post=" + post + ", id=" + id + "]";
+}
     
     
     

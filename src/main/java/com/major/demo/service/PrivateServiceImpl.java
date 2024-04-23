@@ -92,27 +92,30 @@ public class PrivateServiceImpl implements PrivateService {
     
     @Transactional
     @Override
-    public Private getSnippetById(Long snippetId) {
+    public Private getSnippetById(String snippetId) {
         return pri.findById(snippetId)
                 .orElseThrow(() -> new RuntimeException("Snippet not found with id: " + snippetId));
     }
     
-    @Override
-    public Private editPrivate(Long privateId, Private editedPrivate) throws NotFoundException {
-        Optional<Private> existingPrivateOptional = pri.findById(privateId);
+//    @Override
+//    public Optional<Private> findByUuid(String uuid) {
+//        // Convert UUID string to a Long internally
+//        Long id = convertUuidToLong(uuid);
+//        System.out.println(id);
+//        return pri.findById(uuid);
+//    }
 
-        if (existingPrivateOptional.isPresent()) {
-            Private existingPrivate = existingPrivateOptional.get();
-
-            // Update fields based on the editedPrivate
-            existingPrivate.setTitle(editedPrivate.getTitle());
-            existingPrivate.setPost(editedPrivate.getPost());
-
-            // Save the updated private entity
-            return pri.save(existingPrivate);
-        } else {
-            // Handle the case where the private entity is not found
-            throw new NotFoundException("Private entity not found with ID: " + privateId);
-        }
+    public Optional<Private> findByUuid(String uuid) {
+    return pri.findByUuid(uuid);
+}
+    
+    private Long convertUuidToLong(String uuid) {
+        // Your conversion logic from UUID string to Long here
+        // This can be a lookup table, a mapping, or any other mechanism to convert UUIDs to Longs
+        // For simplicity, let's assume a simple hash-based conversion
+        return (long) uuid.hashCode();
     }
+    
+    
+    
 }

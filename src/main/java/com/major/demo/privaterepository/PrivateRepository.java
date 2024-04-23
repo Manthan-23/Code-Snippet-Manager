@@ -23,10 +23,12 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public interface PrivateRepository extends JpaRepository<Private, Long> {
     
+    Optional<Private> findByUuid(String uuid);
+    
     List<Private> findByUser(User user);
      List<Private> findByUserId(Long userId);
      
-      Optional<Private> findById(Long snippetId);
+      Optional<Private> findById(String uuid);
      
      void deleteByIdAndUserId(Long id, Long userId);
      

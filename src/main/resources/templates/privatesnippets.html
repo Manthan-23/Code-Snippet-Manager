@@ -954,7 +954,7 @@ thead th {
     </div>
        
        
-       
+       <!--<form th:action="@{/fetch-snippet/{snippetId}(snippetId=${pri.id})}" method="get">-->
        
 
 
@@ -968,7 +968,7 @@ thead th {
             <!--<img src="path_to_github_logo.png" alt="GitHub Logo">-->
         
                 <div class="list-item-wrapper">
-                    <form th:action="@{/fetch-snippet/{snippetId}(snippetId=${pri.id})}" method="get">
+                    <form th:action="@{/fetch-snippet/{snippetId}(snippetId=${pri.uuid})}" method="get">
                         <div class="git-title" th:if="${pri.category == 'Github'}">
             <i style="font-size: 1.5rem; color: white; margin-left: 1px; margin-top: 2px; position: relative;" class="fa fa-github"></i>
             <button th:text="${pri.title}" class="uwa"></button>
@@ -1080,24 +1080,36 @@ thead th {
     </div>-->
     
       
-            
-<div class="allprisnipp">
-    <div class="myMenu"  id="myMenu" th:each="pri : ${snippet}">
-    <span><div id="titlep" class="ptitle" th:text="${pri.title}"></div>
-          <!--<pre><code><p class="rcorners2" th:text="${data.post}"></p></code></pre>-->
-<table id="myTable" class="tables">
-    <tbody>
-        <tr>
-            <pre><code><td class="tdata" th:text="${pri.post}"></td></code></pre><button type="submit" class="edit-button" title="Edit"><a th:href="@{/edit-snippet(snippetId=${snippet.id})}"><i id="edit-icon" class="material-icons">edit</i></a></button>
-        
-        </tr>
-    </tbody>
-    
-</table>
-</span>
+            <!--th:each="pri : ${snippet}"-->
+<div class="allprisnipp" th:if="${snippet != null}">
+        <div class="myMenu" id="myMenu">
+            <span>
+                <!-- Access snippet properties -->
+                <div id="titlep" class="ptitle" th:text="${snippet.title}"></div>
+                <table id="myTable" class="tables">
+                    <tbody>
+                        <tr>
+                            <pre><code><td class="tdata" th:text="${snippet.post}"></td></code></pre>
+                            <!--<td>-->
+                                <!-- Edit button -->
+                                <button type="submit" class="edit-button" title="Edit">
+                                    <a th:href="@{/edit-snippet(snippetId=${snippet.uuid})}">
+                                        <i id="edit-icon" class="material-icons">edit</i>
+                                    </a>
+                                    <!--<a th:href="@{/edit-snippet(snippetId=${snippet.id})}"><i id="edit-icon" class="material-icons">edit</i></a>-->
+                                </button>
+                            <!--</td>-->
+                        </tr>
+                    </tbody>
+                </table>
+            </span>
+        </div>
+    </div>
 
-</div>
-</div>
+
+
+
+
         
 
 

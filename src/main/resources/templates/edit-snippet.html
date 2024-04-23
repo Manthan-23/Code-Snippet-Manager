@@ -184,8 +184,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         <div class="main"> 
         <form th:action="@{/edit-snippet-content}" method="post">
             <h3>Edit Snippet</h3>
-            <input type="hidden" name="id" th:value="${snippet.id}" />
-    <input type="hidden" name="snippetId" th:value="${snippet.id}" />
+            <input type="hidden" name="id" th:value="${snippet.uuid}" />
+    <input type="hidden" name="snippetId" th:value="${snippet.uuid}" />
     <label for="title">Title:</label>
     <input type="text" id="title" name="title" th:value="${snippet.title}" />
     

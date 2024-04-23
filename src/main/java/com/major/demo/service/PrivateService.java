@@ -29,12 +29,13 @@ public interface PrivateService {
     
     List<Private> getUserPrivateSnippets(Long userId); 
     
+    public Optional<Private> findByUuid(String uuid);
+    
     
     void deleteSnippet(Long snippetId, Long userId);
     
-    Private getSnippetById(Long snippetId);
+    Private getSnippetById(String snippetId);
     
-    Private editPrivate(Long privateId, Private editedPrivate) throws NotFoundException;
     
     public interface PriServ {
     Private getSnippetById(Long snippetId);

@@ -39,6 +39,7 @@ import com.major.demo.privaterepository.PrivateRepository;
 import com.major.demo.service.OtpService;
 
 import com.major.demo.service.PrivateService;
+import com.major.demo.service.SnippetHashService;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Base64;
@@ -63,6 +64,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import java.util.UUID;
 
 
 
@@ -97,22 +99,11 @@ public class SpringController {
     @Autowired
     private HttpSession session;
 
-//    @Autowired
-//    public OtpController(OtpService otpService) {
-//        this.otpService = otpService;
-//    }
+
     
     
     private User user;
     
-    
-//    public void addCommonData(Model model, Principal principal){
-//        String userName = principal.getName();
-//        System.out.println("Username" + userName);
-//        User user = repo.findByEmail(userName);
-//        System.out.println("USER" + user);
-//        model.addAttribute("user", user);
-//    }
     
     
     
@@ -126,22 +117,35 @@ public class SpringController {
         return "enter-otp-page";
     }
     
+    
+
+    
     @GetMapping("/edit-snippet")
-    public String edit(@RequestParam("snippetId") Long snippetId, Model model){
+    public String edit(@RequestParam("snippetId") String snippetId, Model model){
         
-        model.addAttribute("snippet", priService.getSnippetById(snippetId));
+        Optional<Private> snippet = priService.findByUuid(snippetId);
+        
+        model.addAttribute("snippet", snippet.get());
+        
         return "edit-snippet";
     }
     
     @PostMapping("/edit-snippet-content")
-    public String handleEditForm(@ModelAttribute Private editedPrivate, Model model) throws NotFoundException {
+    public String handleEditForm(@RequestParam("id") String snipId,@RequestParam("title") String title, @RequestParam("post") String post, Model model) throws NotFoundException {
         // Save the edited snippet details to the database
-        Long privateId = editedPrivate.getId();
 
-        Private edited = priService.editPrivate(privateId, editedPrivate);
+        Optional <Private> privateData = priService.findByUuid(snipId);
+        
+            Private edited = privateData.get();
+            
+            // Perform edit operations on the edited snippet
+            edited.setTitle(title);
+            edited.setPost(post);
+            
+            priService.save(edited);
+            // Redirect to the edited snippet by constructing the URL
+            return "redirect:/fetch-snippet/" + edited.getUuid();
 
-        // Redirect to the edited snippet by constructing the URL
-        return "redirect:/fetch-snippet/" + edited.getId();
     }
 
     
@@ -671,11 +675,18 @@ public ResponseEntity<Map<String, Object>> loginUser2(@RequestParam("email") Str
     if (user != null) {
         // Get the user ID
         Long userId = user.getId();
+        
+        UUID uuid = UUID.randomUUID();
+        String uuidAsString = uuid.toString();
+        System.out.println("UUID" + uuidAsString);
+        
 
         // Set the user_id in the Private entity
         pri.setUserId(userId);
         
          pri.setPost(post);
+         
+         pri.setUuid(uuidAsString);
         
         System.out.println("Title: " + pri.getTitle());
         System.out.println("Post Content before saving: " + pri.getPost());
@@ -695,16 +706,33 @@ public ResponseEntity<Map<String, Object>> loginUser2(@RequestParam("email") Str
     
    
 @GetMapping("/fetch-snippet/{snippetId}")
-public String fetchSnippet(@PathVariable Long snippetId, Model model, HttpSession session) {
+public String fetchSnippet(@PathVariable String snippetId, Model model, HttpSession session) {
          String email = (String) session.getAttribute("loginEmail");
+         
+//         String snippetIdStr = String.valueOf(snippetId);
+//        
+//        // Step 2: Hash the string
+//        String hashedIdStr = SnippetHashService.hashStringWithSHA256(snippetIdStr);
+         
 // Fetch snippet data from the database using the snippetId
         User persistedUser = repo.findByEmail(email);
-        Private snippet = priService.getSnippetById(snippetId);
+        Optional<Private> snippet = priService.findByUuid(snippetId);
         
-        System.out.println("Fetched snippet: " + snippet.getTitle());
-        System.out.println("Snippet is fetching");
+        if (snippet.isPresent()) {
+    System.out.println("Fetched snippet: " + snippet.get().getTitle());
+    System.out.println("Fetched snippet empty: " + snippet.get());
+    System.out.println("Snippet is fetching");
+        System.out.println("Fetched snippet get: " + snippet.get());
+
+    
+    
+    // Add the snippet data to the model
+    model.addAttribute("snippet", snippet.get());
+        }
+//        System.out.println("Fetched snippet: " + snippet.getTitle());
+//        System.out.println("Snippet is fetching");
         // Add the snippet data to the model
-        model.addAttribute("snippet", snippet);
+//        model.addAttribute("snippet", snippet);
         
          List<Private> userSnippets = priService.getUserPrivateSnippets(persistedUser.getId());
          model.addAttribute("listPrivateSnippets", userSnippets);
