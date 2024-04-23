@@ -14,6 +14,7 @@ import com.major.demo.service.PrivateService;
 import java.time.Instant;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -165,6 +166,10 @@ public ResponseEntity<String> test401() {
     if (user != null) {
         // Get the user ID
         Long userId = user.getId();
+        
+        UUID uuid = UUID.randomUUID();
+        String uuidAsString = uuid.toString();
+        System.out.println("UUID" + uuidAsString);
 
         // Set the user_id in the Private entity
         pri.setUserId(userId);
@@ -172,6 +177,9 @@ public ResponseEntity<String> test401() {
          pri.setPost(post);
          
          pri.setCategory("Github");
+         
+        pri.setUuid(uuidAsString);
+
         
         System.out.println("Title: " + pri.getTitle());
         System.out.println("Post Content before saving: " + pri.getPost());

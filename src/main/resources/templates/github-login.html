@@ -219,8 +219,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             .save{
               position: absolute;
               align-self: end;
-      top: 10px;
-      right: 10px;
+       top: 25px; /* Increase the top value */
+    right: 25px;
       z-index: 1; 
       border: none;
               background-color: #ff7200;
@@ -285,10 +285,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         
         <div class="compiler">
             <form th:action="@{/saveGithubPrivateSnippet}" modelAttribute="pri" method="POST">
-            <input class="title" path="title" name="title" field="*{title}" placeholder="Title"/>
-        <textarea id="code-editor" path="post" name="post" field="*{post}"></textarea>
+            <input class="title" path="title" name="title" field="*{title}" placeholder="Title" required />
+            <textarea id="code-editor" path="post" name="post" field="*{post}" required ></textarea>
         <input type="hidden" id="editorContentNew" name="post" field="*{post}" />
-          <button type="submit" class="save" onclick="updateEditorContentAndSubmitNew()">Save</button>
+        <button type="submit" class="save">Save</button>
             </form>
         </div>
             
