@@ -286,7 +286,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         <div class="compiler">
             <form th:action="@{/saveGithubPrivateSnippet}" modelAttribute="pri" method="POST">
             <input class="title" path="title" name="title" field="*{title}" placeholder="Title" required />
-            <textarea id="code-editor" path="post" name="post" field="*{post}" required ></textarea>
+            <textarea id="code-editor" path="post" name="post" field="*{post}"></textarea>
         <input type="hidden" id="editorContentNew" name="post" field="*{post}" />
         <button type="submit" class="save">Save</button>
             </form>
